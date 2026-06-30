@@ -1,0 +1,115 @@
+name: Fix
+description: 버그 수정 또는 오류 해결 작업을 위한 이슈 템플릿
+title: '[Fix] '
+labels: ['fix']
+assignees: []
+
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 문제 상황
+      description: 어떤 문제가 발생했는지 설명해 주세요.
+      placeholder: |
+        예시:
+        - 로그인 버튼 클릭 시 화면이 이동하지 않음
+        - 특정 API 호출 시 500 에러 발생
+        - 모바일 화면에서 레이아웃이 깨짐
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: 발생 위치
+      description: 문제가 발생한 파일, 페이지, 기능을 적어 주세요.
+      placeholder: |
+        예시:
+        - 페이지: /login
+        - 컴포넌트: LoginForm
+        - API: POST /api/login
+        - 파일: src/components/LoginForm.tsx
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 방법
+      description: 문제를 다시 발생시키는 순서를 적어 주세요.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 동작
+      description: 원래 어떻게 동작해야 하는지 적어 주세요.
+      placeholder: |
+        예시:
+        - 로그인 성공 시 메인 페이지로 이동해야 함
+        - 에러 발생 시 사용자에게 안내 메시지가 보여야 함
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 동작
+      description: 현재 실제로 어떻게 동작하는지 적어 주세요.
+      placeholder: |
+        예시:
+        - 버튼을 눌러도 아무 반응이 없음
+        - 콘솔에 에러가 출력됨
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 에러 로그 / 스크린샷
+      description: 관련 에러 메시지나 스크린샷이 있다면 첨부해 주세요.
+      render: shell
+      placeholder: |
+        에러 로그를 여기에 붙여넣어 주세요.
+    validations:
+      required: false
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 수정 방향
+      description: 어떻게 수정할 예정인지 간단히 적어 주세요.
+      placeholder: |
+        예시:
+        - 조건문 누락 부분 추가
+        - API 응답 예외 처리 추가
+        - 스타일 클래스 수정
+        - null 체크 추가
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 체크리스트
+      options:
+        - label: 문제 원인 확인
+        - label: 코드 수정
+        - label: 로컬 테스트 완료
+        - label: 관련 기능 영향 확인
+        - label: PR 생성
+    validations:
+      required: false
+
+  - type: textarea
+    id: etc
+    attributes:
+      label: 참고 사항
+      description: 추가로 공유할 내용이 있다면 적어 주세요.
+    validations:
+      required: false

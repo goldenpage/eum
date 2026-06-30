@@ -1,0 +1,56 @@
+name: "\U0001F41E Bug"
+description: 버그/오류를 보고합니다.
+title: '[Bug] '
+labels:
+  - bug
+body:
+  - type: input
+    id: summary
+    attributes:
+      label: 요약
+      description: 버그를 한 줄로 설명해주세요.
+      placeholder: 예) Android에서 QR 스캔 시 앱이 종료됩니다.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 재현 절차
+      description: 가능한 간단하게 단계별로 적어주세요.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대 동작
+      placeholder: 정상적으로 화면이 뜨고 QR 이 스캔되어야 합니다.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 동작/로그
+      placeholder: 실제로 나타난 결과, 콘솔/디바이스 로그를 포함해주세요.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 환경
+      placeholder: 'OS/디바이스, 앱 버전/채널, 네트워크(와이파이/셀룰러) 등'
+    validations:
+      required: true
+  - type: textarea
+    id: media
+    attributes:
+      label: 스크린샷/영상 (선택)
+      description: 가능하면 첨부해주세요.
+  - type: textarea
+    id: extra
+    attributes:
+      label: 추가 맥락
+      description: 기타 참고할 내용이 있다면 남겨주세요.

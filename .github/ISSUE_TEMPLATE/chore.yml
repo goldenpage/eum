@@ -1,0 +1,28 @@
+name: "\U0001F527 Chore / Maintenance"
+description: 리팩터링, 빌드/CI, 문서 등 유지보수 작업을 제안합니다.
+title: '[Chore] '
+labels:
+  - chore
+body:
+  - type: input
+    id: task
+    attributes:
+      label: 해야 할 일
+      placeholder: 예) ESLint 버전 업데이트 및 규칙 정리
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: 이유/배경
+      description: 왜 필요한지, 관련 이슈나 리스크를 적어주세요.
+  - type: textarea
+    id: scope
+    attributes:
+      label: 범위
+      description: 영향을 받는 모듈/스크립트/CI 파이프라인 등을 적어주세요.
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 조건
+      description: 작업 완료 판단 기준을 체크리스트처럼 적어주세요.
