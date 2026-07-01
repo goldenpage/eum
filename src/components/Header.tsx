@@ -1,21 +1,21 @@
-import {Link} from 'react-router';
+import { Link } from "react-router";
 
 function Header() {
   return (
     <ul
       style={{
-        listStyle: 'none',
-        display: 'flex',
-        gap: '30px',
+        listStyle: "none",
+        display: "flex",
+        gap: "30px",
       }}
     >
       <li>사용자이름</li>
 
-      <Link to={'/logout'}>
+      <Link to={"/login"}>
         <li>로그아웃</li>
       </Link>
 
-      <Link to={'/notice'}>
+      <Link to={"/notice"}>
         <li>알림</li>
       </Link>
     </ul>
