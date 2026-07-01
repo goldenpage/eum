@@ -5,9 +5,9 @@ import NotFoundPage from './pages/NotFoundPage';
 const App = () => {
   return (
     <>
-      <Sidebar />
+      {/* <Sidebar />
       <Header />
-      <NotFoundPage />
+      <NotFoundPage /> */}
     </>
   );
 };
