@@ -1,4 +1,4 @@
-import {Link} from 'react-router';
+import { Link } from "react-router";
 
 const NotFoundPage = () => {
   return (
@@ -15,14 +15,14 @@ const NotFoundPage = () => {
 
         <div className="not-found__actions">
           <Link
-            to="/food-materials"
+            to="/foodmaterials"
             className="not-found__button not-found__button--primary"
           >
             식자재 목록으로
           </Link>
 
           <Link
-            to="/"
+            to="/foodmaterials"
             className="not-found__button not-found__button--secondary"
           >
             홈으로 이동

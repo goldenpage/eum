@@ -1,98 +1,102 @@
-import {createBrowserRouter} from 'react-router';
-import App from '../App';
-import NotFoundPage from '../pages/NotFoundPage';
-import DisposalStatisticsPage from '../pages/DisposalStatisticsPage';
-import UsedStatisticsPage from '../pages/UsedStatisticsPage';
-import RevenueStatisticsPage from '../pages/RevenueStatisticsPage';
-import PwUpdatePage from '../pages/PwUpdatePage';
-import PuchasePage from '../pages/PuchasePage';
-import NoticePage from '../pages/NoticePage';
-import MenuListPage from '../pages/MenuListPage';
-import ManagerPage from '../pages/ManagerPage';
-import RegisterPage from '../pages/RegisterPage';
-import DisposalItemsPage from '../pages/DisposalItemsPage';
-import AddSalesPage from '../pages/AddSalesPage';
-import AddMenuPage from '../pages/AddMenuPage';
-import AddFoodMaterialsPage from '../pages/AddFoodMaterialsPage';
-import FoodMaterialsPage from '../pages/FoodMaterialsPage';
-import LoginPage from '../pages/LoginPage';
+import { createBrowserRouter } from "react-router";
+import App from "../App";
+import NotFoundPage from "../pages/NotFoundPage";
+import DisposalStatisticsPage from "../pages/DisposalStatisticsPage";
+import UsedStatisticsPage from "../pages/UsedStatisticsPage";
+import RevenueStatisticsPage from "../pages/RevenueStatisticsPage";
+import PwUpdatePage from "../pages/PwUpdatePage";
+import PuchasePage from "../pages/PuchasePage";
+import NoticePage from "../pages/NoticePage";
+import MenuListPage from "../pages/MenuListPage";
+import ManagerPage from "../pages/ManagerPage";
+import RegisterPage from "../pages/RegisterPage";
+import DisposalItemsPage from "../pages/DisposalItemsPage";
+import AddSalesPage from "../pages/AddSalesPage";
+import AddMenuPage from "../pages/AddMenuPage";
+import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
+import FoodMaterialsPage from "../pages/FoodMaterialsPage";
+import LoginPage from "../pages/LoginPage";
 
 //router 주소 및 페이지 설정
 export const router = createBrowserRouter([
   {
-    path: '/login',
+    path: "/login",
     Component: LoginPage,
   },
   {
-    path: '/food-materials',
+    path: "/foodmaterials",
     Component: FoodMaterialsPage,
   },
   {
-    path: '/add-food-materials',
+    path: "/foodmaterialadd",
     Component: AddFoodMaterialsPage,
   },
   {
-    path: '/add-menu',
+    path: "/menuadd",
     Component: AddMenuPage,
   },
   {
-    path: '/add-sales',
+    path: "/addsales",
     Component: AddSalesPage,
   },
   {
-    path: '/disposal-items',
+    path: "/disposal-items",
     Component: DisposalItemsPage,
     // loader:
   },
   {
-    path: '/register',
+    path: "/register",
     Component: RegisterPage,
   },
   {
-    path: '/manager',
+    path: "/manager",
     Component: ManagerPage,
     // loader
   },
   {
-    path: '/menu-list',
+    path: "/menus",
     Component: MenuListPage,
     // loader
   },
   {
-    path: '/notice',
+    path: "/notice",
     Component: NoticePage,
   },
   {
-    path: '/purchase',
+    path: "/purchase",
     Component: PuchasePage,
     // loader
   },
   {
-    path: '/pw-update',
+    path: "/pwupdate",
     Component: PwUpdatePage,
   },
   {
-    path: '/revenue-statistics',
+    path: "/sales-list",
+    // Component: SaleListPage,
+  },
+  {
+    path: "/revenuestatistics",
     Component: RevenueStatisticsPage,
     // loader
   },
   {
-    path: '/used-statistics',
+    path: "/usedstatistics",
     Component: UsedStatisticsPage,
     // loader
   },
   {
-    path: '/disposal-statistics',
+    path: "/disposalstatistics",
     Component: DisposalStatisticsPage,
     // loader
   },
   {
-    path: '*',
+    path: "*",
     Component: NotFoundPage,
   },
 
   {
-    path: 'app',
+    path: "app",
     Component: App,
   },
 ]);
