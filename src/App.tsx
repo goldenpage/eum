@@ -1,5 +1,7 @@
+import { DisposalItemsPage } from "./page/DisposalItemsPage";
+
 const App = () => {
-  return <div></div>;
+  return <DisposalItemsPage/>
 };
 
 export default App;
