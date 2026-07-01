@@ -1,23 +1,14 @@
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     Component: <Login />,
-//     children: [
-//       {
-//         path: 'menus',
-
+import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-
-//       },
-//     ],
-//   },
-// ]);
+import NotFoundPage from './pages/NotFoundPage';
 
 const App = () => {
   return (
-    <div>
+    <>
       <Sidebar />
-    </div>
+      <Header />
+      <NotFoundPage />
+    </>
   );
 };
 

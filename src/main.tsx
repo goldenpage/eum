@@ -1,13 +1,17 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import './index.css';
-import App from './App.tsx';
-import {BrowserRouter, createBrowserRouter} from 'react-router';
+import {RouterProvider} from 'react-router';
+import {router} from './router/routes.tsx';
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  new Error('root 엘리먼트 찾을 수 없음 ㅅㄱ');
+}
+
+createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </StrictMode>,
 );
