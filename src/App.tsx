@@ -10,9 +10,9 @@ const App = () => {
       {/* <Sidebar />
       <Header />
       <NotFoundPage /> */}
+      <DisposalItemsPage/>
     </>
   );
-  return <DisposalItemsPage/>
 };
 
 export default App;

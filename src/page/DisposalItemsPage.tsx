@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Pagination } from "../components/Pagination";
-import { FilterBar } from "../components/Filterbar";
+import { FilterBar } from "../components/FilterBar";
 import { DisposalTable } from "../components/DisposalTable";
 import {
   getDisposalItems,
