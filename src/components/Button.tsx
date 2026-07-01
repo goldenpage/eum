@@ -28,3 +28,17 @@ function Button(props: ButtonProps) {
 }
 
 export default Button;
+
+/* 버튼 작업 예시
+const App = () => {
+  const onClickBtn = ()=>{
+    console.log("1");
+  }
+  return <div>
+    <Button type={"button"} onClick={onClickBtn} id={"searchBtn"}  className="removebtn" value="test" style={{width:"100px"}} >
+      rdsgdgsfd
+      </Button>
+  
+  </div>;
+}
+*/
