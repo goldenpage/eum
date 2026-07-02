@@ -1,10 +1,10 @@
-import type { DisposalReasonCode, ReasonOption } from "./types";
+import type { DisposalReasonCode, ReasonOption } from "../../types/disposal";
 
 export const DISPOSAL_REASONS: ReasonOption[] = [
   { value: "B", label: "파손", aliases: ["B", "파손"] },
   { value: "BETC", label: "기타", aliases: ["BETC", "기타"] },
   { value: "D", label: "변질", aliases: ["D", "변질"] },
-  { value: "E", label: "유통기한 만료", aliases: ["E", "유통기한만료", "유통기한 만료"] },
+  { value: "E", label: "유통기한만료", aliases: ["E", "유통기한만료"] },
 ];
 
 export function normalizeReason(value: string | null): DisposalReasonCode {

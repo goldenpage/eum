@@ -1,9 +1,9 @@
-import { DISPOSAL_REASONS } from "../features/disposals/constants";
 import type { DisposalFilters } from "../types/disposal";
 
 interface FilterBarProps {
   filters: DisposalFilters;
   categories: string[];
+  reasons: string[];
   onChange: (filters: DisposalFilters) => void;
   onSubmit: () => void;
   onReset: () => void;
@@ -12,6 +12,7 @@ interface FilterBarProps {
 export function FilterBar({
   filters,
   categories,
+  reasons,
   onChange,
   onSubmit,
   onReset,
@@ -43,12 +44,12 @@ export function FilterBar({
         id="reason"
         value={filters.reason}
         onChange={(event) => onChange({ ...filters, reason: event.target.value })}
-      >
-        <option value="">전체</option>
-        {DISPOSAL_REASONS.map((reason) => (
-          <option key={reason.value} value={reason.value}>
-            {reason.label}
-          </option>
+        >
+          <option value="">전체</option>
+            {reasons.map((reason) => (
+            <option key={reason} value={reason}>
+              {reason}
+            </option>
         ))}
       </select>
 

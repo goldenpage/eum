@@ -2,7 +2,7 @@ import type {
   DisposalPageResponse,
   DisposalReasonCode,
   DisposalSearchParams,
-} from "./types";
+} from "../../types/disposal";
 
 const API_BASE = "/api/disposal-items";
 

@@ -15,6 +15,8 @@ export interface DisposalPageResponse {
   list: DisposalItem[];
   currentPage: number;
   totalPages: number;
+  categories: string[];
+  reasons: string[];
 }
 
 export interface DisposalFilters {

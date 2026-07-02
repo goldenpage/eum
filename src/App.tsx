@@ -1,8 +1,8 @@
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
+import DisposalItemsPage from './pages/DisposalItemsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
-import { DisposalItemsPage } from "./page/DisposalItemsPage";
 
 const App = () => {
   return (
