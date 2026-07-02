@@ -6,7 +6,10 @@ import {
   getDisposalItems,
   updateDisposalReason,
 } from "../features/disposals/api";
-import type { DisposalFilters, DisposalItem, DisposalReasonCode } from "../types/disposal";
+import type {
+  DisposalFilters,
+  DisposalItem,
+} from "../features/disposals/api";
 
 const PAGE_SIZE = 5;
 
@@ -180,7 +183,7 @@ function DisposalItemsPage() {
 
   const handleReasonChange = async (
     disposalId: string,
-    reason: DisposalReasonCode,
+    reason: string,
   ) => {
     await updateDisposalReason(disposalId, reason);
     await fetchItems(page, appliedFilters, false);

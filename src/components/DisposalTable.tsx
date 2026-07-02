@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { DISPOSAL_REASONS, normalizeReason } from "../features/disposals/constants";
-import type { DisposalItem, DisposalReasonCode } from "../types/disposal";
+import type { DisposalItem } from "../features/disposals/api";
 import { formatGram, formatWon } from "../utils/format";
 
 interface DisposalTableProps {
   items: DisposalItem[];
   isLoading: boolean;
-  onReasonChange: (disposalId: string, reason: DisposalReasonCode) => Promise<void>;
+  onReasonChange: (disposalId: string, reason: string) => Promise<void>;
 }
 
 export function DisposalTable({ items, isLoading, onReasonChange }: DisposalTableProps) {
   const [pendingId, setPendingId] = useState<string | null>(null);
 
-  const handleReasonChange = async (disposalId: string, reason: DisposalReasonCode) => {
+  const handleReasonChange = async (disposalId: string, reason: string) => {
     setPendingId(disposalId);
     try {
       await onReasonChange(disposalId, reason);
@@ -58,7 +58,7 @@ export function DisposalTable({ items, isLoading, onReasonChange }: DisposalTabl
                 <td>{item.foodMaterialType ?? ""}</td>
                 <td>{formatGram(item.disposalCountAll)}</td>
                 <td>{formatWon(item.disposalPrice)}</td>
-                <td>{item.disposalDate ?? ""}</td>
+                <td>{item.disposalDate ? new Date(item.disposalDate).toLocaleDateString("ko-KR") : ""}</td>
                 <td>
                   <select
                     className="reasonSelect"
@@ -67,7 +67,7 @@ export function DisposalTable({ items, isLoading, onReasonChange }: DisposalTabl
                     onChange={(event) =>
                       handleReasonChange(
                         item.disposalId,
-                        event.target.value as DisposalReasonCode,
+                        event.target.value
                       )
                     }
                     aria-label={`${item.foodMaterialName ?? item.disposalId} 폐기 사유`}

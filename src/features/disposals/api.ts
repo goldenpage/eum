@@ -1,8 +1,34 @@
 import type {
-  DisposalPageResponse,
-  DisposalReasonCode,
-  DisposalSearchParams,
-} from "../../types/disposal";
+  Disposals,
+  FoodMaterial,
+  FoodMaterialCategory,
+  Reason,
+} from "../../types";
+
+export type DisposalItem =
+  Disposals &
+  Pick<FoodMaterial, "foodMaterialName" | "foodMaterialType"> &
+  Pick<FoodMaterialCategory, "foodCategory"> &
+  Pick<Reason, "reason">;
+
+export interface DisposalPageResponse {
+  list: DisposalItem[];
+  currentPage: number;
+  totalPages: number;
+  categories: string[];
+  reasons: string[];
+}
+
+export interface DisposalFilters {
+  category: string;
+  reason: string;
+  type?: string;
+}
+
+export interface DisposalSearchParams extends DisposalFilters {
+  page: number;
+  size: number;
+}
 
 const API_BASE = "/api/disposal-items";
 
@@ -34,7 +60,7 @@ export async function getDisposalItems(
 
 export async function updateDisposalReason(
   disposalId: string,
-  reasonId: DisposalReasonCode,
+  reasonId: string,
 ): Promise<void> {
   const response = await fetch(`${API_BASE}/${disposalId}/reason`, {
     method: "PATCH",

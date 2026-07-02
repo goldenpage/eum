@@ -1,4 +1,10 @@
-import type { DisposalReasonCode, ReasonOption } from "../../types/disposal";
+type DisposalReasonCode = "B" | "BETC" | "D" | "E";
+
+interface ReasonOption {
+  value: DisposalReasonCode;
+  label: string;
+  aliases: string[];
+}
 
 export const DISPOSAL_REASONS: ReasonOption[] = [
   { value: "B", label: "파손", aliases: ["B", "파손"] },

@@ -1,4 +1,4 @@
-import type { DisposalFilters } from "../types/disposal";
+import type { DisposalFilters } from "../features/disposals/api";
 
 interface FilterBarProps {
   filters: DisposalFilters;
