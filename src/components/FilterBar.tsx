@@ -1,4 +1,5 @@
 import type { DisposalFilters } from "../features/disposals/api";
+import Button from "./Button";
 
 interface FilterBarProps {
   filters: DisposalFilters;
@@ -53,12 +54,13 @@ export function FilterBar({
         ))}
       </select>
 
-      <button type="submit" className="primaryButton" title="조회">
+      <Button type="submit" className="primaryButton">
         조회
-      </button>
-      <button type="button" className="secondaryButton" onClick={onReset} title="초기화">
+      </Button>
+
+      <Button type="button" className="secondaryButton" onClick={onReset}>
         초기화
-      </button>
+      </Button>
     </form>
   );
 }

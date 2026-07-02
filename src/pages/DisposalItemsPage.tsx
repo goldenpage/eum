@@ -2,6 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { Pagination } from "../components/Pagination";
 import { FilterBar } from "../components/FilterBar";
 import { DisposalTable } from "../components/DisposalTable";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+
 import {
   getDisposalItems,
   updateDisposalReason,
@@ -117,6 +120,7 @@ function DisposalItemsPage() {
     };
 
     async function loadDisposalItems() {
+      setIsLoading(true);
       try {
         const data = await getDisposalItems({
           ...nextFilters,
@@ -154,9 +158,9 @@ function DisposalItemsPage() {
       void fetchItems(1, filters);
       return;
     }
-
     setAppliedFilters(filters);
-    syncUrl(filters, page);
+    setPage(1);
+    syncUrl(filters, 1);
   };
 
   const handleReset = () => {
@@ -190,40 +194,69 @@ function DisposalItemsPage() {
   };
 
   return (
-  <>
-    <section className="pageHeader">
-      <h1>폐기 품목 확인</h1>
-    </section>
+  <div style={{ display: "flex", minHeight: "100vh" }}>
+    <aside
+      style={{
+        width: "220px",
+        flexShrink: 0,
+        position: "sticky",
+        top: 0,
+        height: "100vh",
+        overflowY: "auto",
+      }}
+    >
+      <Sidebar />
+    </aside>
 
-    <section className="contentPanel">
-      {errorMessage && (
-        <div className="errorMessage" role="alert">
-          {errorMessage}
-        </div>
-      )}
+    <div style={{ flex: 1, minWidth: 0 }}>
+      <header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 10,
+          backgroundColor: "white",
+          padding: "16px 24px",
+        }}
+      >
+        <Header />
+      </header>
 
-      <FilterBar
-          filters={filters}
-          categories={categories}
-          reasons={reasons}
-          onChange={setFilters}
-          onSubmit={handleSearch}
-          onReset={handleReset}
-      />
+      <main style={{ padding: "24px" }}>
+        <section className="pageHeader">
+          <h1>폐기 품목 확인</h1>
+        </section>
 
-      <DisposalTable
-        items={items}
-        isLoading={isLoading}
-        onReasonChange={handleReasonChange}
-      />
+        <section className="contentPanel">
+          {errorMessage && (
+            <div className="errorMessage" role="alert">
+              {errorMessage}
+            </div>
+          )}
 
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onMove={handleMovePage}
-      />
-    </section>
-  </>
+          <FilterBar
+            filters={filters}
+            categories={categories}
+            reasons={reasons}
+            onChange={setFilters}
+            onSubmit={handleSearch}
+            onReset={handleReset}
+          />
+
+          <DisposalTable
+            items={items}
+            isLoading={isLoading}
+            onReasonChange={handleReasonChange}
+          />
+
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onMove={handleMovePage}
+          />
+        </section>
+      </main>
+    </div>
+  </div>
 );
 }
 
