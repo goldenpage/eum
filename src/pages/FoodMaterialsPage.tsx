@@ -4,9 +4,10 @@ import Header from "../components/Header";
 import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
 import type { FoodMaterialDto } from "../types/dto/FoodMaterialDto";
+import "./FoodMaterialsPage.css";
 
 const foodMaterialData: FoodMaterialDto[] =[{
-  foodMaterialId: "FM001",
+  foodMaterialId: "FM011",
   foodMaterialName: "홍띵보",
   foodCategory: "육류",
   foodMaterialCount: 10,
@@ -19,7 +20,7 @@ const foodMaterialData: FoodMaterialDto[] =[{
   expirationDate: "2026-07-10",
 },
 {
-  foodMaterialId: "FM002",
+  foodMaterialId: "FM010",
   foodMaterialName: "홍명보",
   foodCategory: "육류",
   foodMaterialCount: 5,
@@ -32,7 +33,7 @@ const foodMaterialData: FoodMaterialDto[] =[{
   expirationDate: "2026-07-04",
 },
 {
-  foodMaterialId: "FM003",
+  foodMaterialId: "FM009",
   foodMaterialName: "홍띵보육포",
   foodCategory: "가공식품",
   foodMaterialCount: 20,
@@ -42,10 +43,10 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "손 빼",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",
+  expirationDate: "2026-11-27",
 },
 {
-  foodMaterialId: "FM004",
+  foodMaterialId: "FM008",
   foodMaterialName: "밥",
   foodCategory: "곡류",
   foodMaterialCount: 20,
@@ -55,9 +56,9 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "우리쌀",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-12-11",},
 {
-  foodMaterialId: "FM005",
+  foodMaterialId: "FM007",
   foodMaterialName: "피카츄",
   foodCategory: "육류",
   foodMaterialCount: 20,
@@ -67,7 +68,7 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "한지우",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-11-20",},
 {
   foodMaterialId: "FM006",
   foodMaterialName: "리자몽",
@@ -79,9 +80,9 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "한사장",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-07-31",},
 {
-  foodMaterialId: "FM007",
+  foodMaterialId: "FM005",
   foodMaterialName: "홍명보 앞다리살",
   foodCategory: "육류",
   foodMaterialCount: 20,
@@ -91,9 +92,9 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "빨명보",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-07-30",},
 {
-  foodMaterialId: "FM008",
+  foodMaterialId: "FM004",
   foodMaterialName: "홍명보뒷다리살",
   foodCategory: "육류",
   foodMaterialCount: 20,
@@ -103,9 +104,9 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "명보가최고야",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-12-14",},
 {
-  foodMaterialId: "FM009",
+  foodMaterialId: "FM003",
   foodMaterialName: "38억",
   foodCategory: "지폐",
   foodMaterialCount: 20,
@@ -115,9 +116,9 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "달다달어",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-12-01",},
 {
-  foodMaterialId: "FM010",
+  foodMaterialId: "FM002",
   foodMaterialName: "면",
   foodCategory: "면류",
   foodMaterialCount: 20,
@@ -127,9 +128,9 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "사리가게",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",},
+  expirationDate: "2026-12-27",},
 {
-  foodMaterialId: "FM011",
+  foodMaterialId: "FM001",
   foodMaterialName: "치즈",
   foodCategory: "발효식품",
   foodMaterialCount: 20,
@@ -139,7 +140,7 @@ const foodMaterialData: FoodMaterialDto[] =[{
   foodMaterialType: "고체",
   vender: "꾸덕꾸덕",
   incomeDate: "2026-06-30",
-  expirationDate: "2026-12-31",}
+  expirationDate: "2026-12-21",}
 ]
 
 function formatNumber(value:number){
@@ -150,6 +151,73 @@ function formatMoney(value:number){
   return `${value.toLocaleString()}원`;
 }
 
+interface FoodMaterialColumn {
+  key:string;
+  label: string;
+  getValue: (foodMaterial: FoodMaterialDto) => string | number;
+}
+
+const foodMaterialColumnList: FoodMaterialColumn[] = [
+  {
+    key: "foodMaterialId",
+    label: "식자재 번호",
+    getValue: (foodMaterial) => foodMaterial.foodMaterialId,
+  },
+  {
+    key: "foodMaterialName",
+    label: "식자재명",
+    getValue: (foodMaterial) => foodMaterial.foodMaterialName,
+  },
+  {
+    key: "foodCategory",
+    label: "카테고리",
+    getValue: (foodMaterial) => foodMaterial.foodCategory,
+  },
+  {
+    key: "foodMaterialCount",
+    label: "수량",
+    getValue: (foodMaterial) => foodMaterial.foodMaterialCount,
+  },
+  {
+    key: "foodMaterialWeight",
+    label: "단위 중량",
+    getValue: (foodMaterial) =>
+      `${formatNumber(foodMaterial.foodMaterialWeight)}g`,
+  },
+  {
+    key: "totalWeight",
+    label: "총중량",
+    getValue: (foodMaterial) =>
+      `${formatNumber(foodMaterial.totalWeight)}g`,
+  },
+  {
+    key: "foodMaterialPrice",
+    label: "매입 가격",
+    getValue: (foodMaterial) =>
+      formatMoney(foodMaterial.foodMaterialPrice),
+  },
+  {
+    key: "foodMaterialType",
+    label: "품목 유형",
+    getValue: (foodMaterial) => foodMaterial.foodMaterialType,
+  },
+  {
+    key: "vender",
+    label: "구입처",
+    getValue: (foodMaterial) => foodMaterial.vender,
+  },
+  {
+    key: "incomeDate",
+    label: "매입일",
+    getValue: (foodMaterial) => foodMaterial.incomeDate,
+  },
+  {
+    key: "expirationDate",
+    label: "유통기한",
+    getValue: (foodMaterial) => foodMaterial.expirationDate,
+  },
+];
+
 function FoodMaterialsPage() {
   const [keyword, setKeyword]=useState("");
   const [sortType, setSortType]=useState("idDesc");
@@ -158,16 +226,32 @@ function FoodMaterialsPage() {
 
   const sortFoodMaterials=(targetFoodMaterials:FoodMaterialDto[], targetSortType:string) =>{
     const sortedFoodMaterials=[...targetFoodMaterials];
-    if(targetSortType==="idAsc"){
-      sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
-    }else if(targetSortType==="idDesc"){
-      sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
-    }else if(targetSortType==="expAsc"){
-      sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
-    }else if(targetSortType==="expDesc"){
-      sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
-    }
+    switch(targetSortType){
+      case "idAsc":
+        sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
+        break;
+      case "idDesc":
+        sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
+        break;
+      case "expAsc":
+        sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
+        break;
+      case "expDesc":
+        sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
+        break;
+      default:
+        break;}
     return sortedFoodMaterials;
+    // if(targetSortType==="idAsc"){
+    //   sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
+    // }else if(targetSortType==="idDesc"){
+    //   sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
+    // }else if(targetSortType==="expAsc"){
+    //   sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
+    // }else if(targetSortType==="expDesc"){
+    //   sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
+    // }
+    // return sortedFoodMaterials;
   }
 
   const onSortChange=(nextSortType:string)=>{setSortType(nextSortType);
@@ -199,21 +283,21 @@ function FoodMaterialsPage() {
 
 
   return (
-    <div style={{display:"flex", minHeight:"100vh"}}>
-      <aside style={{flex:"0 0 170px"}}>
+    <div className="food-materials-page">
+      <aside className="food-materials-sidebar">
         <Sidebar />
       </aside>
-      <main style={{flex:"1", minWidth:0,padding:"20px",boxSizing:"border-box"}}>
-      <div style={{display:"flex", justifyContent:"flex-end"}}>
+      <main className="food-materials-main">
+      <div className="food-materials-header">
         <Header />
       </div>
       <h1>식자재 조회</h1>
-      <div style={{display:"flex", flexWrap:"wrap",gap:"10px", alignItems:"flex-end", marginBottom:"20px"}}>
+      <div className="food-materials-toolbar">
         <Input text="식자재명" inputType="text" value={keyword} onChange={setKeyword} placeholder="식자재명을 입력하세요" width={250} height={30}/>
 
-        <label>
+        <label className="food-materials-sort">
           <div>정렬</div>
-          <select value={sortType} onChange={(event)=>onSortChange(event.target.value)} style={{height:"36px"}}>
+          <select className="food-materials-sort-select" value={sortType} onChange={(event)=>onSortChange(event.target.value)} style={{height:"36px"}}>
             <option value="idAsc">식자재 번호 오름차순</option>
             <option value="idDesc">식자재 번호 내림차순</option>
             <option value="expAsc">유통기한 임박순</option>
@@ -223,22 +307,14 @@ function FoodMaterialsPage() {
         <Button type="button" onClick={onSearch}>검색</Button>
         <Button type="button" onClick={onAllList}>전체 조회</Button>
       </div>
-      <div style={{width:"100%", height:"300px",overflowX:"auto"}}>
-        <table style={{width:"100%",minWidth:"1200px",borderCollapse:"collapse"}}>
+      <div className="food-materials-table-wrap">
+        <table className="food-materials-table">
           <thead>
             <tr>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>식자재 번호</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>식자재명</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>카테고리</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>수량</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>단위 중량</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>총중량</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>매입 가격</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>품목 유형</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>구입처</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>매입일</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>유통기한</th>
-              <th style={{position:"sticky",top:0, backgroundColor:"white",zIndex:1}}>삭제</th>
+              {foodMaterialColumnList.map((column)=>(
+                <th key={column.key} className="food-materials-table__header-cell">{column.label}</th>
+              ))}
+              <th className="food-materials-table__header-cell">삭제</th>
             </tr>
           </thead>
           <tbody>
@@ -248,19 +324,11 @@ function FoodMaterialsPage() {
               </tr>
             ):(foodMaterials.map((foodMaterial)=>(
               <tr key={foodMaterial.foodMaterialId}>
-                <td>{foodMaterial.foodMaterialId}</td>
-                <td>{foodMaterial.foodMaterialName}</td>
-                <td>{foodMaterial.foodCategory}</td>
-                <td>{foodMaterial.foodMaterialCount}</td>
-                <td>{formatNumber(foodMaterial.foodMaterialWeight)}g</td>
-                <td>{formatNumber(foodMaterial.totalWeight)}g</td>
-                <td>{formatMoney(foodMaterial.foodMaterialPrice)}</td>
-                <td>{foodMaterial.foodMaterialType}</td>
-                <td>{foodMaterial.vender}</td>
-                <td>{foodMaterial.incomeDate}</td>
-                <td>{foodMaterial.expirationDate}</td>
+                {foodMaterialColumnList.map((column)=>(
+                  <td key={column.key}>{column.getValue(foodMaterial)}</td>
+                ))}
                 <td>
-                  <button type="button" onClick={()=>onDelete(foodMaterial.foodMaterialId)}> 삭제</button>
+                  <Button type="button" onClick={()=>onDelete(foodMaterial.foodMaterialId)}> 삭제</Button>
                 </td>
               </tr>
             )))}
