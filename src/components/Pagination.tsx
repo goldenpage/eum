@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -11,33 +13,32 @@ export function Pagination({ currentPage, totalPages, onMove }: PaginationProps)
 
   return (
     <nav className="pagination" aria-label="페이지 이동">
-      <button
+      <Button
         type="button"
         onClick={() => onMove(currentPage - 1)}
-        disabled={currentPage <= 1}
-        title="이전"
+        className="paginationButton"
       >
         이전
-      </button>
+      </Button>
+
       {pages.map((page) => (
-        <button
+        <Button
           type="button"
           key={page}
-          className={page === currentPage ? "active" : undefined}
+          className={page === currentPage ? "active paginationButton" : "paginationButton"}
           onClick={() => onMove(page)}
-          aria-current={page === currentPage ? "page" : undefined}
         >
-          {page}
-        </button>
+          {String(page)}
+        </Button>
       ))}
-      <button
+
+      <Button
         type="button"
         onClick={() => onMove(currentPage + 1)}
-        disabled={currentPage >= totalPages}
-        title="다음"
+        className="paginationButton"
       >
         다음
-      </button>
+      </Button>
     </nav>
   );
 }
