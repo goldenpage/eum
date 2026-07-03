@@ -2,13 +2,13 @@ import Dropdown from "./components/Dropdown";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import NotFoundPage from "./pages/NotFoundPage";
+import UsedStatisticsPage from "./pages/UsedStatisticsPage";
 
 const App = () => {
   const list = ["a  ", "b", "c", "d", "e"];
-// import Header from './components/Header';
-// import Sidebar from './components/Sidebar';
-// import NotFoundPage from './pages/NotFoundPage';
-
+  // import Header from './components/Header';
+  // import Sidebar from './components/Sidebar';
+  // import NotFoundPage from './pages/NotFoundPage';
 
   return (
     <>
@@ -16,7 +16,7 @@ const App = () => {
         <div>
           <Sidebar />
         </div>
-
+        <UsedStatisticsPage />
         <div>
           <Header />
         </div>
