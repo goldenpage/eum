@@ -2,6 +2,7 @@ import Dropdown from "./components/Dropdown";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import NotFoundPage from "./pages/NotFoundPage";
+import DisposalItemsPage from "./pages/DisposalItemsPage";
 import UsedStatisticsPage from "./pages/UsedStatisticsPage";
 
 const App = () => {
@@ -24,6 +25,10 @@ const App = () => {
 
       <NotFoundPage />
       <Dropdown text={list} />
+      {/* <Sidebar />
+      <Header />
+      <NotFoundPage /> */}
+      <DisposalItemsPage />
     </>
   );
 };
