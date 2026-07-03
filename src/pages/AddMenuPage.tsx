@@ -1,17 +1,11 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
-const client = axios.create({
-  baseURL: "/",
-  withCredentials: true,
-});
-
-client.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    return Promise.reject(error);
-  },
-);
+// import axios from "axios";
+import client from "../api/client";
+import Header from "../components/Header";
+import Sidebar from "../components/Sidebar";
+import "./AddMenuPage.css";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 interface FoodMaterialListItem {
   foodMaterialId: string;
@@ -55,16 +49,21 @@ interface PendingMenu {
   ingredients: IngredientItem[];
 }
 
-interface Msg {
+// interface Msg {
+//   text: string;
+//   color: "green" | "red";
+// }
+
+interface Notice {
   text: string;
-  color: "green" | "red";
+  type: "success" | "error";
 }
 
 function AddMenuPage() {
   const [categoryList, setCategoryList] = useState<MenuCategoryItem[]>([]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
-  const [categoryMsg, setCategoryMsg] = useState<Msg | null>(null);
+  // const [categoryMsg, setCategoryMsg] = useState<Msg | null>(null);
 
   const [foodMaterialList, setFoodMaterialList] = useState<
     FoodMaterialListItem[]
@@ -77,12 +76,17 @@ function AddMenuPage() {
   const [pendingList, setPendingList] = useState<PendingMenu[]>([]);
   const [selectedMenuName, setSelectedMenuName] = useState<string | null>(null);
 
+  const [notice, setNotice] = useState<Notice | null>(null);
+
+  function showNotice(text: string, type: "success" | "error" = "error") {
+    setNotice({ text, type });
+  }
+
   async function loadFoodMaterialList() {
     try {
       const res = await client.get<FoodMaterialListItem[]>(
         "/api/menu/foodmaterial/list",
       );
-      // setFoodMaterialList(res.data);
       if (Array.isArray(res.data)) {
         setFoodMaterialList(res.data);
       } else {
@@ -98,9 +102,7 @@ function AddMenuPage() {
       const res = await client.get<MenuCategoryItem[]>(
         "/api/menu/menucategory/list",
       );
-      // setCategoryList(res.data);
       if (Array.isArray(res.data)) {
-        // ← 여기부터
         setCategoryList(res.data);
       } else {
         console.warn("카테고리 목록 응답이 배열이 아님:", res.data);
@@ -124,7 +126,7 @@ function AddMenuPage() {
   async function addCategoryAjax() {
     const categoryName = newCategory.trim();
     if (!categoryName) {
-      alert("카테고리명을 입력해주세요");
+      showNotice("카테고리명을 입력해주세요", "error");
       return;
     }
     try {
@@ -134,7 +136,7 @@ function AddMenuPage() {
       );
       const data = res.data;
       if (data.result === "success") {
-        setCategoryMsg({ text: "카테고리가 추가되었습니다,", color: "green" });
+        showNotice("카테고리가 추가되었습니다", "success");
         setCategoryList((prev) => [
           ...prev,
           {
@@ -144,10 +146,10 @@ function AddMenuPage() {
         ]);
         setNewCategory("");
       } else {
-        setCategoryMsg({ text: data.message ?? "추가 실패", color: "red" });
+        showNotice(data.message ?? "추가 실패", "error");
       }
     } catch {
-      setCategoryMsg({ text: "카테고리 추가 중 오류 발생", color: "red" });
+      showNotice("카테고리 추가 중 오류 발생", "error");
     }
   }
 
@@ -161,10 +163,7 @@ function AddMenuPage() {
       );
       const data = res.data;
       if (data.result === "success") {
-        setCategoryMsg({
-          text: data.message ?? "삭제되었습니다.",
-          color: "green",
-        });
+        showNotice(data.message ?? "삭제되었습니다.", "success");
         if (selectedCategoryId === category.menuCategoryId) {
           setSelectedCategoryId("");
         }
@@ -172,23 +171,20 @@ function AddMenuPage() {
           prev.filter((c) => c.menuCategoryId !== category.menuCategoryId),
         );
       } else {
-        setCategoryMsg({ text: data.message ?? "삭제 실패", color: "red" });
+        showNotice(data.message ?? "삭제 실패", "error");
       }
     } catch {
-      setCategoryMsg({
-        text: "카테고리 삭제 중 오류가 발생했습니다.",
-        color: "red",
-      });
+      showNotice("카테고리 삭제 중 오류가 발생했습니다.", "error");
     }
   }
 
   function addIngredient() {
     if (!selectedMaterialId) {
-      alert("식자재를 선택해주세요.");
+      showNotice("식자재를 선택해주세요.", "error");
       return;
     }
     if (!ingredientAmount || Number(ingredientAmount) <= 0) {
-      alert("수량을 올바르게 입력해주세요.");
+      showNotice("수량을 올바르게 입력해주세요.", "error");
       return;
     }
     const material = foodMaterialList.find(
@@ -223,25 +219,25 @@ function AddMenuPage() {
     const name = menuName.trim();
 
     if (!name) {
-      alert("메뉴명을 입력해주세요.");
+      showNotice("메뉴명을 입력해주세요.", "error");
       return;
     }
     if (!selectedCategoryId) {
-      alert("카테고리를 선택해주세요.");
+      showNotice("카테고리를 선택해주세요.", "error");
       return;
     }
     if (!menuPrice || Number(menuPrice) < 0) {
-      alert("메뉴 가격을 올바르게 입력해주세요.");
+      showNotice("메뉴 가격을 올바르게 입력해주세요.", "error");
       return;
     }
     if (ingredientList.length === 0) {
-      alert("사용 식자재를 추가해주세요.");
+      showNotice("사용 식자재를 추가해주세요.", "error");
       return;
     }
 
     const isDuplicate = pendingList.some((m) => m.menuName === name);
     if (isDuplicate) {
-      alert('"' + name + '"은 이미 등록된 메뉴입니다.');
+      showNotice('"' + name + '"은 이미 등록된 메뉴입니다.', "error");
       return;
     }
 
@@ -275,7 +271,7 @@ function AddMenuPage() {
 
   async function registerAllMenus() {
     if (pendingList.length === 0) {
-      alert("등록할 메뉴가 없습니다.");
+      showNotice("등록할 메뉴가 없습니다.", "error");
       return;
     }
 
@@ -296,14 +292,14 @@ function AddMenuPage() {
       const res = await client.post<AddMenuResult>("/api/menu/add", formData);
       const data = res.data;
       if (data.result === "success") {
-        alert(data.message);
+        showNotice(data.message ?? "메뉴등록 완료", "success");
         setPendingList([]);
         setSelectedMenuName(null);
       } else {
-        alert(data.message);
+        showNotice(data.message ?? "메뉴등록 실패", "error");
       }
     } catch {
-      alert("메뉴 등록 중 오류 발생");
+      showNotice("메뉴 등록 중 오류 발생", "error");
     }
   }
 
@@ -312,11 +308,19 @@ function AddMenuPage() {
 
   return (
     <div className="container">
-      <section>{}</section>
+      <section>
+        <Sidebar />
+      </section>
 
       <div className="main">
-        <div>{}</div>
+        <div>
+          <Header />
+        </div>
         <h1>메뉴 입력</h1>
+
+        {notice && (
+          <div className={`notice notice_${notice.type}`}>{notice.text}</div>
+        )}
 
         <div className="content_item">
           <div className="content_left">
@@ -324,16 +328,18 @@ function AddMenuPage() {
               <div className="input_row">
                 <div className="category_buttons">
                   <label>메뉴 카테고리 추가</label>
-                  <input
-                    type="text"
-                    id="getMenuCategory"
+                  <Input
+                    text=""
+                    inputType="text"
+                    // id="getMenuCategory"
                     placeholder="카테고리 입력"
                     value={newCategory}
-                    onChange={(e) => setNewCategory(e.target.value)}
+                    // onChange={(e) => setNewCategory(e.target.value)}
+                    onChange={(value) => setNewCategory(value)}
                   />
-                  <button type="button" onClick={addCategoryAjax}>
+                  <Button type="button" onClick={addCategoryAjax}>
                     추가
-                  </button>
+                  </Button>
                 </div>
               </div>
 
@@ -348,7 +354,7 @@ function AddMenuPage() {
                         gap: "2px",
                       }}
                     >
-                      <button
+                      <Button
                         type="button"
                         className={
                           selectedCategoryId === category.menuCategoryId
@@ -359,60 +365,55 @@ function AddMenuPage() {
                         data-category-id={category.menuCategoryId}
                       >
                         {category.menuCategory}
-                      </button>
-                      <button
+                      </Button>
+                      <Button
                         type="button"
                         className="remove_btn"
                         data-category-name={category.menuCategory}
                         onClick={() => deleteCategoryAjax(category)}
                       >
                         &#10005;
-                      </button>
+                      </Button>
                     </span>
                   ))}
                 </div>
               </div>
-              <div
-                id="categoryMsg"
-                style={{
-                  fontSize: "13px",
-                  marginBottom: "8px",
-                  color: categoryMsg?.color,
-                }}
-              >
-                {categoryMsg?.text}
-              </div>
+              <div id="categoryMsg"></div>
             </div>
 
-            <input
-              type="hidden"
-              id="selectedCategoryId"
+            {/* <Input
+              inputType="hidden"
+              // id="selectedCategoryId"
               name="_dummy"
               value={selectedCategoryId}
               readOnly
-            />
+            /> */}
 
             <div className="input_section">
               <div className="input_row">
                 <label>메뉴명 입력 *</label>
-                <input
-                  type="text"
-                  id="inputMenuName"
+                <Input
+                  text=""
+                  inputType="text"
+                  // id="inputMenuName"
                   placeholder="치즈김밥"
                   value={menuName}
-                  onChange={(e) => setMenuName(e.target.value)}
+                  // onChange={(e) => setMenuName(e.target.value)}
+                  onChange={(value) => setMenuName(value)}
                 />
               </div>
 
               <div className="input_fields">
                 <label>메뉴 가격 *</label>
-                <input
-                  type="number"
-                  id="inputMenuPrice"
+                <Input
+                  text=""
+                  inputType="number"
+                  // id="inputMenuPrice"
                   placeholder="4000"
                   min={0}
                   value={menuPrice}
-                  onChange={(e) => setMenuPrice(e.target.value)}
+                  // onChange={(e) => setMenuPrice(e.target.value)}
+                  onChange={(value) => setMenuPrice(value)}
                 />{" "}
                 원
               </div>
@@ -440,18 +441,20 @@ function AddMenuPage() {
                   ))}
                 </select>
                 <label>수량</label>
-                <input
-                  type="number"
-                  id="inputIngredientAmount"
+                <Input
+                  text=""
+                  inputType="number"
+                  // id="inputIngredientAmount"
                   placeholder="50"
                   min={1}
                   value={ingredientAmount}
-                  onChange={(e) => setIngredientAmount(e.target.value)}
+                  // onChange={(e) => setIngredientAmount(e.target.value)}
+                  onChange={(value) => setIngredientAmount(value)}
                 />
                 <span>g</span>
-                <button type="button" onClick={addIngredient}>
+                <Button type="button" onClick={addIngredient}>
                   + 추가하기
-                </button>
+                </Button>
               </div>
 
               <div className="ingredient_table">
@@ -498,9 +501,9 @@ function AddMenuPage() {
             </div>
 
             <div className="register_btn">
-              <button type="button" onClick={addMenuToList}>
+              <Button type="button" onClick={addMenuToList}>
                 추가
-              </button>
+              </Button>
             </div>
 
             <div id="hiddenFields"></div>
@@ -545,7 +548,6 @@ function AddMenuPage() {
                           <span
                             className="remove_btn"
                             onClick={(e) => {
-                              // 행 클릭(상세 표시)과 삭제가 겹치지 않도록 전파 차단
                               e.stopPropagation();
                               removeMenuRow(menu.menuName);
                             }}
@@ -562,9 +564,9 @@ function AddMenuPage() {
 
             <div className="right_bottom">
               <div className="register_final_btn">
-                <button type="button" onClick={registerAllMenus}>
+                <Button type="button" onClick={registerAllMenus}>
                   메뉴 등록
-                </button>
+                </Button>
               </div>
               <h4>
                 &#9660; 사용 식자재 (

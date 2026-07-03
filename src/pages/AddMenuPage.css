@@ -1,0 +1,228 @@
+ul {
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+}
+
+.profile {
+  display: flex;
+  justify-content: end;
+}
+
+.content_item {
+  height: 100%;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.content_left {
+  flex: 1;
+  overflow-y: auto;
+  border: 2px solid black;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.content_right {
+  width: 400px;
+  min-width: 320px;
+  border: 2px solid black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-self: flex-start;
+}
+
+.content_right h3 {
+  margin-top: 0;
+}
+
+.content_right table {
+  border-spacing: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.content_right .register_final_btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.input_section {
+  padding: 16px;
+  margin: 10px;
+}
+
+.input_row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.input_row label {
+  min-width: 120px;
+}
+
+.category_buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.category_buttons button {
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.category_buttons button.selected {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+.input_fields {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.input_fields label {
+  min-width: 80px;
+}
+
+.input_fields input {
+  width: 120px;
+}
+
+.register_btn {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.ingredient_section {
+  padding: 16px;
+  margin: 10px;
+}
+
+.ingredient_add_row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.ingredient_add_row label {
+  min-width: 50px;
+}
+
+.ingredient_add_row input {
+  width: 100px;
+}
+
+.ingredient_table {
+  font-size: 14px;
+  line-height: 14px;
+  width: 100%;
+}
+
+.ingredient_table table {
+  border-spacing: 16px;
+  width: 100%;
+}
+
+table {
+  border-spacing: 24px;
+}
+
+.remove_btn {
+  cursor: pointer;
+  color: red;
+}
+
+.right_top {
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.right_bottom {
+  border-top: 2px solid #ccc;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.right_bottom h4 {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.ingredient_detail_table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ingredient_detail_table th {
+  background: #f4f4f4;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.ingredient_detail_table td {
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.empty_msg {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+}
+
+#registerMenuTable tbody tr {
+  cursor: pointer;
+}
+#registerMenuTable tbody tr:hover td {
+  background: #f0f7ff;
+}
+#registerMenuTable tbody tr.selected_row td {
+  background: #d6eaff;
+}
+
+.notice {
+  margin: 8px 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid;
+}
+
+.notice_success {
+  color: #1b5e20;
+  background: #e8f5e9;
+  border-color: #a5d6a7;
+}
+
+.notice_error {
+  color: #b71c1c;
+  background: #ffebee;
+  border-color: #ef9a9a;
+}
