@@ -11,12 +11,6 @@
     padding:20px;
     box-sizing: border-box;
 }
-.food-materials-main{
-    flex:1;
-    min-width: 0;
-    padding:20px;
-    box-sizing: border-box;
-}
 .food-materials-header{
     display:flex;
     justify-content: flex-end;

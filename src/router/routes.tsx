@@ -5,7 +5,7 @@ import DisposalStatisticsPage from "../pages/DisposalStatisticsPage";
 import UsedStatisticsPage from "../pages/UsedStatisticsPage";
 import RevenueStatisticsPage from "../pages/RevenueStatisticsPage";
 import PwUpdatePage from "../pages/PwUpdatePage";
-import PuchasePage from "../pages/PuchasePage";
+import PurchasePage from "../pages/PurchasePage";
 import NoticePage from "../pages/NoticePage";
 import MenuListPage from "../pages/MenuListPage";
 import ManagerPage from "../pages/ManagerPage";
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/purchase",
-    Component: PuchasePage,
+    Component: PurchasePage,
     // loader
   },
   {

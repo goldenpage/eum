@@ -1,147 +1,148 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
-import type { FoodMaterialDto } from "../types/dto/FoodMaterialDto";
+import type { FoodMaterialDto, FoodMaterialPageResponse, FoodMaterialDeleteResponse } from "../types/dto/FoodMaterialDto";
 import "./FoodMaterialsPage.css";
+import client from "../api/client";
 
-const foodMaterialData: FoodMaterialDto[] =[{
-  foodMaterialId: "FM011",
-  foodMaterialName: "홍띵보",
-  foodCategory: "육류",
-  foodMaterialCount: 10,
-  foodMaterialWeight: 500,
-  totalWeight: 5000,
-  foodMaterialPrice: 30000,
-  foodMaterialType: "고체",
-  vender: "이게 전술이야 가게",
-  incomeDate: "2026-06-25",
-  expirationDate: "2026-07-10",
-},
-{
-  foodMaterialId: "FM010",
-  foodMaterialName: "홍명보",
-  foodCategory: "육류",
-  foodMaterialCount: 5,
-  foodMaterialWeight: 600,
-  totalWeight: 3000,
-  foodMaterialPrice: 18000,
-  foodMaterialType: "고체",
-  vender: "나가라식품",
-  incomeDate: "2026-06-28",
-  expirationDate: "2026-07-04",
-},
-{
-  foodMaterialId: "FM009",
-  foodMaterialName: "홍띵보육포",
-  foodCategory: "가공식품",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "손 빼",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-11-27",
-},
-{
-  foodMaterialId: "FM008",
-  foodMaterialName: "밥",
-  foodCategory: "곡류",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "우리쌀",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-12-11",},
-{
-  foodMaterialId: "FM007",
-  foodMaterialName: "피카츄",
-  foodCategory: "육류",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "한지우",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-11-20",},
-{
-  foodMaterialId: "FM006",
-  foodMaterialName: "리자몽",
-  foodCategory: "육류",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "한사장",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-07-31",},
-{
-  foodMaterialId: "FM005",
-  foodMaterialName: "홍명보 앞다리살",
-  foodCategory: "육류",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "빨명보",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-07-30",},
-{
-  foodMaterialId: "FM004",
-  foodMaterialName: "홍명보뒷다리살",
-  foodCategory: "육류",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "명보가최고야",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-12-14",},
-{
-  foodMaterialId: "FM003",
-  foodMaterialName: "38억",
-  foodCategory: "지폐",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "달다달어",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-12-01",},
-{
-  foodMaterialId: "FM002",
-  foodMaterialName: "면",
-  foodCategory: "면류",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "사리가게",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-12-27",},
-{
-  foodMaterialId: "FM001",
-  foodMaterialName: "치즈",
-  foodCategory: "발효식품",
-  foodMaterialCount: 20,
-  foodMaterialWeight: 500,
-  totalWeight: 10000,
-  foodMaterialPrice: 12000,
-  foodMaterialType: "고체",
-  vender: "꾸덕꾸덕",
-  incomeDate: "2026-06-30",
-  expirationDate: "2026-12-21",}
-]
+// const foodMaterialData: FoodMaterialDto[] =[{
+//   foodMaterialId: "FM011",
+//   foodMaterialName: "홍띵보",
+//   foodCategory: "육류",
+//   foodMaterialCount: 10,
+//   foodMaterialWeight: 500,
+//   totalWeight: 5000,
+//   foodMaterialPrice: 30000,
+//   foodMaterialType: "고체",
+//   vender: "이게 전술이야 가게",
+//   incomeDate: "2026-06-25",
+//   expirationDate: "2026-07-10",
+// },
+// {
+//   foodMaterialId: "FM010",
+//   foodMaterialName: "홍명보",
+//   foodCategory: "육류",
+//   foodMaterialCount: 5,
+//   foodMaterialWeight: 600,
+//   totalWeight: 3000,
+//   foodMaterialPrice: 18000,
+//   foodMaterialType: "고체",
+//   vender: "나가라식품",
+//   incomeDate: "2026-06-28",
+//   expirationDate: "2026-07-04",
+// },
+// {
+//   foodMaterialId: "FM009",
+//   foodMaterialName: "홍띵보육포",
+//   foodCategory: "가공식품",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "손 빼",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-11-27",
+// },
+// {
+//   foodMaterialId: "FM008",
+//   foodMaterialName: "밥",
+//   foodCategory: "곡류",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "우리쌀",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-12-11",},
+// {
+//   foodMaterialId: "FM007",
+//   foodMaterialName: "피카츄",
+//   foodCategory: "육류",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "한지우",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-11-20",},
+// {
+//   foodMaterialId: "FM006",
+//   foodMaterialName: "리자몽",
+//   foodCategory: "육류",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "한사장",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-07-31",},
+// {
+//   foodMaterialId: "FM005",
+//   foodMaterialName: "홍명보 앞다리살",
+//   foodCategory: "육류",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "빨명보",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-07-30",},
+// {
+//   foodMaterialId: "FM004",
+//   foodMaterialName: "홍명보뒷다리살",
+//   foodCategory: "육류",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "명보가최고야",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-12-14",},
+// {
+//   foodMaterialId: "FM003",
+//   foodMaterialName: "38억",
+//   foodCategory: "지폐",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "달다달어",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-12-01",},
+// {
+//   foodMaterialId: "FM002",
+//   foodMaterialName: "면",
+//   foodCategory: "면류",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "사리가게",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-12-27",},
+// {
+//   foodMaterialId: "FM001",
+//   foodMaterialName: "치즈",
+//   foodCategory: "발효식품",
+//   foodMaterialCount: 20,
+//   foodMaterialWeight: 500,
+//   totalWeight: 10000,
+//   foodMaterialPrice: 12000,
+//   foodMaterialType: "고체",
+//   vender: "꾸덕꾸덕",
+//   incomeDate: "2026-06-30",
+//   expirationDate: "2026-12-21",}
+// ]
 
 function formatNumber(value:number){
   return value.toLocaleString();
@@ -221,27 +222,56 @@ const foodMaterialColumnList: FoodMaterialColumn[] = [
 function FoodMaterialsPage() {
   const [keyword, setKeyword]=useState("");
   const [sortType, setSortType]=useState("idDesc");
-  const[allFoodMaterials, setAllFoodMaterials] = useState<FoodMaterialDto[]>(foodMaterialData);
-  const[foodMaterials, setFoodMaterials]=useState<FoodMaterialDto[]>(foodMaterialData);
+  // const[allFoodMaterials, setAllFoodMaterials] = useState<FoodMaterialDto[]>(foodMaterialData);
+  const[foodMaterials, setFoodMaterials]=useState<FoodMaterialDto[]>([]);
+  const [isLoading, setIsLoading]=useState(false);
+  const [errorMessage, setErrorMessage]=useState("");
+  const[currentPage, setCurrentPage]=useState(1);
+  const [totalPage, setTotalPage]=useState(0);
+  const [isLoadingMore, setIsLoadingMore]=useState(false);
 
-  const sortFoodMaterials=(targetFoodMaterials:FoodMaterialDto[], targetSortType:string) =>{
-    const sortedFoodMaterials=[...targetFoodMaterials];
-    switch(targetSortType){
-      case "idAsc":
-        sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
-        break;
-      case "idDesc":
-        sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
-        break;
-      case "expAsc":
-        sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
-        break;
-      case "expDesc":
-        sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
-        break;
-      default:
-        break;}
-    return sortedFoodMaterials;
+  async function loadFoodMaterials(
+    nextKeyword:string, nextSortType:string
+  ){
+    try{
+      setIsLoading(true);
+      setErrorMessage("");
+
+      const res=await client.get<FoodMaterialPageResponse>(
+        "/api/foodmaterials",{
+          params:{sort:nextSortType, page:1, size:10, keyword:nextKeyword}
+        }
+      )
+      setFoodMaterials(res.data.foodList);
+
+      setCurrentPage(res.data.currentPage);
+      setTotalPage(res.data.totalPage);
+    }catch(e){
+      console.error("식자재 목록 불러오기 실패", e);
+      setErrorMessage("식자재 목록을 불러오지 못했습니다.");
+    }finally{setIsLoading(false);}
+  }
+
+  useEffect(()=>{void loadFoodMaterials("", "idDesc");}, []);
+
+  // const sortFoodMaterials=(targetFoodMaterials:FoodMaterialDto[], targetSortType:string) =>{
+  //   const sortedFoodMaterials=[...targetFoodMaterials];
+  //   switch(targetSortType){
+  //     case "idAsc":
+  //       sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
+  //       break;
+  //     case "idDesc":
+  //       sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
+  //       break;
+  //     case "expAsc":
+  //       sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
+  //       break;
+  //     case "expDesc":
+  //       sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
+  //       break;
+  //     default:
+  //       break;}
+  //   return sortedFoodMaterials;
     // if(targetSortType==="idAsc"){
     //   sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
     // }else if(targetSortType==="idDesc"){
@@ -252,34 +282,83 @@ function FoodMaterialsPage() {
     //   sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
     // }
     // return sortedFoodMaterials;
-  }
+  // }
 
-  const onSortChange=(nextSortType:string)=>{setSortType(nextSortType);
-    const sortedFoodMaterials = sortFoodMaterials(foodMaterials, nextSortType);
-    setFoodMaterials(sortedFoodMaterials);
+  function onSortChange(nextSortType:string){
+    setSortType(nextSortType);
+    loadFoodMaterials(keyword.trim(), nextSortType);
   }
   
-  const onSearch= () =>{
-    const result = allFoodMaterials.filter((foodMaterial)=>foodMaterial.foodMaterialName.includes(keyword))
-    const sortedResult=sortFoodMaterials(result, sortType);
-    setFoodMaterials(sortedResult);
+  function onSearch(){
+    loadFoodMaterials(keyword.trim(), sortType);
   }
 
-  const onAllList=()=>{
+  function onAllList(){
     setKeyword("");
-    const sortedAllFoodMaterials=sortFoodMaterials(allFoodMaterials,sortType);
-    setFoodMaterials(sortedAllFoodMaterials);
+    loadFoodMaterials("", sortType);
   }
 
-  const onDelete=(foodMaterialId:string)=>{
-    const nextAllFoodMaterials=allFoodMaterials.filter((foodMaterial)=>foodMaterial.foodMaterialId !== foodMaterialId)
-    setAllFoodMaterials(nextAllFoodMaterials);
+  async function onDelete(foodMaterialId:string){
+    const isConfirmed=window.confirm("이 식자재를 삭제하겠습니까?");
+    
+    if(!isConfirmed){
+      return;
+    }
 
-    const nextFoodMaterials=nextAllFoodMaterials.filter((foodMaterial)=>foodMaterial.foodMaterialName.includes(keyword))
-    const sortedNextFoodMaterials=sortFoodMaterials(nextFoodMaterials,sortType)
-    setFoodMaterials(sortedNextFoodMaterials);
+    try{
+      setErrorMessage("");
+
+      await client.delete<FoodMaterialDeleteResponse>(
+        `/api/foodmaterials/${foodMaterialId}`
+      );
+
+      loadFoodMaterials(keyword.trim(), sortType);
+    } catch(e){
+      console.error("식자재 삭제 실패", e);
+
+      setErrorMessage("식자재 삭제에 실패했습니다.");
+    }
+  
+    // const nextAllFoodMaterials=allFoodMaterials.filter((foodMaterial)=>foodMaterial.foodMaterialId !== foodMaterialId)
+    // setAllFoodMaterials(nextAllFoodMaterials);
+
+    // const nextFoodMaterials=nextAllFoodMaterials.filter((foodMaterial)=>foodMaterial.foodMaterialName.includes(keyword))
+    // const sortedNextFoodMaterials=sortFoodMaterials(nextFoodMaterials,sortType)
+    // setFoodMaterials(sortedNextFoodMaterials);
   }
 
+  async function loadNextFoodMaterials(){
+    if(isLoading||isLoadingMore) return;
+
+    if(currentPage >= totalPage) return;
+
+    try{
+      setIsLoadingMore(true);
+
+      const res = await client.get<FoodMaterialPageResponse>(
+        "/api/foodmaterials",{params:{sort:sortType, page:currentPage+1, size:10, keyword:keyword.trim()}}
+      );
+
+      setFoodMaterials((previousFoodMaterials)=>[...previousFoodMaterials, ...res.data.foodList]);
+
+      setCurrentPage(res.data.currentPage);
+    }catch(e){
+      console.error("다음 식자재 목록 불러오기 실패");
+      setErrorMessage("다음 식자재 목록을 불러오지 못했습니다.");
+    }finally{
+      setIsLoadingMore(false);
+    }
+  }
+
+  function onTableScroll(event:React.UIEvent<HTMLDivElement>){
+    const{scrollTop, scrollHeight, clientHeight} = event.currentTarget;
+
+    const isNearBottom= scrollTop+clientHeight>= scrollHeight - 40;
+    
+    if(isNearBottom){
+      loadNextFoodMaterials();
+    }
+  }
 
 
   return (
@@ -307,7 +386,12 @@ function FoodMaterialsPage() {
         <Button type="button" onClick={onSearch}>검색</Button>
         <Button type="button" onClick={onAllList}>전체 조회</Button>
       </div>
-      <div className="food-materials-table-wrap">
+
+      {errorMessage && (
+        <p role="alert">{errorMessage}</p>
+      )}
+
+      <div className="food-materials-table-wrap" onScroll={onTableScroll}>
         <table className="food-materials-table">
           <thead>
             <tr>
@@ -318,20 +402,31 @@ function FoodMaterialsPage() {
             </tr>
           </thead>
           <tbody>
-            {foodMaterials.length===0 ? (
+            {isLoading ? (
               <tr>
-                <td colSpan={12}>조회된 식자재가 없습니다</td>
+                <td colSpan={foodMaterialColumnList.length + 1}>식자재 목록을 불러오는 중입니다.</td>
               </tr>
-            ):(foodMaterials.map((foodMaterial)=>(
+            ):(foodMaterials.length===0 ? (
+              <tr>
+                <td colSpan={foodMaterialColumnList.length + 1}>
+                  조회된 식자재가 없습니다.
+                </td>
+              </tr>
+            ) : (foodMaterials.map((foodMaterial)=>(
               <tr key={foodMaterial.foodMaterialId}>
                 {foodMaterialColumnList.map((column)=>(
                   <td key={column.key}>{column.getValue(foodMaterial)}</td>
                 ))}
                 <td>
-                  <Button type="button" onClick={()=>onDelete(foodMaterial.foodMaterialId)}> 삭제</Button>
+                  <Button type="button" onClick={()=>{onDelete(foodMaterial.foodMaterialId)}}> 삭제</Button>
                 </td>
               </tr>
-            )))}
+            ))))}
+            {isLoadingMore&&(
+              <tr>
+                <td colSpan={foodMaterialColumnList.length+1}>다음 식자재 목록을 불러오는 중입니다.</td>
+              </tr>
+            )}
           </tbody>
 
         </table>
