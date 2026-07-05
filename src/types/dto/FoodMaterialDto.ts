@@ -12,3 +12,17 @@ export interface FoodMaterialDto {
   expirationDate: string;
   bId?: string;
 }
+
+export interface FoodMaterialPageResponse {
+  foodList: FoodMaterialDto[];
+  currentPage: number;
+  totalPage: number;
+  totalCount: number;
+  pageSize: number;
+  sort: string;
+  keyword: string | null;
+}
+export interface FoodMaterialDeleteResponse {
+  message: string;
+  foodMaterialId: string;
+}

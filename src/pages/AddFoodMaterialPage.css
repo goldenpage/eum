@@ -1,0 +1,164 @@
+ul {
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  height: 100vh;
+  min-width: 1000px;
+}
+
+.main {
+  width: 100%;
+}
+
+.profile {
+  display: flex;
+  justify-content: end;
+}
+
+.content_item {
+  height: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+.content_left {
+  flex: 1;
+}
+
+.content_right {
+  width: 400px;
+  border: 2px solid black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content_right h3 {
+  margin-top: 0;
+}
+
+.content_right table {
+  border-spacing: 10px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.content_right .register_final_btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.input_section {
+  border: 2px solid black;
+  padding: 16px;
+  margin: 10px;
+}
+
+.input_row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.input_row label {
+  min-width: 100px;
+}
+
+.category_buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.category_buttons button {
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.category_buttons button.selected {
+  background-color: #ccc;
+  font-weight: bold;
+}
+
+.input_fields {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.input_fields label {
+  min-width: 80px;
+}
+
+.input_fields input,
+.input_fields select {
+  width: 120px;
+}
+
+.register_btn {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.search_section {
+  border: 2px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+
+.search_row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+table {
+  border-spacing: 24px;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.remove_btn {
+  cursor: pointer;
+  color: red;
+}
+
+.auto_date_hint {
+  font-size: 11px;
+  color: #999;
+}
+
+.empty_msg {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.category_item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.readonly_field {
+  background: #f0f0f0;
+  cursor: not-allowed;
+}
