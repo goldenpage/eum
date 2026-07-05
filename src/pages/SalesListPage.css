@@ -1,0 +1,157 @@
+.sales-list-page{
+    display: flex;
+    min-height: 100vh;
+}
+
+.sales-list-sidebar{
+    flex: 0 0 220px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sales-list-main{
+    flex: 1;
+    min-width: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.sales-list-header{
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: #ffffff;
+    padding: 16px 0;
+}
+
+.sales-filter-area{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.sales-filter-input,
+.sales-filter-select,
+.sales-filter-button{
+    min-height: 34px;
+    padding: 5px 10px;
+}
+
+.sales-summary-box{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    background: #eff6ff;
+    border-left: 5px solid #2563db;
+    margin-bottom: 20px;
+}
+
+.sales-summary-box span{
+    color: #2563eb;
+}
+
+.sales-table-wrap{
+    width: 100%;
+    overflow: auto;
+}
+
+.sales-table{
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+.sales-table th,
+.sales-table td{
+    padding: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.sales-table tbody tr:hover{
+    background-color: #f1f5f9;
+}
+
+.sales-table button{
+    margin: 0 3px;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination .active{
+    background: #2563eb;
+    color: white;
+}
+
+.sales-error{
+    color: red;
+    margin-bottom: 12px;
+}
+
+.sales-modal-backdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.sales-modal{
+    width: 320px;
+    background: white;
+    padding: 20px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+}
+
+.sales-modal label{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+
+.sales-modal-actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+@media (max-width: 768px){
+    .sales-list-page{
+        display: block;
+    }
+
+    .sales-list-sidebar{
+        position: static;
+        width: 100%;
+        height: auto;
+    }
+
+    .sales-list-main{
+        padding: 16px;
+    }
+
+    .sales-list-header{
+        justify-content: flex-start;
+        position: static;
+    }
+}

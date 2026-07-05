@@ -6,7 +6,6 @@ import Sidebar from "../components/Sidebar";
 import useDisposalItems from "../hooks/useDisposalItems";
 import "./DisposalItemsPage.css";
 
-//pagination.tsx 버튼 공통컴포넌트 확인
 function DisposalItemsPage() {
   const {
     filters,
