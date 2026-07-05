@@ -4,7 +4,15 @@ import Button from "../components/Button";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
-import type { MenuDto, MenuListResponse, MenuMaterialDto, MenuMaterialListResponse, SaleRequest, SaleResponse, MenuDeleteResponse } from "../types/dto/MenuDto";
+import type {
+  MenuDto,
+  MenuListResponse,
+  MenuMaterialDto,
+  MenuMaterialListResponse,
+  SaleRequest,
+  SaleResponse,
+  MenuDeleteResponse,
+} from "../types/dto/MenuDto";
 import "./MenuListPage.css";
 
 function formatMoney(value: number) {
@@ -13,57 +21,59 @@ function formatMoney(value: number) {
 
 function MenuListPage() {
   const [menus, setMenus] = useState<MenuDto[]>([]);
-  const [selectedMenu, setSelectedMenu] =useState<MenuDto | null>(null);
-  const [materials, setMaterials] =useState<MenuMaterialDto[]>([]);
-  const [saleCount, setSaleCount]=useState(1);
-  const [payment, setPayment] =useState("카드");
-  const [isLoading, setIsLoading] =useState(false);
-  const [isSelling, setIsSelling] =useState(false);
-  const [errorMessage, setErrorMessage] =useState("");
-  const [successMessage, setSuccessMessage] =useState("");
-  const [deletingMenuId, setDeletingMenuId]=useState<string | null>(null);
+  const [selectedMenu, setSelectedMenu] = useState<MenuDto | null>(null);
+  const [materials, setMaterials] = useState<MenuMaterialDto[]>([]);
+  const [saleCount, setSaleCount] = useState(1);
+  const [payment, setPayment] = useState("카드");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSelling, setIsSelling] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [deletingMenuId, setDeletingMenuId] = useState<string | null>(null);
 
-  async function loadMenuList(){
-    try{
+  async function loadMenuList() {
+    try {
       setIsLoading(true);
       setErrorMessage("");
 
       const res = await client.get<MenuListResponse>("/api/menus");
       setMenus(res.data.menuList);
-    }catch(e){
+    } catch (e) {
       console.error("메뉴 목록 불러오기 실패", e);
       setErrorMessage("메뉴 목록을 불러오지 못했습니다.");
-    }finally{
+    } finally {
       setIsLoading(false);
     }
   }
 
-  async function loadMenuMaterials(menuId: string){
-    try{
+  async function loadMenuMaterials(menuId: string) {
+    try {
       setErrorMessage("");
 
       const res = await client.get<MenuMaterialListResponse>(
-        `/api/menus/${menuId}/materials`
+        `/api/menus/${menuId}/materials`,
       );
 
       setMaterials(res.data.materialList);
-    }catch(e){
+    } catch (e) {
       console.error("메뉴 식자재 상세 불러오기 실패", e);
       setErrorMessage("메뉴 식자재 상세를 불러오지 못했습니다.");
       setMaterials([]);
     }
   }
-  useEffect(()=>{void loadMenuList();}, []);
+  useEffect(() => {
+    void loadMenuList();
+  }, []);
 
-  function onSelectMenu(menu: MenuDto){
+  function onSelectMenu(menu: MenuDto) {
     setSelectedMenu(menu);
     setMaterials([]);
     setSuccessMessage("");
     loadMenuMaterials(menu.menuId);
   }
 
-  async function onSale(){
-    if(selectedMenu === null) {
+  async function onSale() {
+    if (selectedMenu === null) {
       setErrorMessage("판매할 메뉴를 먼저 선택하세요.");
       return;
     }
@@ -74,77 +84,77 @@ function MenuListPage() {
     }
 
     const isConfirmed = window.confirm(
-      `${selectedMenu.menuName} ${saleCount}개를 ${payment}으로 판매 처리하시겠습니까?`
+      `${selectedMenu.menuName} ${saleCount}개를 ${payment}으로 판매 처리하시겠습니까?`,
     );
 
     if (!isConfirmed) return;
 
-    try{
+    try {
       setIsSelling(true);
       setErrorMessage("");
       setSuccessMessage("");
 
-      const request: SaleRequest={
-        saleCount, payment
+      const request: SaleRequest = {
+        saleCount,
+        payment,
       };
 
       const res = await client.post<SaleResponse>(
-        `/api/menus/${selectedMenu.menuId}/sales`, request
+        `/api/menus/${selectedMenu.menuId}/sales`,
+        request,
       );
 
       setSuccessMessage(res.data.message);
       await loadMenuMaterials(selectedMenu.menuId);
-    }catch(e){
+    } catch (e) {
       console.error("판매 처리 실패", e);
       setErrorMessage(
-        "판매 처리에 실패했습니다. 재고 부족 또는 서버 오류를 확인하세요."
+        "판매 처리에 실패했습니다. 재고 부족 또는 서버 오류를 확인하세요.",
       );
-    }finally{
+    } finally {
       setIsSelling(false);
     }
   }
 
-  async function onDeleteMenu(menu:MenuDto){
+  async function onDeleteMenu(menu: MenuDto) {
     if (deletingMenuId !== null) return;
 
     const isConfirmed = window.confirm(
-      `${menu.menuName} 메뉴를 삭제하시겠습니까?`
+      `${menu.menuName} 메뉴를 삭제하시겠습니까?`,
     );
 
     if (!isConfirmed) return;
 
-    try{
+    try {
       setDeletingMenuId(menu.menuId);
       setErrorMessage("");
       setSuccessMessage("");
 
       const res = await client.delete<MenuDeleteResponse>(
-        `/api/menus/${menu.menuId}`
+        `/api/menus/${menu.menuId}`,
       );
 
-      if(selectedMenu?.menuId === menu.menuId){
+      if (selectedMenu?.menuId === menu.menuId) {
         setSelectedMenu(null);
         setMaterials([]);
       }
 
       setSuccessMessage(res.data.message);
       await loadMenuList();
-    }catch(e) {
+    } catch (e) {
       console.error("메뉴 삭제 실패", e);
-      setErrorMessage("메뉴 삭제에 실패했습니다. 관련 판매, 사용 식자재 데이터를 확인하세요.");
-    }finally {
+      setErrorMessage(
+        "메뉴 삭제에 실패했습니다. 관련 판매, 사용 식자재 데이터를 확인하세요.",
+      );
+    } finally {
       setDeletingMenuId(null);
     }
   }
 
-
-
-
-
-  return(
+  return (
     <div className="menu-list-page">
       <aside className="menu-list-sidebar">
-          <Sidebar />
+        <Sidebar />
       </aside>
 
       <main className="menu-list-main">
@@ -153,8 +163,10 @@ function MenuListPage() {
         </div>
         <h1>메뉴 조회</h1>
 
-        {errorMessage &&<p role="alert">{errorMessage}</p>}
-        {successMessage &&<p className="menu-list-success">{successMessage}</p>}
+        {errorMessage && <p role="alert">{errorMessage}</p>}
+        {successMessage && (
+          <p className="menu-list-success">{successMessage}</p>
+        )}
 
         <div className="menu-list-content">
           <section className="menu-list-panel">
@@ -162,9 +174,9 @@ function MenuListPage() {
 
             {isLoading ? (
               <p>메뉴 목록을 불러오는 중입니다.</p>
-            ):menus.length ===0 ? (
+            ) : menus.length === 0 ? (
               <p>조회된 메뉴가 없습니다.</p>
-            ):(
+            ) : (
               <table className="menu-list-table">
                 <thead>
                   <tr>
@@ -176,16 +188,31 @@ function MenuListPage() {
                 </thead>
                 <tbody>
                   {menus.map((menu) => (
-                    <tr key={menu.menuId} className={selectedMenu?.menuId === menu.menuId ? "menu-list-row--selected" : ""}>
+                    <tr
+                      key={menu.menuId}
+                      className={
+                        selectedMenu?.menuId === menu.menuId
+                          ? "menu-list-row--selected"
+                          : ""
+                      }
+                    >
                       <td>
-                        <Button type="button" onClick={()=>{onSelectMenu(menu);}}>
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            onSelectMenu(menu);
+                          }}
+                        >
                           {menu.menuName}
                         </Button>
                       </td>
                       <td>{formatMoney(menu.menuPrice)}</td>
                       <td>{menu.menuCategory}</td>
                       <td>
-                        <Button type="button" onClick={() => void onDeleteMenu(menu)}>
+                        <Button
+                          type="button"
+                          onClick={() => void onDeleteMenu(menu)}
+                        >
                           {deletingMenuId === menu.menuId ? "삭제 중" : "삭제"}
                         </Button>
                       </td>
@@ -199,9 +226,9 @@ function MenuListPage() {
           <section className="menu-detail-panel">
             <h2>사용 식자재</h2>
 
-            {selectedMenu ===null ? (
+            {selectedMenu === null ? (
               <p>메뉴를 선택하면 사용 식자재 정보가 표시됩니다.</p>
-            ):(
+            ) : (
               <>
                 <p className="menu-list-selected-name">
                   선택 메뉴: {selectedMenu.menuName}
@@ -217,11 +244,11 @@ function MenuListPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {materials.length ===0 ? (
+                    {materials.length === 0 ? (
                       <tr>
                         <td colSpan={4}>사용 식자재 정보가 없습니다.</td>
                       </tr>
-                    ):(
+                    ) : (
                       materials.map((material) => (
                         <tr key={material.foodMaterialId}>
                           <td>{material.foodMaterialName}</td>
@@ -242,7 +269,7 @@ function MenuListPage() {
                         type="radio"
                         value="카드"
                         checked={payment === "카드"}
-                        onChange={(event) =>setPayment(event.target.value)}
+                        onChange={(event) => setPayment(event.target.value)}
                       />
                       카드
                     </label>
@@ -250,8 +277,8 @@ function MenuListPage() {
                       <input
                         type="radio"
                         value="현금"
-                        checked={payment==="현금"}
-                        onChange={(event) =>setPayment(event.target.value)}
+                        checked={payment === "현금"}
+                        onChange={(event) => setPayment(event.target.value)}
                       />
                       현금
                     </label>
@@ -261,7 +288,7 @@ function MenuListPage() {
                     text="판매 수량"
                     inputType="number"
                     value={saleCount}
-                    onChange={(value) =>setSaleCount(Number(value))}
+                    onChange={(value) => setSaleCount(Number(value))}
                     min={1}
                     width={120}
                     height={30}

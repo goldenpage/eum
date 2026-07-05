@@ -23,5 +23,8 @@ export function normalizeReason(value: string | null): DisposalReasonCode {
 
 export function getReasonLabel(value: string | null): string {
   const normalized = normalizeReason(value);
-  return DISPOSAL_REASONS.find((reason) => reason.value === normalized)?.label ?? "기타";
+  return (
+    DISPOSAL_REASONS.find((reason) => reason.value === normalized)?.label ??
+    "기타"
+  );
 }

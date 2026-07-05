@@ -1,74 +1,78 @@
-import {useEffect, useState} from "react";
-import { updateDisposalReason, type DisposalFilters, type DisposalItem } from "../features/disposals/api";
+import { useEffect, useState } from "react";
+import {
+  updateDisposalReason,
+  type DisposalFilters,
+  type DisposalItem,
+} from "../features/disposals/api";
 import { fetchDisposalItems } from "../utils/disposal/fetchItems";
 
 const PAGE_SIZE = 5;
 
-function readInitialFilters(): DisposalFilters & { page: number }{
-    const params = new URLSearchParams(window.location.search);
-    
-    return {
-        category: params.get("category") ?? "",
-        reason: params.get("reason") ?? "",
-        page: Number(params.get("page") ?? "1") || 1,
-    };
+function readInitialFilters(): DisposalFilters & { page: number } {
+  const params = new URLSearchParams(window.location.search);
+
+  return {
+    category: params.get("category") ?? "",
+    reason: params.get("reason") ?? "",
+    page: Number(params.get("page") ?? "1") || 1,
+  };
 }
 
-function syncUrl(filters: DisposalFilters, page: number){
-    const params = new URLSearchParams();
+function syncUrl(filters: DisposalFilters, page: number) {
+  const params = new URLSearchParams();
 
-    if(filters.category){
-        params.set("category", filters.category);
-    }
-    if(filters.reason){
-        params.set("reason", filters.reason);
-    }
-    if(page > 1){
-        params.set("page", String(page));
-    }
+  if (filters.category) {
+    params.set("category", filters.category);
+  }
+  if (filters.reason) {
+    params.set("reason", filters.reason);
+  }
+  if (page > 1) {
+    params.set("page", String(page));
+  }
 
-    const query = params.toString();
-    const nextUrl = query ? `/disposal-items?${query}` : "/disposal-items";
+  const query = params.toString();
+  const nextUrl = query ? `/disposal-items?${query}` : "/disposal-items";
 
-    window.history.pushState({ ...filters, page}, "", nextUrl);
+  window.history.pushState({ ...filters, page }, "", nextUrl);
 }
 
-function useDisposalItems(){
-    const [initialState] = useState(() => readInitialFilters());
-    const [filters, setFilters] = useState<DisposalFilters>({
-        category: initialState.category,
-        reason: initialState.reason,
-    });
-    const [appliedFilters, setAppliedFilters] = useState<DisposalFilters>({
+function useDisposalItems() {
+  const [initialState] = useState(() => readInitialFilters());
+  const [filters, setFilters] = useState<DisposalFilters>({
     category: initialState.category,
     reason: initialState.reason,
+  });
+  const [appliedFilters, setAppliedFilters] = useState<DisposalFilters>({
+    category: initialState.category,
+    reason: initialState.reason,
+  });
+  const [page, setPage] = useState(initialState.page);
+  const [items, setItems] = useState<DisposalItem[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [categories, setCategories] = useState<string[]>([]);
+  const [reasons, setReasons] = useState<string[]>([]);
+  const fetchItems = async (
+    nextPage: number,
+    nextFilters: DisposalFilters = appliedFilters,
+    shouldSyncUrl = true,
+  ) => {
+    await fetchDisposalItems({
+      nextPage,
+      nextFilters,
+      pageSize: PAGE_SIZE,
+      shouldSyncUrl,
+      setIsLoading,
+      setErrorMessage,
+      setItems,
+      setPage,
+      setTotalPages,
+      setCategories,
+      setReasons,
+      syncUrl,
     });
-    const [page, setPage] = useState(initialState.page);
-    const [items, setItems] = useState<DisposalItem[]>([]);
-    const [totalPages, setTotalPages] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-    const [categories, setCategories] = useState<string[]>([]);
-    const [reasons, setReasons] = useState<string[]>([]); 
-    const fetchItems = async(
-        nextPage: number,
-        nextFilters: DisposalFilters = appliedFilters, shouldSyncUrl = true,
-    ) => {
-        await fetchDisposalItems({
-            nextPage,
-            nextFilters,
-            pageSize: PAGE_SIZE,
-            shouldSyncUrl,
-            setIsLoading,
-            setErrorMessage,
-            setItems,
-            setPage,
-            setTotalPages,
-            setCategories,
-            setReasons,
-            syncUrl,
-        }
-    );
   };
 
   useEffect(() => {
@@ -101,7 +105,7 @@ function useDisposalItems(){
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
-useEffect(() => {
+  useEffect(() => {
     const nextFilters = {
       category: appliedFilters.category,
       reason: appliedFilters.reason,

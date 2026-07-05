@@ -54,7 +54,9 @@ export async function fetchDisposalItems({
     }
   } catch (error) {
     setErrorMessage(
-      error instanceof Error ? error.message : "폐기 품목을 불러오지 못했습니다.",
+      error instanceof Error
+        ? error.message
+        : "폐기 품목을 불러오지 못했습니다.",
     );
   } finally {
     setIsLoading(false);

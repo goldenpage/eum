@@ -1,57 +1,57 @@
-.food-materials-page{
-    display:flex;
-    min-height: 100vh;
+.food-materials-page {
+  display: flex;
+  min-height: 100vh;
 }
-.food-materials-sidebar{
-    flex:0 0 170px;
+.food-materials-sidebar {
+  flex: 0 0 170px;
 }
-.food-materials-main{
-    flex:1;
-    min-width: 0;
-    padding:20px;
-    box-sizing: border-box;
+.food-materials-main {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
-.food-materials-header{
-    display:flex;
-    justify-content: flex-end;
+.food-materials-header {
+  display: flex;
+  justify-content: flex-end;
 }
-.food-materials-toolbar{
-    display:flex;
-    flex-wrap: wrap;
-    gap:10px;
-    align-items: flex-end;
-    margin-bottom:20px;
+.food-materials-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 20px;
 }
-.food-materials-sort{
-    display:flex;
-    flex-direction: column;
-    gap:4px;
+.food-materials-sort {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.food-materials-sort-select{
-    height:36px;
+.food-materials-sort-select {
+  height: 36px;
 }
-.food-materials-table-wrap{
-    width:100%;
-    height:420px;
-    overflow: auto;
-    border:1px solid white;
+.food-materials-table-wrap {
+  width: 100%;
+  height: 420px;
+  overflow: auto;
+  border: 1px solid white;
 }
-.food-materials-table{
-    width: 100%;
-    min-width:1200px;
-    border-collapse: collapse;
+.food-materials-table {
+  width: 100%;
+  min-width: 1200px;
+  border-collapse: collapse;
 }
 
 .food-materials-table th,
-.food-materials-table td{
-    padding:8px;
-    border: 1px solid white;
-    text-align: center;
-    white-space: nowrap;
+.food-materials-table td {
+  padding: 8px;
+  border: 1px solid white;
+  text-align: center;
+  white-space: nowrap;
 }
-.food-materials-table__header-cell{
-    position: sticky;
-    top:0;
-    z-index:1;
-    background-color: white;
+.food-materials-table__header-cell {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
 }
