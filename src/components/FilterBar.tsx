@@ -30,7 +30,9 @@ export function FilterBar({
       <select
         id="category"
         value={filters.category}
-        onChange={(event) => onChange({ ...filters, category: event.target.value })}
+        onChange={(event) =>
+          onChange({ ...filters, category: event.target.value })
+        }
       >
         <option value="">전체</option>
         {categories.map((category) => (
@@ -44,13 +46,15 @@ export function FilterBar({
       <select
         id="reason"
         value={filters.reason}
-        onChange={(event) => onChange({ ...filters, reason: event.target.value })}
-        >
-          <option value="">전체</option>
-            {reasons.map((reason) => (
-            <option key={reason} value={reason}>
-              {reason}
-            </option>
+        onChange={(event) =>
+          onChange({ ...filters, reason: event.target.value })
+        }
+      >
+        <option value="">전체</option>
+        {reasons.map((reason) => (
+          <option key={reason} value={reason}>
+            {reason}
+          </option>
         ))}
       </select>
 

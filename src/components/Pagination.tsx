@@ -6,7 +6,11 @@ interface PaginationProps {
   onMove: (page: number) => void;
 }
 
-export function Pagination({ currentPage, totalPages, onMove }: PaginationProps) {
+export function Pagination({
+  currentPage,
+  totalPages,
+  onMove,
+}: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -25,7 +29,11 @@ export function Pagination({ currentPage, totalPages, onMove }: PaginationProps)
         <Button
           type="button"
           key={page}
-          className={page === currentPage ? "active paginationButton" : "paginationButton"}
+          className={
+            page === currentPage
+              ? "active paginationButton"
+              : "paginationButton"
+          }
           onClick={() => onMove(page)}
         >
           {String(page)}

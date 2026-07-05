@@ -65,3 +65,8 @@ export interface Revenue {
 export interface AdminUser {
   name: string;
 }
+
+export interface AdminDTO {
+  username: string;
+  pw: string;
+}

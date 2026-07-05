@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import Button from "../components/Button";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
-import type { FoodMaterialDto, FoodMaterialPageResponse, FoodMaterialDeleteResponse } from "../types/dto/FoodMaterialDto";
+import type {
+  FoodMaterialDto,
+  FoodMaterialPageResponse,
+  FoodMaterialDeleteResponse,
+} from "../types/dto/FoodMaterialDto";
 import "./FoodMaterialsPage.css";
 import client from "../api/client";
+import Button from "../components/Button";
 
 // const foodMaterialData: FoodMaterialDto[] =[{
 //   foodMaterialId: "FM011",
@@ -144,16 +148,16 @@ import client from "../api/client";
 //   expirationDate: "2026-12-21",}
 // ]
 
-function formatNumber(value:number){
+function formatNumber(value: number) {
   return value.toLocaleString();
 }
 
-function formatMoney(value:number){
+function formatMoney(value: number) {
   return `${value.toLocaleString()}원`;
 }
 
 interface FoodMaterialColumn {
-  key:string;
+  key: string;
   label: string;
   getValue: (foodMaterial: FoodMaterialDto) => string | number;
 }
@@ -188,14 +192,12 @@ const foodMaterialColumnList: FoodMaterialColumn[] = [
   {
     key: "totalWeight",
     label: "총중량",
-    getValue: (foodMaterial) =>
-      `${formatNumber(foodMaterial.totalWeight)}g`,
+    getValue: (foodMaterial) => `${formatNumber(foodMaterial.totalWeight)}g`,
   },
   {
     key: "foodMaterialPrice",
     label: "매입 가격",
-    getValue: (foodMaterial) =>
-      formatMoney(foodMaterial.foodMaterialPrice),
+    getValue: (foodMaterial) => formatMoney(foodMaterial.foodMaterialPrice),
   },
   {
     key: "foodMaterialType",
@@ -220,39 +222,47 @@ const foodMaterialColumnList: FoodMaterialColumn[] = [
 ];
 
 function FoodMaterialsPage() {
-  const [keyword, setKeyword]=useState("");
-  const [sortType, setSortType]=useState("idDesc");
+  const [keyword, setKeyword] = useState("");
+  const [sortType, setSortType] = useState("idDesc");
   // const[allFoodMaterials, setAllFoodMaterials] = useState<FoodMaterialDto[]>(foodMaterialData);
-  const[foodMaterials, setFoodMaterials]=useState<FoodMaterialDto[]>([]);
-  const [isLoading, setIsLoading]=useState(false);
-  const [errorMessage, setErrorMessage]=useState("");
-  const[currentPage, setCurrentPage]=useState(1);
-  const [totalPage, setTotalPage]=useState(0);
-  const [isLoadingMore, setIsLoadingMore]=useState(false);
+  const [foodMaterials, setFoodMaterials] = useState<FoodMaterialDto[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  async function loadFoodMaterials(
-    nextKeyword:string, nextSortType:string
-  ){
-    try{
+  async function loadFoodMaterials(nextKeyword: string, nextSortType: string) {
+    try {
       setIsLoading(true);
       setErrorMessage("");
 
-      const res=await client.get<FoodMaterialPageResponse>(
-        "/api/foodmaterials",{
-          params:{sort:nextSortType, page:1, size:10, keyword:nextKeyword}
-        }
-      )
+      const res = await client.get<FoodMaterialPageResponse>(
+        "/api/foodmaterials",
+        {
+          params: {
+            sort: nextSortType,
+            page: 1,
+            size: 10,
+            keyword: nextKeyword,
+          },
+        },
+      );
       setFoodMaterials(res.data.foodList);
 
       setCurrentPage(res.data.currentPage);
       setTotalPage(res.data.totalPage);
-    }catch(e){
+    } catch (e) {
       console.error("식자재 목록 불러오기 실패", e);
       setErrorMessage("식자재 목록을 불러오지 못했습니다.");
-    }finally{setIsLoading(false);}
+    } finally {
+      setIsLoading(false);
+    }
   }
 
-  useEffect(()=>{void loadFoodMaterials("", "idDesc");}, []);
+  useEffect(() => {
+    void loadFoodMaterials("", "idDesc");
+  }, []);
 
   // const sortFoodMaterials=(targetFoodMaterials:FoodMaterialDto[], targetSortType:string) =>{
   //   const sortedFoodMaterials=[...targetFoodMaterials];
@@ -272,53 +282,53 @@ function FoodMaterialsPage() {
   //     default:
   //       break;}
   //   return sortedFoodMaterials;
-    // if(targetSortType==="idAsc"){
-    //   sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
-    // }else if(targetSortType==="idDesc"){
-    //   sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
-    // }else if(targetSortType==="expAsc"){
-    //   sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
-    // }else if(targetSortType==="expDesc"){
-    //   sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
-    // }
-    // return sortedFoodMaterials;
+  // if(targetSortType==="idAsc"){
+  //   sortedFoodMaterials.sort((a,b)=>a.foodMaterialId.localeCompare(b.foodMaterialId));
+  // }else if(targetSortType==="idDesc"){
+  //   sortedFoodMaterials.sort((a,b)=>b.foodMaterialId.localeCompare(a.foodMaterialId));
+  // }else if(targetSortType==="expAsc"){
+  //   sortedFoodMaterials.sort((a,b)=>a.expirationDate.localeCompare(b.expirationDate));
+  // }else if(targetSortType==="expDesc"){
+  //   sortedFoodMaterials.sort((a,b)=>b.expirationDate.localeCompare(a.expirationDate));
+  // }
+  // return sortedFoodMaterials;
   // }
 
-  function onSortChange(nextSortType:string){
+  function onSortChange(nextSortType: string) {
     setSortType(nextSortType);
     loadFoodMaterials(keyword.trim(), nextSortType);
   }
-  
-  function onSearch(){
+
+  function onSearch() {
     loadFoodMaterials(keyword.trim(), sortType);
   }
 
-  function onAllList(){
+  function onAllList() {
     setKeyword("");
     loadFoodMaterials("", sortType);
   }
 
-  async function onDelete(foodMaterialId:string){
-    const isConfirmed=window.confirm("이 식자재를 삭제하겠습니까?");
-    
-    if(!isConfirmed){
+  async function onDelete(foodMaterialId: string) {
+    const isConfirmed = window.confirm("이 식자재를 삭제하겠습니까?");
+
+    if (!isConfirmed) {
       return;
     }
 
-    try{
+    try {
       setErrorMessage("");
 
       await client.delete<FoodMaterialDeleteResponse>(
-        `/api/foodmaterials/${foodMaterialId}`
+        `/api/foodmaterials/${foodMaterialId}`,
       );
 
       loadFoodMaterials(keyword.trim(), sortType);
-    } catch(e){
+    } catch (e) {
       console.error("식자재 삭제 실패", e);
 
       setErrorMessage("식자재 삭제에 실패했습니다.");
     }
-  
+
     // const nextAllFoodMaterials=allFoodMaterials.filter((foodMaterial)=>foodMaterial.foodMaterialId !== foodMaterialId)
     // setAllFoodMaterials(nextAllFoodMaterials);
 
@@ -327,39 +337,49 @@ function FoodMaterialsPage() {
     // setFoodMaterials(sortedNextFoodMaterials);
   }
 
-  async function loadNextFoodMaterials(){
-    if(isLoading||isLoadingMore) return;
+  async function loadNextFoodMaterials() {
+    if (isLoading || isLoadingMore) return;
 
-    if(currentPage >= totalPage) return;
+    if (currentPage >= totalPage) return;
 
-    try{
+    try {
       setIsLoadingMore(true);
 
       const res = await client.get<FoodMaterialPageResponse>(
-        "/api/foodmaterials",{params:{sort:sortType, page:currentPage+1, size:10, keyword:keyword.trim()}}
+        "/api/foodmaterials",
+        {
+          params: {
+            sort: sortType,
+            page: currentPage + 1,
+            size: 10,
+            keyword: keyword.trim(),
+          },
+        },
       );
 
-      setFoodMaterials((previousFoodMaterials)=>[...previousFoodMaterials, ...res.data.foodList]);
+      setFoodMaterials((previousFoodMaterials) => [
+        ...previousFoodMaterials,
+        ...res.data.foodList,
+      ]);
 
       setCurrentPage(res.data.currentPage);
-    }catch(e){
+    } catch (e) {
       console.error("다음 식자재 목록 불러오기 실패");
       setErrorMessage("다음 식자재 목록을 불러오지 못했습니다.");
-    }finally{
+    } finally {
       setIsLoadingMore(false);
     }
   }
 
-  function onTableScroll(event:React.UIEvent<HTMLDivElement>){
-    const{scrollTop, scrollHeight, clientHeight} = event.currentTarget;
+  function onTableScroll(event: React.UIEvent<HTMLDivElement>) {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
 
-    const isNearBottom= scrollTop+clientHeight>= scrollHeight - 40;
-    
-    if(isNearBottom){
+    const isNearBottom = scrollTop + clientHeight >= scrollHeight - 40;
+
+    if (isNearBottom) {
       loadNextFoodMaterials();
     }
   }
-
 
   return (
     <div className="food-materials-page">
@@ -367,71 +387,102 @@ function FoodMaterialsPage() {
         <Sidebar />
       </aside>
       <main className="food-materials-main">
-      <div className="food-materials-header">
-        <Header />
-      </div>
-      <h1>식자재 조회</h1>
-      <div className="food-materials-toolbar">
-        <Input text="식자재명" inputType="text" value={keyword} onChange={setKeyword} placeholder="식자재명을 입력하세요" width={250} height={30}/>
+        <div className="food-materials-header">
+          <Header />
+        </div>
+        <h1>식자재 조회</h1>
+        <div className="food-materials-toolbar">
+          <Input
+            text="식자재명"
+            inputType="text"
+            value={keyword}
+            onChange={setKeyword}
+            placeholder="식자재명을 입력하세요"
+            width={250}
+            height={30}
+          />
 
-        <label className="food-materials-sort">
-          <div>정렬</div>
-          <select className="food-materials-sort-select" value={sortType} onChange={(event)=>onSortChange(event.target.value)} style={{height:"36px"}}>
-            <option value="idAsc">식자재 번호 오름차순</option>
-            <option value="idDesc">식자재 번호 내림차순</option>
-            <option value="expAsc">유통기한 임박순</option>
-            <option value="expDesc">유통기한 여유순</option>
-          </select>
-        </label>
-        <Button type="button" onClick={onSearch}>검색</Button>
-        <Button type="button" onClick={onAllList}>전체 조회</Button>
-      </div>
+          <label className="food-materials-sort">
+            <div>정렬</div>
+            <select
+              className="food-materials-sort-select"
+              value={sortType}
+              onChange={(event) => onSortChange(event.target.value)}
+              style={{ height: "36px" }}
+            >
+              <option value="idAsc">식자재 번호 오름차순</option>
+              <option value="idDesc">식자재 번호 내림차순</option>
+              <option value="expAsc">유통기한 임박순</option>
+              <option value="expDesc">유통기한 여유순</option>
+            </select>
+          </label>
+          <Button type="button" onClick={onSearch}>
+            검색
+          </Button>
+          <Button type="button" onClick={onAllList}>
+            전체 조회
+          </Button>
+        </div>
 
-      {errorMessage && (
-        <p role="alert">{errorMessage}</p>
-      )}
+        {errorMessage && <p role="alert">{errorMessage}</p>}
 
-      <div className="food-materials-table-wrap" onScroll={onTableScroll}>
-        <table className="food-materials-table">
-          <thead>
-            <tr>
-              {foodMaterialColumnList.map((column)=>(
-                <th key={column.key} className="food-materials-table__header-cell">{column.label}</th>
-              ))}
-              <th className="food-materials-table__header-cell">삭제</th>
-            </tr>
-          </thead>
-          <tbody>
-            {isLoading ? (
+        <div className="food-materials-table-wrap" onScroll={onTableScroll}>
+          <table className="food-materials-table">
+            <thead>
               <tr>
-                <td colSpan={foodMaterialColumnList.length + 1}>식자재 목록을 불러오는 중입니다.</td>
-              </tr>
-            ):(foodMaterials.length===0 ? (
-              <tr>
-                <td colSpan={foodMaterialColumnList.length + 1}>
-                  조회된 식자재가 없습니다.
-                </td>
-              </tr>
-            ) : (foodMaterials.map((foodMaterial)=>(
-              <tr key={foodMaterial.foodMaterialId}>
-                {foodMaterialColumnList.map((column)=>(
-                  <td key={column.key}>{column.getValue(foodMaterial)}</td>
+                {foodMaterialColumnList.map((column) => (
+                  <th
+                    key={column.key}
+                    className="food-materials-table__header-cell"
+                  >
+                    {column.label}
+                  </th>
                 ))}
-                <td>
-                  <Button type="button" onClick={()=>{onDelete(foodMaterial.foodMaterialId)}}> 삭제</Button>
-                </td>
+                <th className="food-materials-table__header-cell">삭제</th>
               </tr>
-            ))))}
-            {isLoadingMore&&(
-              <tr>
-                <td colSpan={foodMaterialColumnList.length+1}>다음 식자재 목록을 불러오는 중입니다.</td>
-              </tr>
-            )}
-          </tbody>
-
-        </table>
-
-      </div>
+            </thead>
+            <tbody>
+              {isLoading ? (
+                <tr>
+                  <td colSpan={foodMaterialColumnList.length + 1}>
+                    식자재 목록을 불러오는 중입니다.
+                  </td>
+                </tr>
+              ) : foodMaterials.length === 0 ? (
+                <tr>
+                  <td colSpan={foodMaterialColumnList.length + 1}>
+                    조회된 식자재가 없습니다.
+                  </td>
+                </tr>
+              ) : (
+                foodMaterials.map((foodMaterial) => (
+                  <tr key={foodMaterial.foodMaterialId}>
+                    {foodMaterialColumnList.map((column) => (
+                      <td key={column.key}>{column.getValue(foodMaterial)}</td>
+                    ))}
+                    <td>
+                      <Button
+                        type="button"
+                        onClick={() => {
+                          onDelete(foodMaterial.foodMaterialId);
+                        }}
+                      >
+                        삭제
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
+              {isLoadingMore && (
+                <tr>
+                  <td colSpan={foodMaterialColumnList.length + 1}>
+                    다음 식자재 목록을 불러오는 중입니다.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </main>
     </div>
   );

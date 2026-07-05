@@ -5,8 +5,7 @@ import type {
   Reason,
 } from "../../types";
 
-export type DisposalItem =
-  Disposals &
+export type DisposalItem = Disposals &
   Pick<FoodMaterial, "foodMaterialName" | "foodMaterialType"> &
   Pick<FoodMaterialCategory, "foodCategory"> &
   Pick<Reason, "reason">;
