@@ -152,15 +152,8 @@ function MenuListPage() {
   }
 
   return (
-    <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
-      <main className="main">
-        <div>
-          <Header />
-        </div>
+    <div className="menu-list-page">
+      <main className="menu-list-main">
         <h1>메뉴 조회</h1>
 
         {errorMessage && <p role="alert">{errorMessage}</p>}

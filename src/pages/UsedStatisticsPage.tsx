@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
 import "./UsedStatisticsPage.css";
 
-function getCurrentMonth(){
+function getCurrentMonth() {
   const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, "0");
@@ -14,11 +14,11 @@ function getCurrentMonth(){
 }
 
 function UsedStatisticsPage() {
-  const [selectedMonth, setSelectedMonth]=useState(getCurrentMonth);
+  const [selectedMonth, setSelectedMonth] = useState(getCurrentMonth);
 
-  function onSearch(){
-  console.log(selectedMonth);
-}
+  function onSearch() {
+    console.log(selectedMonth);
+  }
 
   return (
     <div className="container">
@@ -35,14 +35,16 @@ function UsedStatisticsPage() {
           <h1>지출 통계</h1>
 
           <div className="used-statistics-search-area">
-            <Input 
-            text="조회 월"
-            inputType="month"
-            value={selectedMonth}
-            onChange={setSelectedMonth}
+            <Input
+              text="조회 월"
+              inputType="month"
+              value={selectedMonth}
+              onChange={setSelectedMonth}
             />
 
-            <Button type="button" onClick={onSearch}>조회</Button>
+            <Button type="button" onClick={onSearch}>
+              조회
+            </Button>
           </div>
         </div>
       </main>

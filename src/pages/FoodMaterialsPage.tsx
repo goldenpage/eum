@@ -382,14 +382,8 @@ function FoodMaterialsPage() {
   }
 
   return (
-    <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-      <main className="main">
-        <div>
-          <Header />
-        </div>
+    <div className="food-materials-page">
+      <main className="food-materials-main">
         <h1>식자재 조회</h1>
         <div className="food-materials-toolbar">
           <Input
