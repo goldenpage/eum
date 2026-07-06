@@ -1,22 +1,14 @@
-.menu-list-page {
+.container {
   display: flex;
   min-height: 100vh;
 }
 
-.menu-list-sidebar {
-  flex: 0 0 170px;
-}
+/* .menu-list-sidebar {
+    flex: 0 0 170px;
+} */
 
-.menu-list-main {
-  flex: 1;
-  min-width: 0;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.menu-list-header {
-  display: flex;
-  justify-content: flex-end;
+.main {
+  width: 100%;
 }
 
 .menu-list-content {
