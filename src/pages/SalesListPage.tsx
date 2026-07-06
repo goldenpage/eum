@@ -31,14 +31,15 @@ function SalesListPage(){
         handleSaveEdit,
     } = useSalesRecords();
     return(
-        <div className="sales-list-page">
-            <aside className="sales-list-sidebar">
-                <Sidebar/>
-            </aside>
-            <main className="sales-list-main">
-                <div className="sales-list-header">
-                    <Header/>
-                </div>
+        <div className="container">
+            <section>
+                <Sidebar />
+            </section>
+
+        <div className="main">
+            <div>
+                <Header />
+            </div>
                 <h1>판매 기록 조회</h1>
                 {errorMessage && <div className="sales-error">{errorMessage}</div>}
                 <SalesFilterBar
@@ -66,7 +67,7 @@ function SalesListPage(){
                     record={editingRecord}    
                     onClose={handleCloseEdit}
                     onSave={handleSaveEdit}/>
-            </main>
+            </div>
         </div>
     );
 }
