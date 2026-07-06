@@ -20,6 +20,10 @@ import LoginPage from "../pages/LoginPage";
 //router 주소 및 페이지 설정
 export const router = createBrowserRouter([
   {
+    path: "/",
+    Component: LoginPage
+  },
+  {
     path: "/login",
     Component: LoginPage,
   },
