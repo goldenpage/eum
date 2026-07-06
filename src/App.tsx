@@ -1,35 +1,20 @@
-import Dropdown from "./components/Dropdown";
+import { Outlet } from "react-router";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
-import NotFoundPage from "./pages/NotFoundPage";
-import DisposalItemsPage from "./pages/DisposalItemsPage";
-import UsedStatisticsPage from "./pages/UsedStatisticsPage";
+import "../src/App.css";
 
 const App = () => {
-  const list = ["a  ", "b", "c", "d", "e"];
-  // import Header from './components/Header';
-  // import Sidebar from './components/Sidebar';
-  // import NotFoundPage from './pages/NotFoundPage';
-
   return (
-    <>
-      <div style={{ display: "flex" }}>
-        <div>
-          <Sidebar />
-        </div>
-        <UsedStatisticsPage />
-        <div>
-          <Header />
-        </div>
-      </div>
+    <div className="container">
+      <aside className="layout__sidebar">
+        <Sidebar />
+      </aside>
 
-      <NotFoundPage />
-      <Dropdown text={list} />
-      {/* <Sidebar />
-      <Header />
-      <NotFoundPage /> */}
-      <DisposalItemsPage />
-    </>
+      <main className="layout__main">
+        <Header />
+        <Outlet />
+      </main>
+    </div>
   );
 };
 

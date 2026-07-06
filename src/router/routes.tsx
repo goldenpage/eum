@@ -17,86 +17,83 @@ import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
 import LoginPage from "../pages/LoginPage";
 
-//router 주소 및 페이지 설정
 export const router = createBrowserRouter([
   {
     path: "/login",
     Component: LoginPage,
   },
   {
-    path: "/foodmaterials",
-    Component: FoodMaterialsPage,
-  },
-  {
-    path: "/foodmaterialadd",
-    Component: AddFoodMaterialsPage,
-  },
-  {
-    path: "/menuadd",
-    Component: AddMenuPage,
-  },
-  {
-    path: "/addsales",
-    Component: AddSalesPage,
-  },
-  {
-    path: "/disposal-items",
-    Component: DisposalItemsPage,
-    // loader:
-  },
-  {
     path: "/register",
     Component: RegisterPage,
   },
   {
-    path: "/manager",
-    Component: ManagerPage,
-    // loader
-  },
-  {
-    path: "/menus",
-    Component: MenuListPage,
-    // loader
-  },
-  {
-    path: "/notice",
-    Component: NoticePage,
-  },
-  {
-    path: "/purchase",
-    Component: PurchasePage,
-    // loader
-  },
-  {
-    path: "/pwupdate",
-    Component: PwUpdatePage,
-  },
-  {
-    path: "/sales-list",
-    // Component: SaleListPage,
-  },
-  {
-    path: "/revenuestatistics",
-    Component: RevenueStatisticsPage,
-    // loader
-  },
-  {
-    path: "/usedstatistics",
-    Component: UsedStatisticsPage,
-    // loader
-  },
-  {
-    path: "/disposalstatistics",
-    Component: DisposalStatisticsPage,
-    // loader
+    path: "/",
+    Component: App,
+    children: [
+      {
+        index: true,
+        Component: FoodMaterialsPage,
+      },
+      {
+        path: "foodmaterials",
+        Component: FoodMaterialsPage,
+      },
+      {
+        path: "foodmaterialadd",
+        Component: AddFoodMaterialsPage,
+      },
+      {
+        path: "menuadd",
+        Component: AddMenuPage,
+      },
+      {
+        path: "addsales",
+        Component: AddSalesPage,
+      },
+      {
+        path: "disposal-items",
+        Component: DisposalItemsPage,
+      },
+      {
+        path: "manager",
+        Component: ManagerPage,
+      },
+      {
+        path: "menus",
+        Component: MenuListPage,
+      },
+      {
+        path: "notice",
+        Component: NoticePage,
+      },
+      {
+        path: "purchase",
+        Component: PurchasePage,
+      },
+      {
+        path: "pwupdate",
+        Component: PwUpdatePage,
+      },
+      {
+        path: "sales-list",
+        // Component: SaleListPage,
+      },
+      {
+        path: "revenuestatistics",
+        Component: RevenueStatisticsPage,
+      },
+      {
+        path: "usedstatistics",
+        Component: UsedStatisticsPage,
+      },
+      {
+        path: "disposalstatistics",
+        Component: DisposalStatisticsPage,
+      },
+    ],
   },
   {
     path: "*",
     Component: NotFoundPage,
-  },
-
-  {
-    path: "app",
-    Component: App,
   },
 ]);
