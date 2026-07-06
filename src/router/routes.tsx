@@ -16,6 +16,7 @@ import AddMenuPage from "../pages/AddMenuPage";
 import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
 import LoginPage from "../pages/LoginPage";
+import SaleListPage from "../pages/SalesListPage"
 
 //router 주소 및 페이지 설정
 export const router = createBrowserRouter([
@@ -77,7 +78,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/sales-list",
-    // Component: SaleListPage,
+    Component: SaleListPage,
   },
   {
     path: "/revenuestatistics",

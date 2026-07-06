@@ -6,7 +6,6 @@ import Sidebar from "../components/Sidebar";
 import useDisposalItems from "../hooks/useDisposalItems";
 import "./DisposalItemsPage.css";
 
-//pagination.tsx 버튼 공통컴포넌트 확인
 function DisposalItemsPage() {
   const {
     filters,
@@ -25,22 +24,17 @@ function DisposalItemsPage() {
   } = useDisposalItems();
 
   return (
-    <div className="disposal-items-page">
-      <aside className="disposal-items-sidebar">
+    <div className="container">
+      <section>
         <Sidebar />
-      </aside>
+      </section>
 
-      <div className="disposal-items-main">
-        <header className="disposal-items-header">
+      <div className="main">
+        <div>
           <Header />
-        </header>
-
-        <main>
-          <section className="disposal-items-title">
+        </div>
             <h1>폐기 품목 확인</h1>
-          </section>
-
-          <section className="disposal-items-content">
+          <div>
             {errorMessage && (
               <div className="errorMessage" role="alert">
                 {errorMessage}
@@ -67,8 +61,7 @@ function DisposalItemsPage() {
               totalPages={totalPages}
               onMove={handleMovePage}
             />
-          </section>
-        </main>
+          </div>
       </div>
     </div>
   );
