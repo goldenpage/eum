@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+button {
+  cursor: pointer;
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.layout {
+  display: flex;
+  gap: 30px;
+  min-height: 100vh;
+}
+
+.layout__sidebar {
+  flex: 0 0 300px;
+  min-height: 100vh;
+}
+
+.layout__main {
+  flex: 1;
+  min-width: 0;
+  padding: 20px;
+  overflow-x: hidden;
+}
