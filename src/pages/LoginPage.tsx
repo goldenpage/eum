@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import client, { AT } from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import "./LoginPage.css";
 
 function LoginPage() {
   const navigate = useNavigate();
