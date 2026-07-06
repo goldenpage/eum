@@ -152,13 +152,13 @@ function MenuListPage() {
   }
 
   return (
-    <div className="menu-list-page">
-      <aside className="menu-list-sidebar">
+    <div className="container">
+      <section>
         <Sidebar />
-      </aside>
+      </section>
 
-      <main className="menu-list-main">
-        <div className="menu-list-header">
+      <main className="main">
+        <div>
           <Header />
         </div>
         <h1>메뉴 조회</h1>
