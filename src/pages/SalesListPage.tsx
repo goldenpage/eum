@@ -32,14 +32,7 @@ function SalesListPage() {
   } = useSalesRecords();
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
-        <div>
-          <Header />
-        </div>
         <h1>판매 기록 조회</h1>
         {errorMessage && <div className="sales-error">{errorMessage}</div>}
         <SalesFilterBar

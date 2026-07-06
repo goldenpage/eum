@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router";
-import App from "../App";
+
 import NotFoundPage from "../pages/NotFoundPage";
 import DisposalStatisticsPage from "../pages/DisposalStatisticsPage";
 import UsedStatisticsPage from "../pages/UsedStatisticsPage";
@@ -17,6 +17,7 @@ import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
 import LoginPage from "../pages/LoginPage";
 import SaleListPage from "../pages/SalesListPage";
+import ProtectedApp from "./ProtectedApp";
 
 export const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/",
-    Component: App,
+    Component: ProtectedApp,
     children: [
       {
         index: true,

@@ -28,7 +28,8 @@ client.interceptors.response.use(
       original &&
       !original._retry &&
       !original.url?.includes("/api/auth/reissue") &&
-      !original.url?.includes("/api/auth/login")
+      !original.url?.includes("/api/auth/login") &&
+      !original.url?.includes("/api/auth/logout")
     ) {
       original._retry = true;
       try {

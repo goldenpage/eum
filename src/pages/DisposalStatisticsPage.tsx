@@ -6,13 +6,14 @@ import { getCurrentMonth } from "../utils/statistics/date";
 import DisposalSummary from "../features/disposalStatistics/DisposalSummary";
 import ReasonChart from "../features/disposalStatistics/ReasonChart";
 import DailyDisposalChart from "../features/disposalStatistics/DailyDisposalChart";
+import "./DisposalStatisticsPage.css";
 
 function DisposalStatisticsPage() {
   const [month, setMonth] = useState(getCurrentMonth());
   const { data, loading, error } = useDisposalStatistics(month);
 
   return (
-    <section className="disposal-page">
+    <section className="disposal-stats-page">
       <div className="top_area">
         <h1>폐기통계</h1>
 

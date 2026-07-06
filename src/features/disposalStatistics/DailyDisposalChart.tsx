@@ -8,6 +8,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import type { DailyDisposal } from "../../api/statistics";
 
 ChartJS.register(
   CategoryScale,
@@ -18,13 +19,17 @@ ChartJS.register(
   Legend,
 );
 
-const colors = {
+const colors: Record<string, string> = {
   고체: "#2563eb",
   액체: "#16a34a",
   전체: "#64748b",
 };
 
-function DailyDisposalChart({ list = [] }) {
+interface DailyDisposalChartProps {
+  list?: DailyDisposal[];
+}
+
+function DailyDisposalChart({ list = [] }: DailyDisposalChartProps) {
   const dailyLabels = [...new Set(list.map((item) => item.disposalDay))];
 
   const materialTypes = [

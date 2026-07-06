@@ -1,8 +1,16 @@
+import type { TopMaterial } from "../../api/statistics";
+
+interface DisposalSummaryProps {
+  disposalRate?: number;
+  totalDisposalPrice?: number;
+  topMaterials?: TopMaterial[];
+}
+
 function DisposalSummary({
   disposalRate = 0,
   totalDisposalPrice = 0,
   topMaterials = [],
-}) {
+}: DisposalSummaryProps) {
   return (
     <div className="disposal_price">
       <div>

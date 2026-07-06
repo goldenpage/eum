@@ -25,14 +25,7 @@ function DisposalItemsPage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
-        <div>
-          <Header />
-        </div>
         <h1>폐기 품목 확인</h1>
         <div>
           {errorMessage && (

@@ -1,37 +1,72 @@
-const fetchJson = async (url) => {
-  const response = await fetch(url, {
-    method: "GET",
-    credentials: "include",
-  });
+import client from "./client";
 
-  if (!response.ok) {
-    throw new Error(`API 요청 실패: ${response.status}`);
-  }
+export interface StatisticsDateRange {
+  startDate: string;
+  endDate: string;
+}
 
-  return response.json();
+export interface DisposalRateResponse {
+  disposalRate: number;
+}
+
+export interface TopMaterial {
+  foodMaterialName: string;
+  disposalCount: number;
+  totalDisposalPrice: number;
+}
+
+export interface ReasonRatio {
+  reason: string;
+  reasonRatio: number;
+}
+
+export interface DailyDisposal {
+  disposalDay: string;
+  foodMaterialType?: string;
+  disposalCount: number;
+}
+
+export const getDisposalRate = async (params: StatisticsDateRange) => {
+  const response = await client.get<DisposalRateResponse | number>(
+    "/api/statistics/disposals/rate",
+    { params },
+  );
+
+  return response.data;
 };
 
-export const getDisposalRate = ({ startDate, endDate }) =>
-  fetchJson(
-    `/api/statistics/disposals/rate?startDate=${startDate}&endDate=${endDate}`,
+export const getTotalDisposalPrice = async (params: StatisticsDateRange) => {
+  const response = await client.get<number>(
+    "/api/statistics/disposals/total-price",
+    { params },
   );
 
-export const getTotalDisposalPrice = ({ startDate, endDate }) =>
-  fetchJson(
-    `/api/statistics/disposals/total-price?startDate=${startDate}&endDate=${endDate}`,
+  return response.data;
+};
+
+export const getTopMaterials = async (params: StatisticsDateRange) => {
+  const response = await client.get<TopMaterial[]>(
+    "/api/statistics/disposals/top-materials",
+    { params },
   );
 
-export const getTopMaterials = ({ startDate, endDate }) =>
-  fetchJson(
-    `/api/statistics/disposals/top-materials?startDate=${startDate}&endDate=${endDate}`,
+  return response.data;
+};
+
+export const getReasonRatio = async (params: StatisticsDateRange) => {
+  const response = await client.get<ReasonRatio[] | { list: ReasonRatio[] }>(
+    "/api/statistics/disposals/reason-ratio",
+    { params },
   );
 
-export const getReasonRatio = ({ startDate, endDate }) =>
-  fetchJson(
-    `/api/statistics/disposals/reason-ratio?startDate=${startDate}&endDate=${endDate}`,
+  return response.data;
+};
+
+export const getDailyChart = async (params: StatisticsDateRange) => {
+  const response = await client.get<DailyDisposal[]>(
+    "/api/statistics/disposals/daily-chart",
+    { params },
   );
 
-export const getDailyChart = ({ startDate, endDate }) =>
-  fetchJson(
-    `/api/statistics/disposals/daily-chart?startDate=${startDate}&endDate=${endDate}`,
-  );
+  return response.data;
+};

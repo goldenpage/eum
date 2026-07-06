@@ -320,15 +320,7 @@ function AddFoodMaterialsPage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
-        <div>
-          <Header />
-        </div>
-
         <h1>식자재 입력</h1>
 
         {notice && (

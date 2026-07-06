@@ -1,4 +1,10 @@
-function TopMaterialsTable({ list }) {
+import type { TopMaterial } from "../../api/statistics";
+
+interface TopMaterialsTableProps {
+  list: TopMaterial[];
+}
+
+function TopMaterialsTable({ list }: TopMaterialsTableProps) {
   return (
     <div className="table_scroll">
       <table>

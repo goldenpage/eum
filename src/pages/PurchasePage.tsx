@@ -39,12 +39,7 @@ function PuchasePage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
-        <Header />
         <h1>구매 내역</h1>
 
         <div className="table_scroll">

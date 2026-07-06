@@ -1,9 +1,14 @@
 import { ArcElement, Chart as ChartJS, Legend, Tooltip } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import type { ReasonRatio } from "../../api/statistics";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function ReasonChart({ list = [] }) {
+interface ReasonChartProps {
+  list?: ReasonRatio[];
+}
+
+function ReasonChart({ list = [] }: ReasonChartProps) {
   const labels = list.map((item) => item.reason ?? "기타");
   const values = list.map((item) => item.reasonRatio ?? 0);
 

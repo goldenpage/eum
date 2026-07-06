@@ -1,4 +1,3 @@
-// hooks/useDisposalStatistics.js
 import { useEffect, useState } from "react";
 import { getStartAndEndDate } from "../utils/statistics/date";
 import {
@@ -7,10 +6,21 @@ import {
   getReasonRatio,
   getTopMaterials,
   getTotalDisposalPrice,
+  type DailyDisposal,
+  type ReasonRatio,
+  type TopMaterial,
 } from "../api/statistics";
 
-export const useDisposalStatistics = (month) => {
-  const [data, setData] = useState({
+interface DisposalStatisticsData {
+  disposalRate: number;
+  totalDisposalPrice: number;
+  topMaterials: TopMaterial[];
+  reasonRatio: ReasonRatio[];
+  dailyChart: DailyDisposal[];
+}
+
+export const useDisposalStatistics = (month: string) => {
+  const [data, setData] = useState<DisposalStatisticsData>({
     disposalRate: 0,
     totalDisposalPrice: 0,
     topMaterials: [],
@@ -19,7 +29,7 @@ export const useDisposalStatistics = (month) => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -39,12 +49,12 @@ export const useDisposalStatistics = (month) => {
           ]);
 
         setData({
-          disposalRate: rate.disposalRate ?? rate,
+          disposalRate: typeof rate === "number" ? rate : rate.disposalRate,
           totalDisposalPrice: totalPrice,
           topMaterials: topMaterials ?? [],
           reasonRatio: Array.isArray(reasonRatio)
             ? reasonRatio
-            : (reasonRatio.list ?? []),
+            : reasonRatio.list,
           dailyChart: dailyChart ?? [],
         });
       } catch (error) {

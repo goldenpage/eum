@@ -5,7 +5,7 @@ export const getCurrentMonth = () => {
   return `${year}-${month}`;
 };
 
-export const getStartAndEndDate = (month) => {
+export const getStartAndEndDate = (month: string) => {
   const [year, monthNumber] = month.split("-").map(Number);
 
   const startDate = `${year}-${String(monthNumber).padStart(2, "0")}-01`;
