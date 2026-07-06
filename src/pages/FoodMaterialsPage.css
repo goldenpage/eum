@@ -1,20 +1,14 @@
-.food-materials-page {
+.container {
   display: flex;
   min-height: 100vh;
 }
-.food-materials-sidebar {
+/* .food-materials-sidebar {
   flex: 0 0 170px;
+} */
+.main {
+  width: 100%;
 }
-.food-materials-main {
-  flex: 1;
-  min-width: 0;
-  padding: 20px;
-  box-sizing: border-box;
-}
-.food-materials-header {
-  display: flex;
-  justify-content: flex-end;
-}
+
 .food-materials-toolbar {
   display: flex;
   flex-wrap: wrap;

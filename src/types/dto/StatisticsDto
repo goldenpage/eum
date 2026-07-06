@@ -1,0 +1,12 @@
+export interface ExpenseRankDto{
+    ranking:number;
+    foodMaterialName:string;
+    foodMaterialPrice:number;
+    foodMaterialCount:number;
+    totalExpense:number;
+}
+
+export interface MonthlyExpenseDto{
+    expenseMonth: string;
+    totalExpense: number;
+}

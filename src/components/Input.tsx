@@ -1,6 +1,6 @@
 interface InputType {
   text: string;
-  inputType: "text" | "number" | "password"|"email" |"date";
+  inputType: "text" | "number" | "password"|"email" |"date"|"month";
   value: string | number;
   onChange: (value: string) => void;
   placeholder?: string;
