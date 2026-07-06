@@ -1,38 +1,10 @@
-.disposal-items-page {
+.container {
   display: flex;
-  min-height: 100vh;
-}
-
-.disposal-items-sidebar {
-  flex: 0 0 220px;
-  position: sticky;
-  top: 0;
+  gap: 30px;
   height: 100vh;
-  overflow-y: auto;
 }
 
-.disposal-items-main {
-  flex: 1;
-  min-width: 0;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-.disposal-items-header {
-  display: flex;
-  justify-content: flex-end;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background-color: white;
-  padding: 16px 0;
-}
-
-.disposal-items-title {
-  margin: 20px 0;
-}
-
-.disposal-items-content {
+.main {
   width: 100%;
 }
 
@@ -99,25 +71,14 @@
 }
 
 @media (max-width: 768px) {
-  .disposal-items-page {
+  .container {
     display: block;
-  }
-
-  .disposal-items-sidebar {
-    position: static;
-    width: 100%;
     height: auto;
-    overflow-y: visible;
+    min-height: 100vh;
   }
 
-  .disposal-items-main {
-    padding: 16px;
-  }
-
-  .disposal-items-header {
-    justify-content: flex-start;
-    position: static;
-    padding: 12px 0;
+  .main {
+    width: 100%;
   }
 
   .filterBar {

@@ -6,7 +6,6 @@ import Sidebar from "../components/Sidebar";
 import useDisposalItems from "../hooks/useDisposalItems";
 import "./DisposalItemsPage.css";
 
-//pagination.tsx 버튼 공통컴포넌트 확인
 function DisposalItemsPage() {
   const {
     filters,
@@ -25,50 +24,44 @@ function DisposalItemsPage() {
   } = useDisposalItems();
 
   return (
-    <div className="disposal-items-page">
-      <aside className="disposal-items-sidebar">
+    <div className="container">
+      <section>
         <Sidebar />
-      </aside>
+      </section>
 
-      <div className="disposal-items-main">
-        <header className="disposal-items-header">
+      <div className="main">
+        <div>
           <Header />
-        </header>
+        </div>
+        <h1>폐기 품목 확인</h1>
+        <div>
+          {errorMessage && (
+            <div className="errorMessage" role="alert">
+              {errorMessage}
+            </div>
+          )}
 
-        <main>
-          <section className="disposal-items-title">
-            <h1>폐기 품목 확인</h1>
-          </section>
+          <FilterBar
+            filters={filters}
+            categories={categories}
+            reasons={reasons}
+            onChange={setFilters}
+            onSubmit={handleSearch}
+            onReset={handleReset}
+          />
 
-          <section className="disposal-items-content">
-            {errorMessage && (
-              <div className="errorMessage" role="alert">
-                {errorMessage}
-              </div>
-            )}
+          <DisposalTable
+            items={items}
+            isLoading={isLoading}
+            onReasonChange={handleReasonChange}
+          />
 
-            <FilterBar
-              filters={filters}
-              categories={categories}
-              reasons={reasons}
-              onChange={setFilters}
-              onSubmit={handleSearch}
-              onReset={handleReset}
-            />
-
-            <DisposalTable
-              items={items}
-              isLoading={isLoading}
-              onReasonChange={handleReasonChange}
-            />
-
-            <Pagination
-              currentPage={page}
-              totalPages={totalPages}
-              onMove={handleMovePage}
-            />
-          </section>
-        </main>
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onMove={handleMovePage}
+          />
+        </div>
       </div>
     </div>
   );

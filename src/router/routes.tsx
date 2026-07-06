@@ -16,8 +16,13 @@ import AddMenuPage from "../pages/AddMenuPage";
 import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
 import LoginPage from "../pages/LoginPage";
+import SaleListPage from "../pages/SalesListPage";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: LoginPage,
+  },
   {
     path: "/login",
     Component: LoginPage,
