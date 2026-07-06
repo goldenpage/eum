@@ -1,12 +1,14 @@
 interface InputType {
-  text: string;
-  inputType: "text" | "number" | "password"|"email" |"date";
+  text?: string;
+  inputType: "text" | "number" | "password" | "email" | "date" | "month";
   value: string | number;
   onChange: (value: string) => void;
   placeholder?: string;
   width?: number;
   height?: number;
   min?: number;
+  id?: string; //
+  name?: string; //
 }
 
 function Input(props: InputType) {
