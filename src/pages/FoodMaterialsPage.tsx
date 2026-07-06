@@ -383,13 +383,7 @@ function FoodMaterialsPage() {
 
   return (
     <div className="food-materials-page">
-      <aside className="food-materials-sidebar">
-        <Sidebar />
-      </aside>
       <main className="food-materials-main">
-        <div className="food-materials-header">
-          <Header />
-        </div>
         <h1>식자재 조회</h1>
         <div className="food-materials-toolbar">
           <Input

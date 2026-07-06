@@ -33,7 +33,14 @@ function Sidebar() {
 
   return (
     <div>
-      <img src={logo} alt="logo" style={{ width: "150px", height: "150px" }} />
+      <Link to={"/"}>
+        <img
+          src={logo}
+          alt="logo"
+          style={{ width: "150px", height: "150px" }}
+        />
+      </Link>
+
       {list.map((item, idx) => (
         <Link to={linkRoutes[idx]} key={idx}>
           <List item={item} />

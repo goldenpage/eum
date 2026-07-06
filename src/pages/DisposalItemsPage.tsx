@@ -25,43 +25,36 @@ function DisposalItemsPage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
+        <h1>폐기 품목 확인</h1>
         <div>
-          <Header />
+          {errorMessage && (
+            <div className="errorMessage" role="alert">
+              {errorMessage}
+            </div>
+          )}
+
+          <FilterBar
+            filters={filters}
+            categories={categories}
+            reasons={reasons}
+            onChange={setFilters}
+            onSubmit={handleSearch}
+            onReset={handleReset}
+          />
+
+          <DisposalTable
+            items={items}
+            isLoading={isLoading}
+            onReasonChange={handleReasonChange}
+          />
+
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onMove={handleMovePage}
+          />
         </div>
-            <h1>폐기 품목 확인</h1>
-          <div>
-            {errorMessage && (
-              <div className="errorMessage" role="alert">
-                {errorMessage}
-              </div>
-            )}
-
-            <FilterBar
-              filters={filters}
-              categories={categories}
-              reasons={reasons}
-              onChange={setFilters}
-              onSubmit={handleSearch}
-              onReset={handleReset}
-            />
-
-            <DisposalTable
-              items={items}
-              isLoading={isLoading}
-              onReasonChange={handleReasonChange}
-            />
-
-            <Pagination
-              currentPage={page}
-              totalPages={totalPages}
-              onMove={handleMovePage}
-            />
-          </div>
       </div>
     </div>
   );

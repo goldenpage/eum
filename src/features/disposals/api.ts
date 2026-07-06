@@ -44,7 +44,7 @@ export async function getDisposalItems(
   if (params.type) searchParams.set("type", params.type);
 
   const response = await client.get<DisposalPageResponse>(
-    `${API_BASE}?${searchParams.toString()}`
+    `${API_BASE}?${searchParams.toString()}`,
   );
 
   return response.data;
@@ -54,12 +54,12 @@ export async function updateDisposalReason(
   disposalId: string,
   reasonId: string,
 ): Promise<void> {
-  const response = await client.patch<{ success?: boolean}>(
+  const response = await client.patch<{ success?: boolean }>(
     `${API_BASE}/${disposalId}/reason`,
-    { reasonId }
+    { reasonId },
   );
 
-  if (response.data.success === false){
+  if (response.data.success === false) {
     throw new Error("폐기 사유 변경에 실패했습니다.");
   }
 }

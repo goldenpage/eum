@@ -1,6 +1,14 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { logout } from "../api/auth";
 
 function Header() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login", { replace: true });
+  };
+
   return (
     <ul
       style={{
@@ -11,9 +19,11 @@ function Header() {
     >
       <li>사용자이름</li>
 
-      <Link to={"/login"}>
-        <li>로그아웃</li>
-      </Link>
+      <li>
+        <button type="button" onClick={handleLogout}>
+          로그아웃
+        </button>
+      </li>
 
       <Link to={"/notice"}>
         <li>알림</li>

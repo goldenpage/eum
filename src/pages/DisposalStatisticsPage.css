@@ -1,0 +1,132 @@
+.disposal-stats-page {
+  width: 100%;
+}
+
+.disposal-stats-page .top_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.disposal-stats-page .top_area form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.disposal-stats-page .content_item {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(420px, 1.2fr);
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.disposal-stats-page .content_item > div {
+  flex: 1;
+  min-width: 0;
+  padding: 16px;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+}
+
+.disposal-stats-page .disposal_price {
+  grid-column: 1 / -1;
+}
+
+.disposal-stats-page .disposal_price ul {
+  display: flex;
+  gap: 8px;
+}
+
+.disposal-stats-page .section_title,
+.disposal-stats-page .disposal_price > div:first-child,
+.disposal-stats-page .disposal_ratio > div:first-child,
+.disposal-stats-page .disposal_solid_liquid > div:first-child {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.disposal-stats-page .disposal_price .table_scroll {
+  overflow-x: auto;
+}
+
+.disposal-stats-page table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-top: 12px;
+  background-color: white;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.disposal-stats-page table th,
+.disposal-stats-page table td {
+  border: 1px solid #cbd5e1;
+  padding: 10px 12px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.disposal-stats-page table th {
+  background-color: #f1f5f9;
+  font-weight: bold;
+  color: #1e293b;
+}
+
+.disposal-stats-page table tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+.disposal-stats-page table td[colspan] {
+  padding: 24px;
+  color: #64748b;
+}
+
+.disposal-stats-page .chart_box {
+  width: 100%;
+  min-height: 380px;
+  position: relative;
+}
+
+.disposal-stats-page canvas {
+  width: 100% !important;
+  height: 380px !important;
+}
+
+@media (max-width: 1200px) {
+  .disposal-stats-page .content_item {
+    grid-template-columns: 1fr;
+  }
+
+  .disposal-stats-page .content_item > div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .disposal-stats-page .top_area {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .disposal-stats-page .chart_box {
+    min-height: 320px;
+  }
+
+  .disposal-stats-page canvas {
+    height: 320px !important;
+  }
+}

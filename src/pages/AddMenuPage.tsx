@@ -113,7 +113,6 @@ function AddMenuPage() {
   }
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadFoodMaterialList();
 
     loadMenuCategoryList();
@@ -308,14 +307,7 @@ function AddMenuPage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
-        <div>
-          <Header />
-        </div>
         <h1>메뉴 입력</h1>
 
         {notice && (
