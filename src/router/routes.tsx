@@ -21,6 +21,10 @@ import SaleListPage from "../pages/SalesListPage"
 //router 주소 및 페이지 설정
 export const router = createBrowserRouter([
   {
+    path: "/",
+    Component: LoginPage
+  },
+  {
     path: "/login",
     Component: LoginPage,
   },
