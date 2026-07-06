@@ -1,8 +1,6 @@
 import { Pagination } from "../components/Pagination";
 import { FilterBar } from "../components/FilterBar";
 import { DisposalTable } from "../components/DisposalTable";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import useDisposalItems from "../hooks/useDisposalItems";
 import "./DisposalItemsPage.css";
 
