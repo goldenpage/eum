@@ -7,7 +7,6 @@ const client = axios.create({
   withCredentials: true,
 });
 
-
 //const url = import.meta.env.VITE_SERVER_URl;
 
 client.interceptors.request.use((config) => {
@@ -18,7 +17,7 @@ client.interceptors.request.use((config) => {
   return config;
 });
 
-type RetryConfig = InternalAxiosRequestConfig & {_retry? : boolean};
+type RetryConfig = InternalAxiosRequestConfig & { _retry?: boolean };
 
 client.interceptors.response.use(
   (response) => response,
@@ -29,7 +28,8 @@ client.interceptors.response.use(
       original &&
       !original._retry &&
       !original.url?.includes("/api/auth/reissue") &&
-      !original.url?.includes("/api/auth/login")
+      !original.url?.includes("/api/auth/login") &&
+      !original.url?.includes("/api/auth/logout")
     ) {
       original._retry = true;
       try {

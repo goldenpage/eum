@@ -219,13 +219,7 @@ function RevenueStatisticsPage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <div className="main">
-        <Header />
-
         <div className="top_area">
           <h1>매출통계</h1>
 

@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  gap: 30px;
+  height: 100vh;
+}
+
+/* .used-statistics-sidebar{
+    flex: 0 0 170px;
+} */
+
+.main {
+  width: 100%;
+}
+.used-statistics-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.used-statistics-search-area {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
