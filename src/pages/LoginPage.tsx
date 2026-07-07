@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router";
 import client, { AT } from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import "./LoginPage.css";
+import "../pages/css/LoginPage.css";
 import { isAdminUser, useUserStore } from "../store/userStore";
 
 function LoginPage() {

@@ -8,10 +8,14 @@ import {
   type RegistrationReview,
   type ReviewStatus,
 } from "../api/review";
-import ManagerHeader from "../features/review/ManagerHeader";
-import ReviewTabs from "../features/review/ReviewTabs";
-import ReviewTable from "../features/review/ReviewTable";
-import ReviewDetailDialog from "../features/review/ReviewDetailDialog";
+import ManagerHeader from "../features/manager/ManagerHeader";
+import ReviewTabs from "../features/manager/ReviewTabs";
+import ReviewTable from "../features/manager/ReviewTable";
+import ReviewDetailDialog from "../features/manager/ReviewDetailDialog";
+import { getManagerReviewTestData } from "../utils/test";
+import "../pages/css/ManagerPage.css";
+
+const useManagerTestData = import.meta.env.DEV;
 
 function ManagerPage() {
   const [status, setStatus] = useState<ReviewStatus>("PENDING");
@@ -20,6 +24,7 @@ function ManagerPage() {
     useState<RegistrationReview | null>(null);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [usingTestData, setUsingTestData] = useState(false);
 
   const loadReviews = async (nextStatus = status) => {
     try {
@@ -27,8 +32,21 @@ function ManagerPage() {
       setErrorMessage("");
 
       const data = await getReviews(nextStatus);
+      if (useManagerTestData && data.length === 0) {
+        setReviews(getManagerReviewTestData(nextStatus));
+        setUsingTestData(true);
+        return;
+      }
+
       setReviews(data);
+      setUsingTestData(false);
     } catch (error) {
+      if (useManagerTestData) {
+        setReviews(getManagerReviewTestData(nextStatus));
+        setUsingTestData(true);
+        return;
+      }
+
       const message =
         error instanceof Error
           ? error.message
@@ -44,6 +62,18 @@ function ManagerPage() {
   };
 
   const handleOpenDetail = async (reviewId: number) => {
+    if (usingTestData) {
+      const review = reviews.find((item) => item.reviewId === reviewId);
+
+      if (review) {
+        setSelectedReview(review);
+        return;
+      }
+
+      alert("테스트 상세 데이터를 찾지 못했습니다.");
+      return;
+    }
+
     try {
       const data = await getReviewDetail(reviewId);
       setSelectedReview(data);
@@ -59,6 +89,15 @@ function ManagerPage() {
   const handleApprove = async (reviewId: number) => {
     if (!confirm("해당 회원가입 신청을 승인하시겠습니까?")) return;
 
+    if (usingTestData) {
+      alert("테스트 데이터의 회원가입 신청을 승인했습니다.");
+      setSelectedReview(null);
+      setReviews((current) =>
+        current.filter((review) => review.reviewId !== reviewId),
+      );
+      return;
+    }
+
     await approveReview(reviewId);
     alert("회원가입 신청을 승인했습니다.");
     setSelectedReview(null);
@@ -73,6 +112,15 @@ function ManagerPage() {
 
     if (!confirm("해당 회원가입 신청을 반려하시겠습니까?")) return;
 
+    if (usingTestData) {
+      alert("테스트 데이터의 회원가입 신청을 반려했습니다.");
+      setSelectedReview(null);
+      setReviews((current) =>
+        current.filter((review) => review.reviewId !== reviewId),
+      );
+      return;
+    }
+
     await rejectReview(reviewId, reason);
     alert("회원가입 신청을 반려했습니다.");
     setSelectedReview(null);
@@ -84,7 +132,7 @@ function ManagerPage() {
   }, [status]);
 
   return (
-    <>
+    <div className="manager-page">
       <ManagerHeader managerName="관리자" />
 
       <main className="manager-content">
@@ -104,7 +152,7 @@ function ManagerPage() {
         onApprove={handleApprove}
         onReject={handleReject}
       />
-    </>
+    </div>
   );
 }
 

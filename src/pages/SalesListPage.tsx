@@ -1,19 +1,17 @@
-import { Pagination } from "../components/Pagination";
 import { SalesEditModal } from "../features/sales/SalesEditModal";
 import { SalesFilterBar } from "../features/sales/SalesFilterBar";
 import { SalesTable } from "../features/sales/SalesTable";
 import { useSalesRecords } from "../hooks/useSalesRecords";
 import { formatWon } from "../utils/format";
-import "./SalesListPage.css";
+import "../pages/css/SalesListPage.css";
 
 function SalesListPage() {
   const {
     filters,
     setFilters,
     records,
-    totalPages,
-    page,
     isLoading,
+    isLoadingMore,
     errorMessage,
     categories,
     payments,
@@ -22,11 +20,11 @@ function SalesListPage() {
     editingRecord,
     handleSearch,
     handleReset,
-    handleMovePage,
     handleDelete,
     handleOpenEdit,
     handleCloseEdit,
     handleSaveEdit,
+    handleTableScroll,
   } = useSalesRecords();
   return (
     <div className="container">
@@ -50,12 +48,11 @@ function SalesListPage() {
           isLoading={isLoading}
           onEdit={handleOpenEdit}
           onDelete={handleDelete}
+          onScroll={handleTableScroll}
         />
-        <Pagination
-          currentPage={page + 1}
-          totalPages={totalPages}
-          onMove={(nextPage) => handleMovePage(nextPage - 1)}
-        />
+        {isLoadingMore && (
+          <div className="loadingText">다음 판매 기록을 불러오는 중입니다.</div>
+        )}
         <SalesEditModal
           record={editingRecord}
           onClose={handleCloseEdit}

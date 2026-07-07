@@ -4,12 +4,11 @@ import type { TooltipItem } from "chart.js/auto";
 import client from "../api/client";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import Sidebar from "../components/Sidebar";
 import type {
   ExpenseRankDto,
   MonthlyExpenseDto,
 } from "../types/dto/StatisticsDto.ts";
-import "./UsedStatisticsPage.css";
+import "../pages/css/UsedStatisticsPage.css";
 
 function getCurrentMonth() {
   const today = new Date();

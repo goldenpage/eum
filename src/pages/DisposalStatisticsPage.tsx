@@ -6,7 +6,7 @@ import { getCurrentMonth } from "../utils/statistics/date";
 import DisposalSummary from "../features/disposalStatistics/DisposalSummary";
 import ReasonChart from "../features/disposalStatistics/ReasonChart";
 import DailyDisposalChart from "../features/disposalStatistics/DailyDisposalChart";
-import "./DisposalStatisticsPage.css";
+import "../pages/css/DisposalStatisticsPage.css";
 
 function DisposalStatisticsPage() {
   const [month, setMonth] = useState(getCurrentMonth());

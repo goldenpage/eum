@@ -18,7 +18,7 @@
 
 .tableScroller {
   width: 100%;
-  height: 420px;
+  height: 220px;
   overflow: auto;
   border: 1px solid white;
 }
@@ -70,7 +70,7 @@
   min-width: 110px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .container {
     display: block;
     height: auto;
@@ -79,28 +79,28 @@
 
   .main {
     width: 100%;
+    min-width: 0;
+    padding: 12px;
   }
 
   .filterBar {
-    align-items: flex-start;
+    display: block;
   }
 
-  .tableScroller {
-    height: 360px;
+  .filterBar label,
+  .filterBar select,
+  .filterBar button {
+    margin-bottom: 8px;
   }
 
-  .listTable {
-    min-width: 900px;
-  }
-}
-
-@media (max-width: 480px) {
   .table_scroll,
   .tableScroller {
+    width: 100%;
+    height: 260px;
     overflow-x: auto;
   }
 
-  table {
+  .listTable {
     min-width: 720px;
   }
 
@@ -112,5 +112,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .pagination {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 6px;
   }
 }

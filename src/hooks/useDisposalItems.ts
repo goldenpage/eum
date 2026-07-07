@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  getDisposalItems,
   updateDisposalReason,
   type DisposalFilters,
   type DisposalItem,
@@ -51,6 +52,7 @@ function useDisposalItems() {
   const [items, setItems] = useState<DisposalItem[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [categories, setCategories] = useState<string[]>([]);
   const [reasons, setReasons] = useState<string[]>([]);
@@ -112,7 +114,7 @@ function useDisposalItems() {
     };
 
     void fetchDisposalItems({
-      nextPage: page,
+      nextPage: 1,
       nextFilters,
       pageSize: PAGE_SIZE,
       shouldSyncUrl: false,
@@ -125,7 +127,7 @@ function useDisposalItems() {
       setReasons,
       syncUrl,
     });
-  }, [page, appliedFilters.category, appliedFilters.reason]);
+  }, [appliedFilters.category, appliedFilters.reason]);
 
   const handleSearch = () => {
     const isSameFilters =
@@ -161,11 +163,43 @@ function useDisposalItems() {
     syncUrl(resetFilters, 1);
   };
 
-  const handleMovePage = (nextPage: number) => {
-    if (nextPage < 1 || nextPage > totalPages || nextPage === page) return;
+  const loadNextItems = async () => {
+    if (isLoading || isLoadingMore) return;
+    if (page >= totalPages) return;
 
-    setPage(nextPage);
-    syncUrl(appliedFilters, nextPage);
+    setIsLoadingMore(true);
+
+    try {
+      const data = await getDisposalItems({
+        ...appliedFilters,
+        page: page + 1,
+        size: PAGE_SIZE,
+      });
+
+      setItems((previousItems) => [...previousItems, ...(data.list ?? [])]);
+
+      setPage(data.currentPage);
+      setTotalPages(data.totalPages);
+      setCategories(data.categories ?? []);
+      setReasons(data.reasons ?? []);
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "폐기 품목을 불러오지 못했습니다.",
+      );
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+
+  const handleTableScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+    const isNearBottom = scrollTop + clientHeight >= scrollHeight - 40;
+
+    if (isNearBottom) {
+      void loadNextItems();
+    }
   };
 
   const handleReasonChange = async (disposalId: string, reason: string) => {
@@ -180,13 +214,14 @@ function useDisposalItems() {
     totalPages,
     page,
     isLoading,
+    isLoadingMore,
     errorMessage,
     categories,
     reasons,
     handleSearch,
     handleReset,
-    handleMovePage,
     handleReasonChange,
+    handleTableScroll,
   };
 }
 

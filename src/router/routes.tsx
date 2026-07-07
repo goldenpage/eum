@@ -10,13 +10,13 @@ import MenuListPage from "../pages/MenuListPage";
 import ManagerPage from "../pages/ManagerPage";
 import RegisterPage from "../pages/RegisterPage";
 import DisposalItemsPage from "../pages/DisposalItemsPage";
-import AddSalesPage from "../pages/AddSalesPage";
 import AddMenuPage from "../pages/AddMenuPage";
 import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
 import LoginPage from "../pages/LoginPage";
 import SaleListPage from "../pages/SalesListPage";
 import ProtectedApp from "./ProtectedApp";
+import ProtectedPage from "./ProtectedPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +34,16 @@ export const router = createBrowserRouter([
   {
     path: "pwupdate",
     Component: PwUpdatePage,
+  },
+  {
+    path: "/manager",
+    Component: ProtectedPage,
+    children: [
+      {
+        index: true,
+        Component: ManagerPage,
+      },
+    ],
   },
   {
     path: "/",
@@ -56,16 +66,8 @@ export const router = createBrowserRouter([
         Component: AddMenuPage,
       },
       {
-        path: "addsales",
-        Component: AddSalesPage,
-      },
-      {
         path: "disposal-items",
         Component: DisposalItemsPage,
-      },
-      {
-        path: "manager",
-        Component: ManagerPage,
       },
       {
         path: "menus",
@@ -78,6 +80,10 @@ export const router = createBrowserRouter([
       {
         path: "purchase",
         Component: PurchasePage,
+      },
+      {
+        path: "pwupdate",
+        Component: PwUpdatePage,
       },
       {
         path: "sales-list",

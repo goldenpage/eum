@@ -13,6 +13,8 @@ function ReviewDetailDialog({ review, onClose, onApprove, onReject }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [reason, setReason] = useState("");
   const [documentUrl, setDocumentUrl] = useState("");
+  const [documentMessage, setDocumentMessage] =
+    useState("제출 서류를 불러오는 중입니다.");
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -35,8 +37,13 @@ function ReviewDetailDialog({ review, onClose, onApprove, onReject }: Props) {
     let objectUrl = "";
 
     const loadDocument = async () => {
-      objectUrl = await getReviewDocument(review.reviewId);
-      setDocumentUrl(objectUrl);
+      try {
+        setDocumentMessage("제출 서류를 불러오는 중입니다.");
+        objectUrl = await getReviewDocument(review.reviewId);
+        setDocumentUrl(objectUrl);
+      } catch {
+        setDocumentMessage("제출 서류를 불러오지 못했습니다.");
+      }
     };
 
     loadDocument();
@@ -47,6 +54,7 @@ function ReviewDetailDialog({ review, onClose, onApprove, onReject }: Props) {
       }
 
       setDocumentUrl("");
+      setDocumentMessage("제출 서류를 불러오는 중입니다.");
     };
   }, [review]);
 
@@ -100,7 +108,7 @@ function ReviewDetailDialog({ review, onClose, onApprove, onReject }: Props) {
           title="제출 사업자등록증"
         />
       ) : (
-        <div className="document-frame">제출 서류를 불러오는 중입니다.</div>
+        <div className="document-frame">{documentMessage}</div>
       )}
 
       {review.status === "PENDING" && (

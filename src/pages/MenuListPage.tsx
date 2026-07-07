@@ -11,7 +11,7 @@ import type {
   SaleResponse,
   MenuDeleteResponse,
 } from "../types/dto/MenuDto";
-import "./MenuListPage.css";
+import "../pages/css/MenuListPage.css";
 
 function formatMoney(value: number) {
   return `${value.toLocaleString()}원`;
@@ -190,6 +190,11 @@ function MenuListPage() {
                       <td>
                         <Button
                           type="button"
+                          className={
+                            selectedMenu?.menuId === menu.menuId
+                              ? "selected"
+                              : "secondaryButton"
+                          }
                           onClick={() => {
                             onSelectMenu(menu);
                           }}
@@ -202,9 +207,10 @@ function MenuListPage() {
                       <td>
                         <Button
                           type="button"
+                          className="remove_btn"
                           onClick={() => void onDeleteMenu(menu)}
                         >
-                          {deletingMenuId === menu.menuId ? "삭제 중" : "삭제"}
+                          {deletingMenuId === menu.menuId ? "..." : "X"}
                         </Button>
                       </td>
                     </tr>

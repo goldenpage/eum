@@ -1,32 +1,32 @@
-ul {
+.menu-page ul {
   list-style: none;
 }
 
-.container {
+.menu-page {
   display: flex;
   gap: 30px;
   min-height: 100vh;
 }
 
-.main {
+.menu-page .main {
   width: 100%;
   padding: 24px;
   box-sizing: border-box;
 }
 
-.main > h1 {
+.menu-page .main > h1 {
   font-size: 22px;
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 20px;
 }
 
-.profile {
+.menu-page .profile {
   display: flex;
   justify-content: end;
 }
 
-.content_item {
+.menu-page .content_item {
   display: flex;
   gap: 20px;
   align-items: flex-start;
@@ -34,7 +34,7 @@ ul {
   box-sizing: border-box;
 }
 
-.content_left {
+.menu-page .content_left {
   flex: 1;
   min-width: 0;
   border: none;
@@ -45,7 +45,7 @@ ul {
   box-sizing: border-box;
 }
 
-.content_right {
+.menu-page .content_right {
   width: 360px;
   min-width: 0;
   flex-shrink: 0;
@@ -60,7 +60,7 @@ ul {
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
-.content_right h3 {
+.menu-page .content_right h3 {
   margin-top: 0;
   margin-bottom: 16px;
   font-size: 16px;
@@ -68,39 +68,39 @@ ul {
   color: #0f172a;
 }
 
-.content_right table {
+.menu-page .content_right table {
   border-spacing: 0;
   border-collapse: collapse;
   font-size: 14px;
   width: 100%;
 }
 
-.content_right table th,
-.content_right table td {
+.menu-page .content_right table th,
+.menu-page .content_right table td {
   padding: 8px 6px;
   text-align: left;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.content_right table th {
+.menu-page .content_right table th {
   color: #64748b;
   font-weight: 600;
   font-size: 13px;
 }
 
-.content_right .register_final_btn {
+.menu-page .content_right .register_final_btn {
   display: flex;
   justify-content: center;
   padding: 0 0 12px;
 }
 
-.content_right .register_final_btn .btn {
+.menu-page .content_right .register_final_btn .btn {
   width: 100%;
   padding: 14px;
   font-size: 15px;
 }
 
-.input_section {
+.menu-page .input_section {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
@@ -109,7 +109,7 @@ ul {
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
-.input_row {
+.menu-page .input_row {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -117,28 +117,28 @@ ul {
   flex-wrap: wrap;
 }
 
-.input_row label {
+.menu-page .input_row label {
   min-width: 120px;
   font-size: 14px;
   font-weight: 600;
   color: #334155;
 }
 
-.input_fields > div:not(.category_buttons),
-.input_row > div:not(.category_buttons),
-.ingredient_add_row > div:not(.category_buttons) {
+.menu-page .input_fields > div:not(.category_buttons),
+.menu-page .input_row > div:not(.category_buttons),
+.menu-page .ingredient_add_row > div:not(.category_buttons) {
   flex: 1;
   min-width: 0;
 }
 
-.category_buttons {
+.menu-page .category_buttons {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.category_buttons .btn {
+.menu-page .category_buttons .btn {
   padding: 8px 18px;
   border-radius: 999px;
   background: #ffffff;
@@ -147,18 +147,18 @@ ul {
   font-weight: 600;
 }
 
-.category_buttons .btn:hover {
+.menu-page .category_buttons .btn:hover {
   background: #f1f5f9;
 }
 
-.category_buttons .btn.selected {
+.menu-page .category_buttons .btn.selected {
   background-color: #2563eb;
   border-color: #2563eb;
   color: #ffffff;
   font-weight: 700;
 }
 
-.category_buttons .btn.remove_btn {
+.menu-page .category_buttons .btn.remove_btn {
   padding: 4px 8px;
   border-radius: 8px;
   background: transparent;
@@ -166,11 +166,11 @@ ul {
   color: #ef4444;
 }
 
-.category_buttons .btn.remove_btn:hover {
+.menu-page .category_buttons .btn.remove_btn:hover {
   background: #fee2e2;
 }
 
-.input_fields {
+.menu-page .input_fields {
   display: flex;
   gap: 10px 16px;
   align-items: center;
@@ -178,17 +178,17 @@ ul {
   margin-top: 12px;
 }
 
-.input_fields label {
+.menu-page .input_fields label {
   min-width: 90px;
   font-size: 13px;
   font-weight: 600;
   color: #334155;
 }
 
-.input_fields input,
-.input_row input,
-.ingredient_add_row input,
-.ingredient_add_row select {
+.menu-page .input_fields input,
+.menu-page .input_row input,
+.menu-page .ingredient_add_row input,
+.menu-page .ingredient_add_row select {
   width: 140px;
   padding: 10px 12px;
   border: 1px solid #e2e8f0;
@@ -198,22 +198,22 @@ ul {
   box-sizing: border-box;
 }
 
-.input_fields input:focus,
-.input_row input:focus,
-.ingredient_add_row input:focus,
-.ingredient_add_row select:focus {
+.menu-page .input_fields input:focus,
+.menu-page .input_row input:focus,
+.menu-page .ingredient_add_row input:focus,
+.menu-page .ingredient_add_row select:focus {
   outline: none;
   border-color: #2563eb;
   background: #ffffff;
 }
 
-.register_btn {
+.menu-page .register_btn {
   margin-top: 4px;
   display: flex;
   justify-content: center;
 }
 
-.register_btn .btn {
+.menu-page .register_btn .btn {
   width: 100%;
   padding: 14px;
   background: #eff6ff;
@@ -222,11 +222,11 @@ ul {
   font-weight: 700;
 }
 
-.register_btn .btn:hover {
+.menu-page .register_btn .btn:hover {
   background: #dbeafe;
 }
 
-.ingredient_section {
+.menu-page .ingredient_section {
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
@@ -235,14 +235,14 @@ ul {
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
-.ingredient_section h3 {
+.menu-page .ingredient_section h3 {
   margin-top: 0;
   font-size: 16px;
   font-weight: 700;
   color: #0f172a;
 }
 
-.ingredient_add_row {
+.menu-page .ingredient_add_row {
   display: flex;
   gap: 12px;
   align-items: center;
@@ -250,68 +250,68 @@ ul {
   flex-wrap: wrap;
 }
 
-.ingredient_add_row label {
+.menu-page .ingredient_add_row label {
   min-width: 44px;
   font-size: 14px;
   font-weight: 600;
   color: #334155;
 }
 
-.ingredient_add_row select {
+.menu-page .ingredient_add_row select {
   width: auto;
   flex: 1;
   min-width: 140px;
 }
 
-.ingredient_table {
+.menu-page .ingredient_table {
   font-size: 14px;
   width: 100%;
 }
 
-.ingredient_table table {
+.menu-page .ingredient_table table {
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
 }
 
-.ingredient_table th,
-.ingredient_table td {
+.menu-page .ingredient_table th,
+.menu-page .ingredient_table td {
   padding: 8px 6px;
   text-align: left;
   border-bottom: 1px solid #f1f5f9;
 }
 
-.ingredient_table th {
+.menu-page .ingredient_table th {
   color: #64748b;
   font-weight: 600;
   font-size: 13px;
 }
 
-.right_top {
+.menu-page .right_top {
   overflow-y: auto;
   max-height: 300px;
 }
 
-.right_bottom {
+.menu-page .right_bottom {
   border-top: 1px solid #e2e8f0;
   padding-top: 16px;
   margin-top: 16px;
 }
 
-.right_bottom h4 {
+.menu-page .right_bottom h4 {
   margin: 0 0 10px 0;
   font-size: 13px;
   font-weight: 600;
   color: #64748b;
 }
 
-.ingredient_detail_table {
+.menu-page .ingredient_detail_table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
 
-.ingredient_detail_table th {
+.menu-page .ingredient_detail_table th {
   background: #f8fafc;
   padding: 8px;
   border: 1px solid #e2e8f0;
@@ -320,37 +320,37 @@ ul {
   font-weight: 600;
 }
 
-.ingredient_detail_table td {
+.menu-page .ingredient_detail_table td {
   padding: 8px;
   border: 1px solid #e2e8f0;
   text-align: center;
 }
 
-#registerMenuTable tbody tr {
+.menu-page #registerMenuTable tbody tr {
   cursor: pointer;
 }
 
-#registerMenuTable tbody tr:hover td {
+.menu-page #registerMenuTable tbody tr:hover td {
   background: #f0f7ff;
 }
 
-#registerMenuTable tbody tr.selected_row td {
+.menu-page #registerMenuTable tbody tr.selected_row td {
   background: #dbeafe;
 }
 
-.remove_btn {
+.menu-page .remove_btn {
   cursor: pointer;
   color: #ef4444;
 }
 
-.empty_msg {
+.menu-page .empty_msg {
   text-align: center;
   color: #94a3b8;
   font-size: 13px;
   padding: 24px 0;
 }
 
-.notice {
+.menu-page .notice {
   margin: 0 0 16px;
   padding: 12px 16px;
   border-radius: 8px;
@@ -358,25 +358,25 @@ ul {
   border: none;
 }
 
-.notice_success {
+.menu-page .notice_success {
   color: #166534;
   background: #dcfce7;
 }
 
-.notice_error {
+.menu-page .notice_error {
   color: #991b1b;
   background: #fee2e2;
 }
 
 @media screen and (max-width: 480px) {
-  .container,
-  .container *,
-  .container *::before,
-  .container *::after {
+  .menu-page,
+  .menu-page *,
+  .menu-page *::before,
+  .menu-page *::after {
     box-sizing: border-box !important;
   }
 
-  .content_item {
+  .menu-page .content_item {
     display: flex !important;
     flex-direction: column !important;
     gap: 24px !important;
@@ -384,29 +384,29 @@ ul {
     padding: 8px !important;
   }
 
-  .content_left,
-  .content_right {
+  .menu-page .content_left,
+  .menu-page .content_right {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  .category_buttons {
+  .menu-page .category_buttons {
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 8px !important;
     width: 100% !important;
   }
 
-  .category_buttons label {
+  .menu-page .category_buttons label {
     width: 100% !important;
     margin-bottom: 4px;
   }
 
-  .category_buttons > span {
+  .menu-page .category_buttons > span {
     flex-wrap: wrap !important;
   }
 
-  .input_section .input_row {
+  .menu-page .input_section .input_row {
     display: flex !important;
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -415,7 +415,7 @@ ul {
     margin-bottom: 16px !important;
   }
 
-  .input_section .input_fields {
+  .menu-page .input_section .input_fields {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: wrap !important;
@@ -426,18 +426,18 @@ ul {
     margin-bottom: 16px !important;
   }
 
-  .input_section label,
-  .input_section .input_fields label {
+  .menu-page .input_section label,
+  .menu-page .input_section .input_fields label {
     width: 100% !important;
     font-size: 14px !important;
     font-weight: bold;
     margin-bottom: 4px !important;
   }
 
-  .input_section input,
-  .input_section select,
-  .ingredient_add_row input,
-  .ingredient_add_row select {
+  .menu-page .input_section input,
+  .menu-page .input_section select,
+  .menu-page .ingredient_add_row input,
+  .menu-page .ingredient_add_row select {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -446,13 +446,13 @@ ul {
     font-size: 16px !important;
   }
 
-  .input_section .input_fields > div,
-  .input_section .input_fields input {
+  .menu-page .input_section .input_fields > div,
+  .menu-page .input_section .input_fields input {
     flex: 1 !important;
     width: auto !important;
   }
 
-  .unit_text {
+  .menu-page .unit_text {
     white-space: nowrap !important;
     font-size: 15px !important;
     color: #334155;
@@ -460,41 +460,41 @@ ul {
     display: inline-block !important;
   }
 
-  .ingredient_add_row {
+  .menu-page .ingredient_add_row {
     display: flex !important;
     flex-direction: column !important;
     gap: 10px !important;
     width: 100% !important;
   }
 
-  .ingredient_add_row :has(> input[type="number"]) {
+  .menu-page .ingredient_add_row :has(> input[type="number"]) {
     display: flex !important;
     align-items: center;
     gap: 8px;
     width: 100% !important;
   }
 
-  .ingredient_add_row Button {
+  .menu-page .ingredient_add_row Button {
     width: 100% !important;
     height: 42px !important;
     margin-top: 4px;
   }
 
-  .ingredient_table,
-  .right_top,
-  .right_bottom {
+  .menu-page .ingredient_table,
+  .menu-page .right_top,
+  .menu-page .right_bottom {
     width: 100% !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
   }
 
-  table {
+  .menu-page table {
     width: 100% !important;
     white-space: nowrap;
   }
 
-  .register_btn Button,
-  .register_final_btn Button {
+  .menu-page .register_btn Button,
+  .menu-page .register_final_btn Button {
     width: 100% !important;
     padding: 12px 0 !important;
     font-size: 16px !important;
