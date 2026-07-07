@@ -2,6 +2,7 @@ import { create } from "zustand";
 import client from "../api/client";
 
 export interface UserInfo {
+  userName?: string;
   username?: string;
   name?: string;
   role?: string;
@@ -41,6 +42,10 @@ export function isAdminUser(user: UserInfo | null) {
     hasAdminValue(user.storeType) ||
     user.authorities?.some(hasAdminValue) === true
   );
+}
+
+export function getUserDisplayName(user: UserInfo | null) {
+  return user?.userName ?? user?.name ?? user?.username ?? "사용자";
 }
 
 export const useUserStore = create<UserState>((set, get) => ({
