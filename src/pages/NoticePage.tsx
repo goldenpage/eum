@@ -25,13 +25,7 @@ function NoticePage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
       <div className="main">
-        <div>
-          <Header />
-        </div>
         <div className="notice_top_area">
           <div className="notice_left_area">
             <h2>알림 내역</h2>
