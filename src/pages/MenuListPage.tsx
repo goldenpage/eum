@@ -11,7 +11,7 @@ import type {
   SaleResponse,
   MenuDeleteResponse,
 } from "../types/dto/MenuDto";
-import "./MenuListPage.css";
+import "../pages/css/MenuListPage.css";
 
 function formatMoney(value: number) {
   return `${value.toLocaleString()}원`;

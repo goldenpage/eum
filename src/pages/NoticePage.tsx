@@ -3,7 +3,7 @@ import NoticeSettingBox from "../features/notice/NoticeSettingBox";
 import NoticeSummaryBox from "../features/notice/NoticeSummaryBox";
 import NoticeTable from "../features/notice/NoticeTable";
 import { useNotice } from "../hooks/useNotice";
-import "./NoticePage.css";
+import "../pages/css/NoticePage.css";
 
 function NoticePage() {
   const {

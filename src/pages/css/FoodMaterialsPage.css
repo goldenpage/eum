@@ -1,4 +1,4 @@
-@import "../components/css/Input.css";
+@import "../../components/css/Input.css";
 
 .container:has(> .layout__sidebar) {
   display: flex;

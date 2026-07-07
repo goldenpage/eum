@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Chart } from "chart.js/auto";
 import type { TooltipItem } from "chart.js";
 import client from "../api/client";
-import "./RevenueStatisticsPage.css";
+import "../pages/css/RevenueStatisticsPage.css";
 import Button from "../components/Button";
 import Input from "../components/Input";
 
