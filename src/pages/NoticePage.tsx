@@ -22,10 +22,10 @@ function NoticePage() {
   } = useNotice();
 
   return (
-    <div className="container">
-      <div className="main">
-        <div className="notice_top_area">
-          <div className="notice_left_area">
+    <div className="notice-page">
+      <div className="notice-page__main">
+        <div className="notice-page__top">
+          <div className="notice-page__left">
             <h2>알림 내역</h2>
             <NoticeSummaryBox summary={summary} />
           </div>
@@ -39,11 +39,11 @@ function NoticePage() {
           />
         </div>
         {errorMessage && (
-          <div className="error-message" role="alert">
+          <div className="notice-page__error" role="alert">
             {errorMessage}
           </div>
         )}
-        <div className="notice-action-area">
+        <div className="notice-page__actions">
           <Button type="button" onClick={handleReadAllStockNotices}>
             재고 알림 전체 읽음
           </Button>
