@@ -5,10 +5,8 @@ import "../src/App.css";
 
 const App = () => {
   return (
-    <div className="container">
-      <aside className="layout__sidebar">
-        <Sidebar />
-      </aside>
+    <div className="layout">
+      <Sidebar />
 
       <main className="layout__main">
         <Header />

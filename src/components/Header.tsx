@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import { logout } from "../api/auth";
 import { useUserStore } from "../store/userStore";
+import "../components/css/Header.css";
 
 function Header() {
   const navigate = useNavigate();
@@ -15,23 +16,16 @@ function Header() {
   };
 
   return (
-    <ul
-      style={{
-        listStyle: "none",
-        display: "flex",
-        gap: "30px",
-      }}
-    >
+    <ul className="profile">
       <li>{user?.name ?? user?.username ?? "사용자"}</li>
       <li>
         <button type="button" onClick={handleLogout}>
           로그아웃
         </button>
       </li>
-
-      <Link to={"/notice"}>
-        <li>알림</li>
-      </Link>
+      <li>
+        <Link to="/notice">알림</Link>
+      </li>
     </ul>
   );
 }

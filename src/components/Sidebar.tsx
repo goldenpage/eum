@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import List from "./List";
 import logo from "../assets/image.svg";
+import "../components/css/Sidebar.css";
 
 function Sidebar() {
   const list = [
@@ -32,21 +32,19 @@ function Sidebar() {
   ];
 
   return (
-    <div>
-      <Link to={"/"}>
-        <img
-          src={logo}
-          alt="logo"
-          style={{ width: "150px", height: "150px" }}
-        />
+    <nav className="sideMenu">
+      <Link to="/">
+        <img src={logo} alt="logo" />
       </Link>
 
-      {list.map((item, idx) => (
-        <Link to={linkRoutes[idx]} key={idx}>
-          <List item={item} />
-        </Link>
-      ))}
-    </div>
+      <ul>
+        {list.map((item, idx) => (
+          <li key={item}>
+            <Link to={linkRoutes[idx]}>{item}</Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 export default Sidebar;
