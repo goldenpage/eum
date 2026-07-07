@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
     Component: RegisterPage,
   },
   {
+    path: "pwupdate",
+    Component: PwUpdatePage,
+  },
+  {
     path: "/manager",
     Component: ProtectedPage,
     children: [
@@ -77,10 +81,7 @@ export const router = createBrowserRouter([
         path: "purchase",
         Component: PurchasePage,
       },
-      {
-        path: "pwupdate",
-        Component: PwUpdatePage,
-      },
+
       {
         path: "sales-list",
         Component: SaleListPage,
