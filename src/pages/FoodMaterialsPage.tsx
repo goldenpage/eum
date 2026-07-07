@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import Header from "../components/Header";
 import Input from "../components/Input";
-import Sidebar from "../components/Sidebar";
 import type {
   FoodMaterialDto,
   FoodMaterialPageResponse,

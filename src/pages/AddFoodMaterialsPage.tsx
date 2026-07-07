@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import client from "../api/client";
 import Input from "../components/Input";
 import "./AddFoodMaterialPage.css";

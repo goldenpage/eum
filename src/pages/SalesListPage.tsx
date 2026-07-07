@@ -1,9 +1,7 @@
-import Header from "../components/Header";
 import { Pagination } from "../components/Pagination";
 import { SalesEditModal } from "../components/SalesEditModal";
 import { SalesFilterBar } from "../components/SalesFilterBar";
 import { SalesTable } from "../components/SalesTable";
-import Sidebar from "../components/Sidebar";
 import { useSalesRecords } from "../hooks/useSalesRecords";
 import { formatWon } from "../utils/format";
 import "./SalesListPage.css";
