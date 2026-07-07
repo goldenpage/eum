@@ -31,7 +31,7 @@ function DisposalStatisticsPage() {
       {error && <div className="error-message">{error}</div>}
       {loading && <div>불러오는 중입니다.</div>}
 
-      <div className="content_item">
+      <div className="disposal-stats-content">
         <DisposalSummary
           disposalRate={data.disposalRate}
           totalDisposalPrice={data.totalDisposalPrice}

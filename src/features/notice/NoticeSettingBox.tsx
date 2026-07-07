@@ -21,18 +21,18 @@ function NoticeSettingBox({
 }: NoticeSettingBoxProps) {
   if (!expSetting || !stockSetting) {
     return (
-      <div className="notice_setting_box">
-        <div className="notice_setting_title">알림 설정</div>
+      <div className="notice-page__setting">
+        <div className="notice-page__setting-title">알림 설정</div>
         <div>설정을 불러오는 중입니다.</div>
       </div>
     );
   }
 
   return (
-    <div className="notice_setting_box">
-      <div className="notice_setting_title">알림 설정</div>
-      <div className="setting_row">
-        <label className="setting_label">
+    <div className="notice-page__setting">
+      <div className="notice-page__setting-title">알림 설정</div>
+      <div className="notice-page__setting-row">
+        <label className="notice-page__setting-label">
           <input
             type="checkbox"
             checked={expSetting.expAlert}
@@ -42,7 +42,7 @@ function NoticeSettingBox({
           />
           유통기한 알림
         </label>
-        <span className="setting_text">기준</span>
+        <span className="notice-page__setting-text">기준</span>
         <Input
           text=""
           inputType="number"
@@ -52,10 +52,10 @@ function NoticeSettingBox({
             onExpChange({ ...expSetting, expDays: Number(value) })
           }
         />
-        <span className="setting_text">일 전</span>
+        <span className="notice-page__setting-text">일 전</span>
       </div>
-      <div className="setting_row">
-        <label className="setting_label">
+      <div className="notice-page__setting-row">
+        <label className="notice-page__setting-label">
           <input
             type="checkbox"
             checked={stockSetting.foodmAlert}
@@ -68,7 +68,7 @@ function NoticeSettingBox({
           />
           재고 부족 알림
         </label>
-        <span className="setting_text">기준</span>
+        <span className="notice-page__setting-text">기준</span>
         <Input
           text=""
           inputType="number"
@@ -78,17 +78,17 @@ function NoticeSettingBox({
             onStockChange({ ...stockSetting, foodmLimit: Number(value) })
           }
         />
-        <span className="setting_text">개 이하</span>
+        <span className="notice-page__setting-text">개 이하</span>
       </div>
-      <div className="setting_button_area">
+      <div className="notice-page__setting-actions">
         <Button
           type="button"
-          className="save_notice_setting_btn"
+          className="notice-page__setting-save"
           onClick={onSave}
         >
           저장
         </Button>
-        <span className="notice_setting_message">{message}</span>
+        <span className="notice-page__setting-message">{message}</span>
       </div>
     </div>
   );
