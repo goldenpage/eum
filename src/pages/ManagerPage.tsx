@@ -8,10 +8,11 @@ import {
   type RegistrationReview,
   type ReviewStatus,
 } from "../api/review";
-import ManagerHeader from "../features/review/ManagerHeader";
-import ReviewTabs from "../features/review/ReviewTabs";
-import ReviewTable from "../features/review/ReviewTable";
-import ReviewDetailDialog from "../features/review/ReviewDetailDialog";
+import ManagerHeader from "../features/manager/ManagerHeader";
+import ReviewTabs from "../features/manager/ReviewTabs";
+import ReviewTable from "../features/manager/ReviewTable";
+import ReviewDetailDialog from "../features/manager/ReviewDetailDialog";
+import "../pages/css/ManagerPage.css";
 
 function ManagerPage() {
   const [status, setStatus] = useState<ReviewStatus>("PENDING");
@@ -84,7 +85,7 @@ function ManagerPage() {
   }, [status]);
 
   return (
-    <>
+    <div className="manager-page">
       <ManagerHeader managerName="관리자" />
 
       <main className="manager-content">
@@ -104,7 +105,7 @@ function ManagerPage() {
         onApprove={handleApprove}
         onReject={handleReject}
       />
-    </>
+    </div>
   );
 }
 

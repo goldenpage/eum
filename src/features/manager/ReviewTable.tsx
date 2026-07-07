@@ -49,12 +49,16 @@ function ReviewTable({ reviews, loading, errorMessage, onOpenDetail }: Props) {
           !errorMessage &&
           reviews.map((review) => (
             <tr key={review.reviewId}>
-              <td>{formatDate(review.requestedAt)}</td>
-              <td>{formatBusinessNumber(review.businessId)}</td>
-              <td>{review.storeName ?? "-"}</td>
-              <td>{review.representativeName ?? "-"}</td>
-              <td>{statusLabels[review.status] ?? review.status}</td>
-              <td>
+              <td data-label="신청일">{formatDate(review.requestedAt)}</td>
+              <td data-label="사업자번호">
+                {formatBusinessNumber(review.businessId)}
+              </td>
+              <td data-label="상호명">{review.storeName ?? "-"}</td>
+              <td data-label="대표자">{review.representativeName ?? "-"}</td>
+              <td data-label="상태">
+                {statusLabels[review.status] ?? review.status}
+              </td>
+              <td data-label="관리">
                 <button
                   type="button"
                   onClick={() => onOpenDetail(review.reviewId)}

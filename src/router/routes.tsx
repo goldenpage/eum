@@ -16,6 +16,7 @@ import FoodMaterialsPage from "../pages/FoodMaterialsPage";
 import LoginPage from "../pages/LoginPage";
 import SaleListPage from "../pages/SalesListPage";
 import ProtectedApp from "./ProtectedApp";
+import ProtectedPage from "./ProtectedPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,16 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     Component: RegisterPage,
+  },
+  {
+    path: "/manager",
+    Component: ProtectedPage,
+    children: [
+      {
+        index: true,
+        Component: ManagerPage,
+      },
+    ],
   },
   {
     path: "/",
@@ -53,10 +64,6 @@ export const router = createBrowserRouter([
       {
         path: "disposal-items",
         Component: DisposalItemsPage,
-      },
-      {
-        path: "manager",
-        Component: ManagerPage,
       },
       {
         path: "menus",
