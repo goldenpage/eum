@@ -111,13 +111,6 @@ export function useSalesRecords() {
     setPage(0);
   };
 
-  const handleMovePage = (nextPage: number) => {
-    if (nextPage < 0 || nextPage >= totalPages || nextPage === page) {
-      return;
-    }
-    setPage(nextPage);
-  };
-
   const handleDelete = async (saleId: string) => {
     if (!window.confirm("판매 기록을 삭제하시겠습니까?")) {
       return;
