@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import client from "../api/client";
-import "./PurchasePage.css";
+import "../pages/css/PurchasePage.css";
 
 interface PurchaseItem {
   purchaseId: number;

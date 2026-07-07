@@ -1,7 +1,7 @@
 import { FilterBar } from "../components/FilterBar";
 import { DisposalTable } from "../features/disposals/DisposalTable";
 import useDisposalItems from "../hooks/useDisposalItems";
-import "./DisposalItemsPage.css";
+import "../pages/css/DisposalItemsPage.css";
 
 function DisposalItemsPage() {
   const {

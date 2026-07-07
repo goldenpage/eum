@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import client from "../api/client";
-import "./AddMenuPage.css";
+import "../pages/css/AddMenuPage.css";
 import Button from "../components/Button";
 import Input from "../components/Input";
 
@@ -297,7 +297,7 @@ function AddMenuPage() {
     pendingList.find((m) => m.menuName === selectedMenuName) ?? null;
 
   return (
-    <div className="container">
+    <div className="menu-page">
       <div className="main">
         <h1>메뉴 입력</h1>
 

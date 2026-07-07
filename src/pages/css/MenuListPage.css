@@ -1,4 +1,4 @@
-@import "../components/css/Input.css";
+@import "../../components/css/Input.css";
 
 .container:has(> .layout__sidebar) {
   display: flex;
@@ -76,7 +76,7 @@
   }
 
   .menu-list-table {
-    min-width: 520px;
+    min-width: 350px;
     font-size: 13px;
   }
 
