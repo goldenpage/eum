@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
 //import type { PwUpdateRequest } from "../types/dto/PwUpdateDto";
-import "./PwUpdatePage.css";
+import "./css/PwUpdatePage.css";
 
 // 비밀번호 규칙 : 영문 숫자 특수문자 혼합 4~8자
 const PW_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,8}$/;
