@@ -97,32 +97,18 @@ ul {
   height: calc(100vh - 260px);
   min-height: 320px;
   padding: 15px;
-  overflow: hidden;
+  overflow: auto;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
 }
 
 .list_container {
-  display: block;
   width: 100%;
-  max-height: 100%;
-  overflow: auto;
+  min-width: 900px;
   border-collapse: collapse;
   font-size: 14px;
   line-height: 1.4;
-}
-
-.list_container thead,
-.list_container_tbody,
-.list_container tr {
-  display: table;
-  width: 100%;
-  table-layout: fixed;
-}
-
-.list_container_tbody {
-  display: block;
 }
 
 .list_container th,
@@ -130,6 +116,9 @@ ul {
   padding: 12px 10px;
   border-bottom: 1px solid #e2e8f0;
   text-align: center;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .list_container th {

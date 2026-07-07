@@ -1,9 +1,6 @@
-import Button from "./Button";
-import Input from "./Input";
-import type {
-  ExpNoticeResponse,
-  StockNoticeResponse,
-} from "../features/notice/api";
+import Button from "../../../components/Button";
+import Input from "../../../components/Input";
+import type { ExpNoticeResponse, StockNoticeResponse } from "../../notice/api";
 
 interface NoticeSettingBoxProps {
   expSetting: ExpNoticeResponse | null;
