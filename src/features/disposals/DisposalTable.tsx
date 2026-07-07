@@ -1,10 +1,7 @@
 import { useState } from "react";
-import {
-  DISPOSAL_REASONS,
-  normalizeReason,
-} from "../features/disposals/constants";
-import type { DisposalItem } from "../features/disposals/api";
-import { formatGram, formatWon } from "../utils/format";
+import { DISPOSAL_REASONS, normalizeReason } from "./constants";
+import type { DisposalItem } from "./api";
+import { formatGram, formatWon } from "../../utils/format";
 
 interface DisposalTableProps {
   items: DisposalItem[];
