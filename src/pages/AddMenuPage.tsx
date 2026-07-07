@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 // import axios from "axios";
 import client from "../api/client";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
 import "./AddMenuPage.css";
 import Button from "../components/Button";
 import Input from "../components/Input";

@@ -4,6 +4,7 @@ import client, { AT } from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import "./LoginPage.css";
+import { isAdminUser, useUserStore } from "../store/userStore";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const fetchUser = useUserStore((state) => state.fetchUser);
+  const clearUser = useUserStore((state) => state.clearUser);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault(); // 폼 기본동작(새로고침) 막기(필수)
@@ -26,7 +29,12 @@ function LoginPage() {
       if (!token) throw new Error("토큰 없음");
 
       sessionStorage.setItem(AT, token); // AT토큰 sessionStorage저장
-      navigate("/foodmaterials"); // 성공 후 이동(로그인 뒤에 보여질 페이지 권한에 따라 다름)
+      clearUser();
+
+      const user = await fetchUser();
+      navigate(isAdminUser(user) ? "/manager" : "/foodmaterials", {
+        replace: true,
+      });
     } catch {
       setError("아이디 또는 비밀번호를 확인해주세요");
     } finally {
