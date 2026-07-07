@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { logout } from "../api/auth";
 import { getUserDisplayName, useUserStore } from "../store/userStore";
+import StockNotice from "./StockNotice";
 import "./css/Header.css";
 
 interface HeaderProps {
@@ -36,6 +37,9 @@ function Header({ onMenuClick }: HeaderProps) {
 
       <ul className="profile desktop-profile">
         <li>{userName}</li>
+        <li className="stock-notice-li">
+          <StockNotice />
+        </li>
         <li>
           <Link to="/notice">알림</Link>
         </li>
@@ -45,6 +49,10 @@ function Header({ onMenuClick }: HeaderProps) {
           </button>
         </li>
       </ul>
+
+      <div className="mobile-stock-notice">
+        <StockNotice />
+      </div>
 
       <div className="profile-menu mobile-profile-menu">
         <button
