@@ -380,8 +380,8 @@ function FoodMaterialsPage() {
   }
 
   return (
-    <div className="food-materials-page">
-      <main className="food-materials-main">
+    <div className="container">
+      <main className="main">
         <h1>식자재 조회</h1>
         <div className="food-materials-toolbar">
           <Input

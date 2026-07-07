@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import client from "../api/client";
-import "./purchasePage.css";
+import "./PurchasePage.css";
 
 interface PurchaseItem {
   purchaseId: number;
@@ -36,7 +36,7 @@ function PuchasePage() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="purchase_page">
       <div className="main">
         <h1>구매 내역</h1>
 
