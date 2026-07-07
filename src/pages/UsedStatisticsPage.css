@@ -23,3 +23,52 @@
   align-items: flex-end;
   gap: 10px;
 }
+.used-statistics-guide-message {
+  margin-top: 20px;
+}
+
+.used-statistics-summary {
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid white;
+  border-radius: 8px;
+}
+
+.used-statistics-summary p {
+  font-size: 24px;
+  font-weight: bold;
+}
+.used-statistics-section {
+  overflow-x: auto;
+}
+
+.used-statistics-table {
+  width: 100%;
+  min-width: 620px;
+  border-collapse: collapse;
+}
+
+.used-statistics-table th,
+.used-statistics-table td {
+  padding: 8px;
+  border: 1px solid white;
+  text-align: center;
+}
+
+.used-statistics-chart-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 20px;
+}
+
+.used-statistics-chart-wrap {
+  position: relative;
+  height: 280px;
+  margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .used-statistics-chart-row {
+    grid-template-columns: 1fr;
+  }
+}
