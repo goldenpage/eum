@@ -1,0 +1,41 @@
+input[type="text"],
+input[type="number"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="month"] {
+  display: block;
+  max-width: 100%;
+  padding: 7px 10px;
+  border: 1px solid grey;
+  border-radius: 4px;
+  background: white;
+  color: darkblue;
+  line-height: 1.2;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus {
+  border-color: blue;
+  outline: 2px solid rgba(37, 99, 235, 0.18);
+  outline-offset: 1px;
+}
+
+input::placeholder {
+  color: grey;
+}
+
+@media (max-width: 480px) {
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="email"],
+  input[type="date"],
+  input[type="month"] {
+    min-height: 36px;
+  }
+}

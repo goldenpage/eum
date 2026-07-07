@@ -150,8 +150,8 @@ function MenuListPage() {
   }
 
   return (
-    <div className="menu-list-page">
-      <main className="menu-list-main">
+    <div className="container">
+      <main className="main">
         <h1>메뉴 조회</h1>
 
         {errorMessage && <p role="alert">{errorMessage}</p>}
