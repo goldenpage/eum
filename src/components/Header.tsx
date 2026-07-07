@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { logout } from "../api/auth";
-import { useUserStore } from "../store/userStore";
+import { getUserDisplayName, useUserStore } from "../store/userStore";
 import "./css/Header.css";
 
 interface HeaderProps {
@@ -11,6 +11,7 @@ interface HeaderProps {
 function Header({ onMenuClick }: HeaderProps) {
   const navigate = useNavigate();
   const user = useUserStore((state) => state.user);
+  const userName = getUserDisplayName(user);
   const clearUser = useUserStore((state) => state.clearUser);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -34,7 +35,7 @@ function Header({ onMenuClick }: HeaderProps) {
       <div className="header-spacer" />
 
       <ul className="profile desktop-profile">
-        <li>{user?.name ?? user?.username ?? "사용자"}</li>
+        <li>{userName}</li>
         <li>
           <Link to="/notice">알림</Link>
         </li>
@@ -52,7 +53,7 @@ function Header({ onMenuClick }: HeaderProps) {
           onClick={() => setProfileOpen((open) => !open)}
           aria-expanded={profileOpen}
         >
-          <span>{user?.name ?? user?.username ?? "사용자"}</span>
+          <span>{userName}</span>
           <span aria-hidden="true">▾</span>
         </button>
 

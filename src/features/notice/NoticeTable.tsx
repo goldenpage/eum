@@ -43,7 +43,7 @@ function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
                 key={getNoticeKey(notice)}
                 className={
                   notice.noticeType === "stock" && notice.readYn === "Y"
-                    ? "notice-read-row"
+                    ? "notice-page__read-row"
                     : undefined
                 }
                 onClick={() => onRead(notice)}

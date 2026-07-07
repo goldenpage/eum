@@ -15,19 +15,23 @@
   gap: 10px;
 }
 
-.disposal-stats-page .content_item {
+.disposal-stats-page .disposal-stats-content {
   display: grid;
   grid-template-columns: minmax(280px, 0.8fr) minmax(420px, 1.2fr);
   gap: 16px;
   width: 100%;
+  height: auto;
+  min-height: 0;
+  max-height: none;
   padding: 16px;
   box-sizing: border-box;
   align-items: flex-start;
+  overflow: visible;
   background-color: #f8fafc;
   border: 1px solid #e2e8f0;
 }
 
-.disposal-stats-page .content_item > div {
+.disposal-stats-page .disposal-stats-content > div {
   flex: 1;
   min-width: 0;
   padding: 16px;
@@ -106,16 +110,21 @@
 }
 
 @media (max-width: 1200px) {
-  .disposal-stats-page .content_item {
+  .disposal-stats-page .disposal-stats-content {
     grid-template-columns: 1fr;
   }
 
-  .disposal-stats-page .content_item > div {
+  .disposal-stats-page .disposal-stats-content > div {
     width: 100%;
   }
 }
 
 @media (max-width: 768px) {
+  .disposal-stats-page .disposal-stats-content {
+    height: auto;
+    overflow: visible;
+  }
+
   .disposal-stats-page .top_area {
     align-items: flex-start;
     flex-direction: column;
