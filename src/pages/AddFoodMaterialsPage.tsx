@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import client from "../api/client";
 import Input from "../components/Input";
-import "./AddFoodMaterialPage.css";
+import "../pages/css/AddFoodMaterialPage.css";
 
 interface FoodCategoryItem {
   foodCategoryId: string;

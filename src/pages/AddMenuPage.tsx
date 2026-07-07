@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import client from "../api/client";
-import "./AddMenuPage.css";
+import "../pages/css/AddMenuPage.css";
 import Button from "../components/Button";
 import Input from "../components/Input";
 

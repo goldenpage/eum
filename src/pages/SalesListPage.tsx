@@ -4,7 +4,7 @@ import { SalesFilterBar } from "../features/sales/SalesFilterBar";
 import { SalesTable } from "../features/sales/SalesTable";
 import { useSalesRecords } from "../hooks/useSalesRecords";
 import { formatWon } from "../utils/format";
-import "./SalesListPage.css";
+import "../pages/css/SalesListPage.css";
 
 function SalesListPage() {
   const {

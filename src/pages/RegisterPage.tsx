@@ -3,7 +3,7 @@ import client from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { useState } from "react";
-import "./RegisterPage.css";
+import "../pages/css/RegisterPage.css";
 
 function RegisterPage() {
   const navigate = useNavigate();

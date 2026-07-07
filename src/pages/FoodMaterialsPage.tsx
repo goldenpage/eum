@@ -5,7 +5,7 @@ import type {
   FoodMaterialPageResponse,
   FoodMaterialDeleteResponse,
 } from "../types/dto/FoodMaterialDto";
-import "./FoodMaterialsPage.css";
+import "../pages/css/FoodMaterialsPage.css";
 import client from "../api/client";
 import Button from "../components/Button";
 

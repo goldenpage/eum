@@ -8,7 +8,7 @@ import type {
   ExpenseRankDto,
   MonthlyExpenseDto,
 } from "../types/dto/StatisticsDto.ts";
-import "./UsedStatisticsPage.css";
+import "../pages/css/UsedStatisticsPage.css";
 
 function getCurrentMonth() {
   const today = new Date();
