@@ -7,12 +7,14 @@ interface DisposalTableProps {
   items: DisposalItem[];
   isLoading: boolean;
   onReasonChange: (disposalId: string, reason: string) => Promise<void>;
+  onScroll?: (event: React.UIEvent<HTMLDivElement>) => void;
 }
 
 export function DisposalTable({
   items,
   isLoading,
   onReasonChange,
+  onScroll,
 }: DisposalTableProps) {
   const [pendingId, setPendingId] = useState<string | null>(null);
 
@@ -26,7 +28,7 @@ export function DisposalTable({
   };
 
   return (
-    <div className="tableScroller">
+    <div className="tableScroller" onScroll={onScroll}>
       <table className="listTable">
         <thead>
           <tr>

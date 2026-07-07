@@ -1,4 +1,3 @@
-import { Pagination } from "../components/Pagination";
 import { FilterBar } from "../components/FilterBar";
 import { DisposalTable } from "../features/disposals/DisposalTable";
 import useDisposalItems from "../hooks/useDisposalItems";
@@ -9,16 +8,15 @@ function DisposalItemsPage() {
     filters,
     setFilters,
     items,
-    totalPages,
-    page,
     isLoading,
+    isLoadingMore,
     errorMessage,
     categories,
     reasons,
     handleSearch,
     handleReset,
-    handleMovePage,
     handleReasonChange,
+    handleTableScroll,
   } = useDisposalItems();
 
   return (
@@ -45,13 +43,11 @@ function DisposalItemsPage() {
             items={items}
             isLoading={isLoading}
             onReasonChange={handleReasonChange}
+            onScroll={handleTableScroll}
           />
-
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            onMove={handleMovePage}
-          />
+          {isLoadingMore && (
+            <div className="loadingText">다음 목록을 불러오는 중입니다.</div>
+          )}
         </div>
       </div>
     </div>
