@@ -18,7 +18,7 @@
 
 .tableScroller {
   width: 100%;
-  height: 420px;
+  height: 220px;
   overflow: auto;
   border: 1px solid white;
 }
@@ -96,6 +96,7 @@
   .table_scroll,
   .tableScroller {
     width: 100%;
+    height: 260px;
     overflow-x: auto;
   }
 

@@ -28,6 +28,7 @@ export function useSalesRecords() {
   const [totalPages, setTotalPages] = useState(1);
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [editingRecord, setEditingRecord] = useState<SalesRecord | null>(null);
   const categories = useMemo(
@@ -91,11 +92,11 @@ export function useSalesRecords() {
   );
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      void fetchRecords(page, appliedFilters, isSearching);
+      void fetchRecords(0, appliedFilters, isSearching);
     }, 0);
 
     return () => window.clearTimeout(timer);
-  }, [page, appliedFilters, isSearching, fetchRecords]);
+  }, [appliedFilters, isSearching, fetchRecords]);
 
   const handleSearch = () => {
     setAppliedFilters(filters);
@@ -144,6 +145,48 @@ export function useSalesRecords() {
     await fetchRecords(page, appliedFilters, isSearching);
   };
 
+  const loadNextRecords = async () => {
+    if (isLoading || isLoadingMore) return;
+    if (page + 1 >= totalPages) return;
+
+    setIsLoadingMore(true);
+
+    try {
+      const nextPage = page + 1;
+      const data = isSearching
+        ? await searchSales({
+            ...appliedFilters,
+            page: nextPage,
+            size: PAGE_SIZE,
+          })
+        : await getSalesList(nextPage, PAGE_SIZE);
+
+      setRecords((previousRecords) => [
+        ...previousRecords,
+        ...(data.content ?? []),
+      ]);
+      setPage(data.number);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "판매 기록을 불러오지 못했습니다.",
+      );
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+
+  const handleTableScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+    const isNearBottom = scrollTop + clientHeight >= scrollHeight - 40;
+
+    if (isNearBottom) {
+      void loadNextRecords();
+    }
+  };
+
   return {
     filters,
     setFilters,
@@ -151,6 +194,7 @@ export function useSalesRecords() {
     totalPages,
     page,
     isLoading,
+    isLoadingMore,
     errorMessage,
     categories,
     payments,
@@ -159,10 +203,10 @@ export function useSalesRecords() {
     editingRecord,
     handleSearch,
     handleReset,
-    handleMovePage,
     handleDelete,
     handleOpenEdit,
     handleCloseEdit,
     handleSaveEdit,
+    handleTableScroll,
   };
 }
