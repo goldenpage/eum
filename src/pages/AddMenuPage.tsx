@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import axios from "axios";
 import client from "../api/client";
 import "./AddMenuPage.css";
 import Button from "../components/Button";
@@ -47,11 +46,6 @@ interface PendingMenu {
   ingredients: IngredientItem[];
 }
 
-// interface Msg {
-//   text: string;
-//   color: "green" | "red";
-// }
-
 interface Notice {
   text: string;
   type: "success" | "error";
@@ -61,7 +55,6 @@ function AddMenuPage() {
   const [categoryList, setCategoryList] = useState<MenuCategoryItem[]>([]);
   const [newCategory, setNewCategory] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
-  // const [categoryMsg, setCategoryMsg] = useState<Msg | null>(null);
 
   const [foodMaterialList, setFoodMaterialList] = useState<
     FoodMaterialListItem[]
@@ -321,10 +314,8 @@ function AddMenuPage() {
                   <Input
                     text=""
                     inputType="text"
-                    // id="getMenuCategory"
                     placeholder="카테고리 입력"
                     value={newCategory}
-                    // onChange={(e) => setNewCategory(e.target.value)}
                     onChange={(value) => setNewCategory(value)}
                   />
                   <Button type="button" onClick={addCategoryAjax}>
@@ -371,24 +362,14 @@ function AddMenuPage() {
               <div id="categoryMsg"></div>
             </div>
 
-            {/* <Input
-              inputType="hidden"
-              // id="selectedCategoryId"
-              name="_dummy"
-              value={selectedCategoryId}
-              readOnly
-            /> */}
-
             <div className="input_section">
               <div className="input_row">
                 <label>메뉴명 입력 *</label>
                 <Input
                   text=""
                   inputType="text"
-                  // id="inputMenuName"
                   placeholder="치즈김밥"
                   value={menuName}
-                  // onChange={(e) => setMenuName(e.target.value)}
                   onChange={(value) => setMenuName(value)}
                 />
               </div>
@@ -398,14 +379,12 @@ function AddMenuPage() {
                 <Input
                   text=""
                   inputType="number"
-                  // id="inputMenuPrice"
                   placeholder="4000"
                   min={0}
                   value={menuPrice}
-                  // onChange={(e) => setMenuPrice(e.target.value)}
                   onChange={(value) => setMenuPrice(value)}
                 />{" "}
-                원
+                <span className="unit_text">원</span>
               </div>
             </div>
 
