@@ -1,4 +1,4 @@
-import type { NoticeItem } from "../../notice/api";
+import type { NoticeItem } from "./api";
 
 interface NoticeTableProps {
   notices: NoticeItem[];

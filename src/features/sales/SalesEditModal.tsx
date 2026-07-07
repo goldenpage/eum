@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { SalesRecord } from "../../sales/api";
-import Input from "../../../components/Input";
-import Button from "../../../components/Button";
+import type { SalesRecord } from "./api";
+import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 interface SalesEditModalProps {
   record: SalesRecord | null;

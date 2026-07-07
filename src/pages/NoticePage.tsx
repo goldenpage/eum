@@ -1,9 +1,7 @@
 import Button from "../components/Button";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import NoticeSettingBox from "../features/components/notice/NoticeSettingBox";
-import NoticeSummaryBox from "../features/components/notice/NoticeSummaryBox";
-import NoticeTable from "../features/components/notice/NoticeTable";
+import NoticeSettingBox from "../features/notice/NoticeSettingBox";
+import NoticeSummaryBox from "../features/notice/NoticeSummaryBox";
+import NoticeTable from "../features/notice/NoticeTable";
 import { useNotice } from "../hooks/useNotice";
 import "./NoticePage.css";
 

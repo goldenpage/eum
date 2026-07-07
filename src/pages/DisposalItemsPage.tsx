@@ -1,6 +1,6 @@
 import { Pagination } from "../components/Pagination";
 import { FilterBar } from "../components/FilterBar";
-import { DisposalTable } from "../features/components/disposals/DisposalTable";
+import { DisposalTable } from "../features/disposals/DisposalTable";
 import useDisposalItems from "../hooks/useDisposalItems";
 import "./DisposalItemsPage.css";
 

@@ -1,6 +1,6 @@
-import type { SalesRecord } from "../../sales/api";
-import Button from "../../../components/Button";
-import { formatWon } from "../../../utils/format";
+import type { SalesRecord } from "./api";
+import Button from "../../components/Button";
+import { formatWon } from "../../utils/format";
 
 interface SalesTableProps {
   records: SalesRecord[];

@@ -1,7 +1,7 @@
 import { Pagination } from "../components/Pagination";
-import { SalesEditModal } from "../features/components/saleslist/SalesEditModal";
-import { SalesFilterBar } from "../features/components/saleslist/SalesFilterBar";
-import { SalesTable } from "../features/components/saleslist/SalesTable";
+import { SalesEditModal } from "../features/sales/SalesEditModal";
+import { SalesFilterBar } from "../features/sales/SalesFilterBar";
+import { SalesTable } from "../features/sales/SalesTable";
 import { useSalesRecords } from "../hooks/useSalesRecords";
 import { formatWon } from "../utils/format";
 import "./SalesListPage.css";

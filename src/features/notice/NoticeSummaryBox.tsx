@@ -1,4 +1,4 @@
-import type { NoticeSummary } from "../../notice/api";
+import type { NoticeSummary } from "./api";
 
 interface NoticeSummaryBoxProps {
   summary: NoticeSummary;
