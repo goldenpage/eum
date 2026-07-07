@@ -1,4 +1,5 @@
 import { type CSSProperties } from "react";
+import "./Button.css";
 
 interface ButtonProps {
   type?: "button" | "submit";
@@ -8,17 +9,19 @@ interface ButtonProps {
   value?: string;
   // data-status: string;
   style?: CSSProperties;
-  children: string; // 버튼 안에 들어가는 값
+  children: string;
 }
 
 function Button(props: ButtonProps) {
   const { type, onClick, id, className, value, style, children } = props;
+  const mergedClassName = className ? `btn ${className}` : "btn";
+
   return (
     <button
       type={type}
       onClick={onClick}
       id={id}
-      className={className}
+      className={mergedClassName}
       value={value}
       style={style}
     >
@@ -28,17 +31,3 @@ function Button(props: ButtonProps) {
 }
 
 export default Button;
-
-/* 버튼 작업 예시
-const App = () => {
-  const onClickBtn = ()=>{
-    console.log("1");
-  }
-  return <div>
-    <Button type={"button"} onClick={onClickBtn} id={"searchBtn"}  className="removebtn" value="test" style={{width:"100px"}} >
-      rdsgdgsfd
-      </Button>
-  
-  </div>;
-}
-*/
