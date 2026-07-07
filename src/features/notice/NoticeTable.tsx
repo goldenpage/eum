@@ -16,7 +16,7 @@ function getNoticeKey(notice: NoticeItem) {
 
 function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
   return (
-    <div className="content-item">
+    <div className="content_item">
       <table className="list_container">
         <thead>
           <tr>

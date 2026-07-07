@@ -115,7 +115,7 @@
   gap: 8px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .container {
     display: block;
     height: auto;
@@ -124,9 +124,44 @@
 
   .main {
     width: 100%;
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .sales-filter-area {
+    display: block;
+    padding: 12px;
+  }
+
+  .sales-filter-input,
+  .sales-filter-select,
+  .sales-filter-button {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .sales-summary-box {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .sales-table-wrap {
+    width: 100%;
+    overflow-x: auto;
   }
 
   .sales-table {
     min-width: 1100px;
+  }
+
+  .pagination {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  .sales-modal {
+    width: calc(100% - 24px);
+    max-width: 320px;
   }
 }
