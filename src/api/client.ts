@@ -1,4 +1,5 @@
 import axios, { type InternalAxiosRequestConfig } from "axios";
+import { _rlookupByKey } from "chart.js/helpers";
 
 export const AT = "accessToken";
 
@@ -34,7 +35,9 @@ client.interceptors.response.use(
       original._retry = true;
       try {
         const r = await client.post("/api/auth/reissue");
-        sessionStorage.setItem(AT, r.headers["authorization"]);
+        const newToken = r.headers["authorization"];
+        sessionStorage.setItem(AT, newToken);
+        original.headers.Authorization = newToken;
         return client(original);
       } catch (e) {
         sessionStorage.removeItem(AT);
