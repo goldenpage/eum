@@ -216,7 +216,7 @@ function RevenueStatisticsPage() {
   }
 
   return (
-    <div className="container">
+    <div className="revenue_page">
       <div className="main">
         <div className="top_area">
           <h1>매출통계</h1>

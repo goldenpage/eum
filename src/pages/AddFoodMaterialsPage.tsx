@@ -317,7 +317,7 @@ function AddFoodMaterialsPage() {
   }
 
   return (
-    <div className="container">
+    <div className="fm_page">
       <div className="main">
         <h1>식자재 입력</h1>
 
@@ -334,8 +334,6 @@ function AddFoodMaterialsPage() {
                   <Input
                     text=""
                     inputType="text"
-                    // id="getFoodCategory"
-                    // name="foodCategory"
                     placeholder="카테고리 입력"
                     value={newCategory}
                     onChange={(value) => setNewCategory(value)}
@@ -381,130 +379,144 @@ function AddFoodMaterialsPage() {
             </div>
 
             <div className="input_section">
-              <div className="input_row">
-                <label>식자재명 입력 *</label>
-                <Input
-                  text=""
-                  inputType="text"
-                  // id="foodMaterialName"
-                  placeholder="단무지"
-                  value={foodMaterialName}
-                  onChange={(value) => setFoodMaterialName(value)}
-                />
+              <div className="input_fields">
+                <div className="field_cell">
+                  <label>식자재명 입력 *</label>
+                  <Input
+                    text=""
+                    inputType="text"
+                    placeholder="단무지"
+                    value={foodMaterialName}
+                    onChange={(value) => setFoodMaterialName(value)}
+                  />
+                </div>
+
+                <div className="field_cell">
+                  <label>타입 *</label>
+                  <select
+                    id="foodMaterialType"
+                    value={foodMaterialType}
+                    onChange={(e) => setFoodMaterialType(e.target.value)}
+                  >
+                    <option value="">선택</option>
+                    <option value="고체">고체</option>
+                    <option value="액체">액체</option>
+                    <option value="기타">기타</option>
+                  </select>
+                </div>
               </div>
 
               <div className="input_fields">
-                <label>총 중량</label>
-                <input
-                  type="number"
-                  id="totalWeight"
-                  placeholder="자동 계산"
-                  readOnly
-                  value={totalWeight}
-                  className="readonly_field"
-                />
+                <div className="field_cell">
+                  <label>총 중량</label>
+                  <input
+                    type="number"
+                    id="totalWeight"
+                    placeholder="자동 계산"
+                    readOnly
+                    value={totalWeight}
+                    className="readonly_field"
+                  />
+                </div>
 
-                <label>식자재중량(개당, 단위:g) *</label>
-                <Input
-                  text=""
-                  inputType="number"
-                  // id="foodMaterialWeight"
-                  placeholder="1500"
-                  min={0}
-                  value={foodMaterialWeight}
-                  onChange={(value) => setFoodMaterialWeight(value)}
-                />
-
-                <select
-                  id="inputUnit"
-                  value={inputUnit}
-                  onChange={(e) => setInputUnit(e.target.value)}
-                >
-                  <option value="g">g</option>
-                  <option value="kg">kg</option>
-                  <option value="ml">ml</option>
-                  <option value="L">L</option>
-                </select>
+                <div className="field_cell">
+                  <label>식자재중량(개당, 단위:g) *</label>
+                  <div className="weight_with_unit">
+                    <Input
+                      text=""
+                      inputType="number"
+                      placeholder="1500"
+                      min={0}
+                      value={foodMaterialWeight}
+                      onChange={(value) => setFoodMaterialWeight(value)}
+                    />
+                    <select
+                      id="inputUnit"
+                      value={inputUnit}
+                      onChange={(e) => setInputUnit(e.target.value)}
+                    >
+                      <option value="g">g</option>
+                      <option value="kg">kg</option>
+                      <option value="ml">ml</option>
+                      <option value="L">L</option>
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div className="input_fields">
-                <label>총 가격</label>
-                <input
-                  type="number"
-                  id="totalPrice"
-                  placeholder="자동 계산"
-                  readOnly
-                  value={totalPrice}
-                  className="readonly_field"
-                />
+                <div className="field_cell">
+                  <label>총 가격</label>
+                  <input
+                    type="number"
+                    id="totalPrice"
+                    placeholder="자동 계산"
+                    readOnly
+                    value={totalPrice}
+                    className="readonly_field"
+                  />
+                </div>
 
-                <label>가격(개당) *</label>
-                <Input
-                  text=""
-                  inputType="number"
-                  // id="foodMaterialPrice"
-                  placeholder="10000"
-                  min={0}
-                  value={foodMaterialPrice}
-                  onChange={(value) => setFoodMaterialPrice(value)}
-                />
+                <div className="field_cell">
+                  <label>가격(개당) *</label>
+                  <Input
+                    text=""
+                    inputType="number"
+                    placeholder="10000"
+                    min={0}
+                    value={foodMaterialPrice}
+                    onChange={(value) => setFoodMaterialPrice(value)}
+                  />
+                </div>
               </div>
 
               <div className="input_fields">
-                <label>구매 수량 *</label>
-                <Input
-                  text=""
-                  inputType="number"
-                  // id="foodMaterialCount"
-                  placeholder="5"
-                  min={0}
-                  value={foodMaterialCount}
-                  onChange={(value) => setFoodMaterialCount(value)}
-                />
+                <div className="field_cell">
+                  <label>구매 수량 *</label>
+                  <Input
+                    text=""
+                    inputType="number"
+                    placeholder="5"
+                    min={0}
+                    value={foodMaterialCount}
+                    onChange={(value) => setFoodMaterialCount(value)}
+                  />
+                </div>
 
-                <label>타입 *</label>
-                <select
-                  id="foodMaterialType"
-                  value={foodMaterialType}
-                  onChange={(e) => setFoodMaterialType(e.target.value)}
-                >
-                  <option value="">선택</option>
-                  <option value="고체">고체</option>
-                  <option value="액체">액체</option>
-                  <option value="기타">기타</option>
-                </select>
-
-                <label>구입처 *</label>
-                <Input
-                  text=""
-                  inputType="text"
-                  // id="vender"
-                  placeholder="하나로마트"
-                  value={vender}
-                  onChange={(value) => setVender(value)}
-                />
+                <div className="field_cell">
+                  <label>구입처 *</label>
+                  <Input
+                    text=""
+                    inputType="text"
+                    placeholder="하나로마트"
+                    value={vender}
+                    onChange={(value) => setVender(value)}
+                  />
+                </div>
               </div>
 
               <div className="input_fields">
-                <label>매입일자</label>
-                <Input
-                  text=""
-                  inputType="date"
-                  // id="incomeDate"
-                  value={incomeDate}
-                  onChange={(value) => setIncomeDate(value)}
-                />
-                <span className="auto_date_hint"></span>
+                <div className="field_cell">
+                  <label>매입일자</label>
+                  <Input
+                    text=""
+                    inputType="date"
+                    value={incomeDate}
+                    onChange={(value) => setIncomeDate(value)}
+                  />
+                  <span className="auto_date_hint"></span>
+                </div>
 
-                <label>유통기한 *</label>
-                <Input
-                  text=""
-                  inputType="date"
-                  // id="expirationDate"
-                  value={expirationDate}
-                  onChange={(value) => setExpirationDate(value)}
-                />
-                <span>&#10003;</span>
+                <div className="field_cell">
+                  <label>유통기한 *</label>
+                  <Input
+                    text=""
+                    inputType="date"
+                    value={expirationDate}
+                    onChange={(value) => setExpirationDate(value)}
+                  />
+                  <span>&#10003;</span>
+                </div>
               </div>
 
               <div className="register_btn">
@@ -522,7 +534,6 @@ function AddFoodMaterialsPage() {
                 <Input
                   text=""
                   inputType="text"
-                  // id="searchInput"
                   placeholder="단무지"
                   value={searchInput}
                   onChange={(value) => setSearchInput(value)}
