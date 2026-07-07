@@ -3,13 +3,8 @@ import { Chart } from "chart.js/auto";
 import type { TooltipItem } from "chart.js/auto";
 import client from "../api/client";
 import Button from "../components/Button";
-import Header from "../components/Header";
 import Input from "../components/Input";
 import Sidebar from "../components/Sidebar";
-import type {
-  ExpenseRankDto,
-  MonthlyExpenseDto,
-} from "../types/dto/StatisticsDto.ts";
 import "./UsedStatisticsPage.css";
 
 function getCurrentMonth() {
