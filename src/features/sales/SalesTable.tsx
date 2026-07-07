@@ -7,6 +7,7 @@ interface SalesTableProps {
   isLoading: boolean;
   onEdit: (saleId: string) => void;
   onDelete: (saleId: string) => void;
+  onScroll: (event: React.UIEvent<HTMLDivElement>) => void;
 }
 
 export function SalesTable({
@@ -14,9 +15,10 @@ export function SalesTable({
   isLoading,
   onEdit,
   onDelete,
+  onScroll,
 }: SalesTableProps) {
   return (
-    <div className="sales-table-wrap">
+    <div className="sales-table-wrap" onScroll={onScroll}>
       <table className="sales-table">
         <thead>
           <tr>

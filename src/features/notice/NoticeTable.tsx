@@ -16,8 +16,8 @@ function getNoticeKey(notice: NoticeItem) {
 
 function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
   return (
-    <div className="notice-page__content">
-      <table className="notice-page__table">
+    <div className="content_item">
+      <table className="list_container">
         <thead>
           <tr>
             <th>알림 유형</th>
