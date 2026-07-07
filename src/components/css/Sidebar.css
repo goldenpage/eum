@@ -7,6 +7,11 @@
   border-right: 1px solid #d9e2ec;
 }
 
+.sidebar-backdrop,
+.sideMenu-close {
+  display: none;
+}
+
 .sideMenu > a:first-child {
   display: block;
   width: 200px;
@@ -54,4 +59,42 @@
 .sideMenu > ul > li:hover {
   background-color: #e0f2fe;
   color: #0369a1;
+}
+
+@media (max-width: 768px) {
+  .sideMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1100;
+    width: 280px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+  }
+
+  .sideMenu-close {
+    display: inline-flex;
+    margin-bottom: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #fff;
+    padding: 6px 10px;
+  }
+
+  .sideMenu.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    display: none;
+  }
+
+  .sidebar-backdrop.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.35);
+  }
 }
