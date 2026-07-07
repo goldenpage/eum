@@ -5,6 +5,7 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import "../pages/css/LoginPage.css";
 import { isAdminUser, useUserStore } from "../store/userStore";
+import image from "../assets/image.svg";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -46,7 +47,11 @@ function LoginPage() {
     <>
       <div className="login-wrap">
         <form className="login-box" onSubmit={handleSubmit}>
-          <h1 className="main-title">로그인</h1>
+          <img
+            src={image}
+            alt="logo"
+            style={{ width: "325px", height: "225px" }}
+          />
 
           <div className="section-title">아이디</div>
           <Input
