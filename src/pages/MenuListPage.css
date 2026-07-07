@@ -1,14 +1,23 @@
-.container {
+@import "../components/css/Input.css";
+
+.container:has(> .layout__sidebar) {
   display: flex;
+  gap: 30px;
   min-height: 100vh;
+  width: 100%;
 }
 
-/* .menu-list-sidebar {
-    flex: 0 0 170px;
-} */
-
-.main {
+.layout__main > .container {
+  display: block;
   width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: auto;
+}
+
+.layout__main > .container > .main {
+  width: 100%;
+  min-width: 0;
 }
 
 .menu-list-content {
@@ -21,18 +30,21 @@
 .menu-detail-panel {
   flex: 1;
   min-width: 0;
+  overflow-x: auto;
 }
 
 .menu-list-table {
   width: 100%;
+  min-width: 480px;
   border-collapse: collapse;
 }
 
 .menu-list-table th,
 .menu-list-table td {
   padding: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid white;
   text-align: center;
+  white-space: nowrap;
 }
 
 .menu-list-row--selected {
@@ -52,22 +64,46 @@
   margin-top: 20px;
 }
 
-@media (max-width: 900px) {
-  .menu-list-page {
-    flex-direction: column;
-  }
-
-  .menu-list-sidebar {
-    flex: none;
-    width: 100%;
-  }
-
+@media (max-width: 480px) {
   .menu-list-content {
     flex-direction: column;
+    gap: 16px;
   }
 
   .menu-list-panel,
   .menu-detail-panel {
     width: 100%;
+  }
+
+  .menu-list-table {
+    min-width: 520px;
+    font-size: 13px;
+  }
+
+  .menu-sale-form {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .menu-sale-form > div {
+    width: 100%;
+  }
+
+  .menu-sale-form > div:nth-child(2) input {
+    width: 100% !important;
+    height: 36px !important;
+  }
+
+  .menu-sale-form > button {
+    width: 100%;
+    min-height: 36px;
+  }
+
+  .menu-sale-form label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 12px;
   }
 }
