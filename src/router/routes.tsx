@@ -81,7 +81,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "sales-list",
-        // Component: SaleListPage,
+        Component: SaleListPage,
       },
       {
         path: "revenuestatistics",
