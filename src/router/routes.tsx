@@ -10,7 +10,6 @@ import MenuListPage from "../pages/MenuListPage";
 import ManagerPage from "../pages/ManagerPage";
 import RegisterPage from "../pages/RegisterPage";
 import DisposalItemsPage from "../pages/DisposalItemsPage";
-import AddSalesPage from "../pages/AddSalesPage";
 import AddMenuPage from "../pages/AddMenuPage";
 import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
@@ -50,10 +49,6 @@ export const router = createBrowserRouter([
       {
         path: "menuadd",
         Component: AddMenuPage,
-      },
-      {
-        path: "addsales",
-        Component: AddSalesPage,
       },
       {
         path: "disposal-items",
