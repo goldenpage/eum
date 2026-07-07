@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import client from "../api/client";
-import Sidebar from "../components/Sidebar";
-import Header from "../components/Header";
 import "./purchasePage.css";
 
 interface PurchaseItem {

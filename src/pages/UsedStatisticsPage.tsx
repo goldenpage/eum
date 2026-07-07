@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Button from "../components/Button";
-import Header from "../components/Header";
 import Input from "../components/Input";
-import Sidebar from "../components/Sidebar";
 import "./UsedStatisticsPage.css";
 
 function getCurrentMonth() {
@@ -22,15 +20,7 @@ function UsedStatisticsPage() {
 
   return (
     <div className="container">
-      <section>
-        <Sidebar />
-      </section>
-
       <main className="main">
-        <div>
-          <Header />
-        </div>
-
         <div className="used-statistics-top">
           <h1>지출 통계</h1>
 
