@@ -1,0 +1,170 @@
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  height: 100vh;
+}
+
+.main {
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+}
+
+.notice_top_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.notice_left_area {
+  flex: 1;
+}
+
+.summary_box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 25px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.notice_setting_box {
+  min-width: 320px;
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #dbc5e1;
+  border-radius: 8px;
+}
+
+.notice_setting_title {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.notice_setting_message {
+  margin-left: 8px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.setting_row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.setting_label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.setting_text {
+  font-size: 14px;
+}
+
+.setting_button_area {
+  margin-top: 10px;
+}
+
+.save_notice_setting_btn {
+  background-color: lightblue;
+}
+
+.notice-action-area {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.content_item {
+  height: calc(100vh - 260px);
+  min-height: 320px;
+  padding: 15px;
+  overflow: auto;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+.list_container {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.list_container th,
+.list_container td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: center;
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.list_container th {
+  background: #f1f5f9;
+  font-weight: 700;
+}
+
+.notice-read-row {
+  color: #94a3b8;
+}
+
+.error-message {
+  margin-bottom: 16px;
+  padding: 10px 12px;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+}
+
+@media (max-width: 786px) {
+  .container {
+    display: block;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .main {
+    width: 100%;
+    padding: 16px;
+  }
+
+  .notice_top_area {
+    display: block;
+  }
+
+  .notice_setting_box {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .notice-action-area {
+    justify-content: flex-start;
+  }
+
+  .content_item {
+    height: 360px;
+  }
+}

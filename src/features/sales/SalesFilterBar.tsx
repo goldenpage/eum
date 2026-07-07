@@ -1,5 +1,5 @@
-import Button from "./Button";
-import type { SalesSearchFilters } from "../features/sales/api";
+import Button from "../../components/Button";
+import type { SalesSearchFilters } from "./api";
 
 interface SalesFilterBarProps {
   filters: SalesSearchFilters;
