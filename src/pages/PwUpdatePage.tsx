@@ -9,7 +9,7 @@ import "./css/PwUpdatePage.css";
 const PW_REGEX = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{4,8}$/;
 
 function PwUpdatePage() {
-  const navigate = useNavigate(1);
+  const navigate = useNavigate();
   const [step, setStep] = useState(1);
 
   const [bId, setBId] = useState("");

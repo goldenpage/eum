@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 import type { SalesSearchFilters } from "./api";
 
 interface SalesFilterBarProps {
@@ -7,7 +8,7 @@ interface SalesFilterBarProps {
   payments: string[];
   menus: string[];
   onChange: (filters: SalesSearchFilters) => void;
-  onSubmit: () => void;
+  onSubmit: (filters: SalesSearchFilters) => void;
   onReset: () => void;
 }
 
@@ -20,31 +21,40 @@ export function SalesFilterBar({
   onSubmit,
   onReset,
 }: SalesFilterBarProps) {
+  const handleFilterChange = (nextFilters: SalesSearchFilters) => {
+    onChange(nextFilters);
+    onSubmit(nextFilters);
+  };
   return (
     <form
       className="sales-filter-area"
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit();
+        onSubmit(filters);
       }}
     >
-      <input
-        type="date"
-        value={filters.startDate}
-        onChange={(event) =>
-          onChange({ ...filters, startDate: event.target.value })
-        }
-      />
-      <span>~</span>
-      <input
-        type="date"
-        value={filters.endDate}
-        onChange={(event) =>
-          onChange({ ...filters, endDate: event.target.value })
-        }
-      />
-
+      <label className="sales-filter-date">
+        <span>시작일</span>
+        <Input
+          inputType="date"
+          value={filters.startDate}
+          onChange={(value) =>
+            handleFilterChange({ ...filters, startDate: value })
+          }
+        />
+      </label>
+      <label className="sales-filter-date">
+        <span>종료일</span>
+        <Input
+          inputType="date"
+          value={filters.endDate}
+          onChange={(value) =>
+            handleFilterChange({ ...filters, endDate: value })
+          }
+        />
+      </label>
       <select
+        className="mobile-filter-hidden"
         value={filters.category}
         onChange={(event) =>
           onChange({ ...filters, category: event.target.value })
@@ -59,9 +69,10 @@ export function SalesFilterBar({
       </select>
 
       <select
+        className="mobile-filter-hidden"
         value={filters.payment}
         onChange={(event) =>
-          onChange({ ...filters, payment: event.target.value })
+          handleFilterChange({ ...filters, payment: event.target.value })
         }
       >
         <option value="">결제수단</option>
@@ -73,9 +84,10 @@ export function SalesFilterBar({
       </select>
 
       <select
+        className="sales-filter-menu"
         value={filters.menuName}
         onChange={(event) =>
-          onChange({ ...filters, menuName: event.target.value })
+          handleFilterChange({ ...filters, menuName: event.target.value })
         }
       >
         <option value="">메뉴명</option>
@@ -85,9 +97,7 @@ export function SalesFilterBar({
           </option>
         ))}
       </select>
-
-      <Button type="submit">조회</Button>
-      <Button type="button" onClick={onReset}>
+      <Button type="button" className="sales-reset-button" onClick={onReset}>
         초기화
       </Button>
     </form>

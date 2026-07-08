@@ -20,7 +20,6 @@ input[type="password"]:focus,
 input[type="email"]:focus,
 input[type="date"]:focus,
 input[type="month"]:focus {
-  border-color: blue;
   outline: 2px solid rgba(37, 99, 235, 0.18);
   outline-offset: 1px;
 }

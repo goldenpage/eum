@@ -22,7 +22,7 @@ function DisposalItemsPage() {
   return (
     <div className="container">
       <div className="main">
-        <h1>폐기 품목 확인</h1>
+        <h1>폐기 품목</h1>
         <div>
           {errorMessage && (
             <div className="errorMessage" role="alert">

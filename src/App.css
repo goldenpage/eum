@@ -20,15 +20,21 @@ textarea {
   font: inherit;
 }
 
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .layout {
   display: flex;
   gap: 30px;
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
 }
 
 .layout__sidebar {
   flex: 0 0 300px;
-  min-height: 100vh;
 }
 
 .layout__main {

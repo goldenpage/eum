@@ -129,19 +129,20 @@ function useDisposalItems() {
     });
   }, [appliedFilters.category, appliedFilters.reason]);
 
-  const handleSearch = () => {
+  const handleSearch = (nextFilters: DisposalFilters = filters) => {
     const isSameFilters =
-      filters.category === appliedFilters.category &&
-      filters.reason === appliedFilters.reason;
+      nextFilters.category === appliedFilters.category &&
+      nextFilters.reason === appliedFilters.reason;
 
     if (isSameFilters && page === 1) {
-      void fetchItems(1, filters);
+      void fetchItems(1, nextFilters);
       return;
     }
 
-    setAppliedFilters(filters);
+    setFilters(nextFilters);
+    setAppliedFilters(nextFilters);
     setPage(1);
-    syncUrl(filters, 1);
+    syncUrl(nextFilters, 1);
   };
 
   const handleReset = () => {

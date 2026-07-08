@@ -337,6 +337,10 @@
   cursor: not-allowed;
 }
 
+.fm_page .notice_bottom {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   .fm_page,
   .fm_page *,
@@ -423,5 +427,13 @@
     width: 100% !important;
     overflow-x: auto !important;
     white-space: nowrap;
+  }
+
+  .fm_page .notice_top {
+    display: none;
+  }
+
+  .fm_page .notice_bottom {
+    display: block;
   }
 }

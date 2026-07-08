@@ -208,7 +208,7 @@
 }
 
 .menu-page .register_btn {
-  margin-top: 4px;
+  margin-top: 16px;
   display: flex;
   justify-content: center;
 }
@@ -368,6 +368,10 @@
   background: #fee2e2;
 }
 
+.menu-page .notice_bottom {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
   .menu-page,
   .menu-page *,
@@ -498,5 +502,13 @@
     width: 100% !important;
     padding: 12px 0 !important;
     font-size: 16px !important;
+  }
+
+  .menu-page .notice_top {
+    display: none;
+  }
+
+  .menu-page .notice_bottom {
+    display: block;
   }
 }
