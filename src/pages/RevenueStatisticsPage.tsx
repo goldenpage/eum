@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Button from "../components/Button";
 import ChatrtSwiper from "../components/ChatrtSwiper";
 import Input from "../components/Input";
 import MenuSalesRankChart from "../features/revenueStatistics/MenuSalesRankChart";

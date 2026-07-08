@@ -8,7 +8,6 @@ import ReasonChart from "../features/disposalStatistics/ReasonChart";
 import DailyDisposalChart from "../features/disposalStatistics/DailyDisposalChart";
 import "../pages/css/DisposalStatisticsPage.css";
 import ChatrtSwiper from "../components/ChatrtSwiper";
-import Button from "../components/Button";
 import Input from "../components/Input";
 
 function DisposalStatisticsPage() {
