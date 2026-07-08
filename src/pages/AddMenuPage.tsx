@@ -174,7 +174,7 @@ function AddMenuPage() {
       return;
     }
     if (!ingredientAmount || Number(ingredientAmount) <= 0) {
-      showNotice("수량을 올바르게 입력해주세요.", "error");
+      showNotice("사용량을 올바르게 입력해주세요.", "error");
       return;
     }
     const material = foodMaterialList.find(
@@ -302,19 +302,21 @@ function AddMenuPage() {
         <h1>메뉴 입력</h1>
 
         {notice && (
-          <div className={`notice notice_${notice.type}`}>{notice.text}</div>
+          <div className={`notice notice_top notice_${notice.type}`}>
+            {notice.text}
+          </div>
         )}
 
         <div className="content_item">
           <div className="content_left">
             <div className="input_section">
+              <h3>메뉴 카테고리</h3>
               <div className="input_row">
                 <div className="category_buttons">
-                  <label>메뉴 카테고리 추가</label>
                   <Input
                     text=""
                     inputType="text"
-                    placeholder="카테고리 입력"
+                    placeholder="카테고리 추가"
                     value={newCategory}
                     onChange={(value) => setNewCategory(value)}
                   />
@@ -363,28 +365,26 @@ function AddMenuPage() {
             </div>
 
             <div className="input_section">
+              <h3>메뉴 정보</h3>
               <div className="input_row">
-                <label>메뉴명 입력 *</label>
                 <Input
                   text=""
                   inputType="text"
-                  placeholder="치즈김밥"
+                  placeholder="메뉴명 입력 *"
                   value={menuName}
                   onChange={(value) => setMenuName(value)}
                 />
               </div>
 
               <div className="input_fields">
-                <label>메뉴 가격 *</label>
                 <Input
                   text=""
                   inputType="number"
-                  placeholder="4000"
+                  placeholder="가격 * (원)"
                   min={0}
                   value={menuPrice}
                   onChange={(value) => setMenuPrice(value)}
                 />{" "}
-                <span className="unit_text">원</span>
               </div>
             </div>
 
@@ -392,13 +392,12 @@ function AddMenuPage() {
               <h3>사용 식자재 추가 *</h3>
 
               <div className="ingredient_add_row">
-                <label>식자재</label>
                 <select
                   id="inputIngredientSelect"
                   value={selectedMaterialId}
                   onChange={(e) => setSelectedMaterialId(e.target.value)}
                 >
-                  <option value="">-- 선택 --</option>
+                  <option value="">-- 식자재 선택 --</option>
                   {foodMaterialList.map((fm) => (
                     <option
                       key={fm.foodMaterialId}
@@ -409,20 +408,16 @@ function AddMenuPage() {
                     </option>
                   ))}
                 </select>
-                <label>수량</label>
                 <Input
                   text=""
                   inputType="number"
-                  // id="inputIngredientAmount"
-                  placeholder="50"
+                  placeholder="사용량 (g)"
                   min={1}
                   value={ingredientAmount}
-                  // onChange={(e) => setIngredientAmount(e.target.value)}
                   onChange={(value) => setIngredientAmount(value)}
                 />
-                <span>g</span>
                 <Button type="button" onClick={addIngredient}>
-                  + 추가하기
+                  + 식자재 추가
                 </Button>
               </div>
 
@@ -431,7 +426,7 @@ function AddMenuPage() {
                   <thead>
                     <tr>
                       <th>이름</th>
-                      <th>수량(g)</th>
+                      <th>사용량(g)</th>
                       <th>삭제</th>
                     </tr>
                   </thead>
@@ -467,12 +462,11 @@ function AddMenuPage() {
                   </tbody>
                 </table>
               </div>
-            </div>
-
-            <div className="register_btn">
-              <Button type="button" onClick={addMenuToList}>
-                추가
-              </Button>
+              <div className="register_btn">
+                <Button type="button" onClick={addMenuToList}>
+                  추가
+                </Button>
+              </div>
             </div>
 
             <div id="hiddenFields"></div>
@@ -548,7 +542,7 @@ function AddMenuPage() {
                 <thead>
                   <tr>
                     <th>이름</th>
-                    <th>수량(g)</th>
+                    <th>사용량(g)</th>
                   </tr>
                 </thead>
                 <tbody id="ingredientDetailBody">
@@ -571,6 +565,11 @@ function AddMenuPage() {
             </div>
           </div>
         </div>
+        {notice && (
+          <div className={`notice notice_bottom notice_${notice.type}`}>
+            {notice.text}
+          </div>
+        )}
       </div>
     </div>
   );
