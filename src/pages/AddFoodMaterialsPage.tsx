@@ -322,19 +322,21 @@ function AddFoodMaterialsPage() {
         <h1>식자재 입력</h1>
 
         {notice && (
-          <div className={`notice notice_${notice.type}`}>{notice.text}</div>
+          <div className={`notice notice_top notice_${notice.type}`}>
+            {notice.text}
+          </div>
         )}
 
         <div className="content_item">
           <div className="content_left">
             <div className="input_section">
+              <h3>식자재 카테고리</h3>
               <div className="input_row">
                 <div className="category_buttons">
-                  <label>카테고리 추가</label>
                   <Input
                     text=""
                     inputType="text"
-                    placeholder="카테고리 입력"
+                    placeholder="카테고리 추가"
                     value={newCategory}
                     onChange={(value) => setNewCategory(value)}
                   />
@@ -379,26 +381,25 @@ function AddFoodMaterialsPage() {
             </div>
 
             <div className="input_section">
+              <h3>식자재 정보</h3>
               <div className="input_fields">
                 <div className="field_cell">
-                  <label>식자재명 입력 *</label>
                   <Input
                     text=""
                     inputType="text"
-                    placeholder="단무지"
+                    placeholder="식자재명 입력 ex)단무지 *"
                     value={foodMaterialName}
                     onChange={(value) => setFoodMaterialName(value)}
                   />
                 </div>
 
                 <div className="field_cell">
-                  <label>타입 *</label>
                   <select
                     id="foodMaterialType"
                     value={foodMaterialType}
                     onChange={(e) => setFoodMaterialType(e.target.value)}
                   >
-                    <option value="">선택</option>
+                    <option value="">타입 *</option>
                     <option value="고체">고체</option>
                     <option value="액체">액체</option>
                     <option value="기타">기타</option>
@@ -408,11 +409,10 @@ function AddFoodMaterialsPage() {
 
               <div className="input_fields">
                 <div className="field_cell">
-                  <label>총 중량</label>
                   <input
                     type="number"
                     id="totalWeight"
-                    placeholder="자동 계산"
+                    placeholder="총 중량(자동 계산)"
                     readOnly
                     value={totalWeight}
                     className="readonly_field"
@@ -420,17 +420,16 @@ function AddFoodMaterialsPage() {
                 </div>
 
                 <div className="field_cell">
-                  <label>식자재중량(개당, 단위:g) *</label>
                   <div className="weight_with_unit">
                     <Input
                       text=""
                       inputType="number"
-                      placeholder="1500"
+                      placeholder="식자재중량(개당, 단위:g) *"
                       min={0}
                       value={foodMaterialWeight}
                       onChange={(value) => setFoodMaterialWeight(value)}
                     />
-                    <select
+                    {/* <select
                       id="inputUnit"
                       value={inputUnit}
                       onChange={(e) => setInputUnit(e.target.value)}
@@ -439,18 +438,17 @@ function AddFoodMaterialsPage() {
                       <option value="kg">kg</option>
                       <option value="ml">ml</option>
                       <option value="L">L</option>
-                    </select>
+                    </select> */}
                   </div>
                 </div>
               </div>
 
               <div className="input_fields">
                 <div className="field_cell">
-                  <label>총 가격</label>
                   <input
                     type="number"
                     id="totalPrice"
-                    placeholder="자동 계산"
+                    placeholder="총 가격(자동 계산)"
                     readOnly
                     value={totalPrice}
                     className="readonly_field"
@@ -458,11 +456,10 @@ function AddFoodMaterialsPage() {
                 </div>
 
                 <div className="field_cell">
-                  <label>가격(개당) *</label>
                   <Input
                     text=""
                     inputType="number"
-                    placeholder="10000"
+                    placeholder="가격(개당) *"
                     min={0}
                     value={foodMaterialPrice}
                     onChange={(value) => setFoodMaterialPrice(value)}
@@ -472,11 +469,10 @@ function AddFoodMaterialsPage() {
 
               <div className="input_fields">
                 <div className="field_cell">
-                  <label>구매 수량 *</label>
                   <Input
                     text=""
                     inputType="number"
-                    placeholder="5"
+                    placeholder="구매 수량 *"
                     min={0}
                     value={foodMaterialCount}
                     onChange={(value) => setFoodMaterialCount(value)}
@@ -484,11 +480,10 @@ function AddFoodMaterialsPage() {
                 </div>
 
                 <div className="field_cell">
-                  <label>구입처 *</label>
                   <Input
                     text=""
                     inputType="text"
-                    placeholder="하나로마트"
+                    placeholder="구입처 *"
                     value={vender}
                     onChange={(value) => setVender(value)}
                   />
@@ -515,7 +510,6 @@ function AddFoodMaterialsPage() {
                     value={expirationDate}
                     onChange={(value) => setExpirationDate(value)}
                   />
-                  <span>&#10003;</span>
                 </div>
               </div>
 
@@ -527,24 +521,19 @@ function AddFoodMaterialsPage() {
             </div>
 
             <div className="search_section">
-              <h3>기존 식자재 찾기</h3>
+              <h3>기존 식자재 검색</h3>
 
               <div className="search_row">
-                <label>검색</label>
                 <Input
                   text=""
                   inputType="text"
-                  placeholder="단무지"
+                  placeholder="검색 ex) 단무지"
                   value={searchInput}
                   onChange={(value) => setSearchInput(value)}
                 />
                 <Button type="button" onClick={searchMaterial}>
                   검색
                 </Button>
-              </div>
-
-              <div className="search_row">
-                <span>기존에 등록된 식자재 목록</span>
               </div>
 
               <div>
@@ -597,7 +586,7 @@ function AddFoodMaterialsPage() {
           </div>
 
           <div className="content_right">
-            <h3>등록할 식자재 목록</h3>
+            <h3>식자재 목록</h3>
 
             <table id="registerTable">
               <thead>
@@ -651,6 +640,11 @@ function AddFoodMaterialsPage() {
             </div>
           </div>
         </div>
+        {notice && (
+          <div className={`notice notice_bottom notice_${notice.type}`}>
+            {notice.text}
+          </div>
+        )}
       </div>
     </div>
   );
