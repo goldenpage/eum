@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { logout } from "../api/auth";
 import { getUserDisplayName, useUserStore } from "../store/userStore";
@@ -15,12 +15,33 @@ function Header({ onMenuClick }: HeaderProps) {
   const userName = getUserDisplayName(user);
   const clearUser = useUserStore((state) => state.clearUser);
   const [profileOpen, setProfileOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
 
   const handleLogout = async () => {
     await logout();
     clearUser();
     navigate("/login", { replace: true });
   };
+
+  useEffect(() => {
+    if (!profileOpen) return;
+
+    const handleOutsideClick = (event: MouseEvent | TouchEvent) => {
+      const target = event.target;
+
+      if (target instanceof Node && !profileMenuRef.current?.contains(target)) {
+        setProfileOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener("touchstart", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener("touchstart", handleOutsideClick);
+    };
+  }, [profileOpen]);
 
   return (
     <header className="app-header">
@@ -54,7 +75,7 @@ function Header({ onMenuClick }: HeaderProps) {
         <StockNotice />
       </div>
 
-      <div className="profile-menu mobile-profile-menu">
+      <div className="profile-menu mobile-profile-menu" ref={profileMenuRef}>
         <button
           type="button"
           className="profile-trigger"
