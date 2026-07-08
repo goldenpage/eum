@@ -220,13 +220,13 @@ const foodMaterialColumnList: FoodMaterialColumn[] = [
   },
   {
     key: "foodMaterialWeight",
-    label: "단위 중량",
+    label: "단위 중량(g)",
     getValue: (foodMaterial) =>
       `${formatNumber(foodMaterial.foodMaterialWeight)}g`,
   },
   {
     key: "totalWeight",
-    label: "총중량",
+    label: "총중량(g)",
     getValue: (foodMaterial) => `${formatNumber(foodMaterial.totalWeight)}g`,
   },
   {

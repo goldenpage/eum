@@ -29,13 +29,13 @@
 .purchase-date-range {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 1px;
 }
 
 .purchase-date-range__inputs {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 1px;
 }
 
 .table_scroll {
