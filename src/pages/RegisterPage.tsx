@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 import client from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { useState } from "react";
+import { use, useState } from "react";
 import "../pages/css/RegisterPage.css";
 
 function RegisterPage() {
@@ -12,11 +12,13 @@ function RegisterPage() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneCode, setPhoneCode] = useState("");
+  const [verifyPhone, setVerifyPhone] = useState(false);
   const [storeName, setStoreName] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [pwConfirm, setPwConfirm] = useState("");
+  const [pwConfirmFlag, setPwConfirmFlag] = useState(false);
   const [businessType, setBusinessType] = useState("");
   const [storeType, setStoreType] = useState("일반음식점");
   const [storeCategory, setStoreCategory] = useState("한식");
@@ -27,6 +29,16 @@ function RegisterPage() {
   const [message, setMessage] = useState("");
 
   const openNext = () => setStep((s) => s + 1);
+
+  const STEP_TITLES = [
+    "사업자번호", // step 1
+    "휴대폰 인증", // step 2
+    "기본정보", // step 3
+    "비밀번호", // step 4
+    "사업자 유형", // step 5
+    "증명 서류", // step 6
+    "약관 동의", // step 7
+  ];
 
   // 1) 사업자번호 확인
   const submitBId = () => {
@@ -56,11 +68,17 @@ function RegisterPage() {
         phone,
         code: phoneCode,
       });
-      setMessage(res.data.message ?? "휴대폰 인증 완료.");
-      openNext();
+      if (res.data.message === "휴대폰 인증이 완료되었습니다.")
+        setMessage("휴대폰 인증이 완료되었습니다 다음을 눌러주세요.");
+      setVerifyPhone(true);
     } catch {
       setMessage("인증번호가 올바르지 않습니다.");
     }
+  };
+
+  const verifyPhoneCodeNext = () => {
+    setMessage("");
+    openNext();
   };
 
   // 3) 기본정보
@@ -83,8 +101,23 @@ function RegisterPage() {
       setMessage("비밀번호가 일치하지 않습니다.");
       return;
     }
+    setPwConfirmFlag(true);
+    setMessage("비밀번호 확인이 되었습니다.");
+  };
+
+  const pwConfirmCheck = () => {
     setMessage("");
     openNext();
+  };
+
+  const backbtn = () => {
+    setMessage("");
+
+    if (step === 1) {
+      navigate("/login");
+    } else {
+      setStep((s) => s - 1);
+    }
   };
 
   // 5) 사업자 유형/상점 종류
@@ -154,26 +187,29 @@ function RegisterPage() {
   return (
     <div className="signup-wrap">
       <form className="signup-box" onSubmit={(e) => e.preventDefault()}>
-        <h1 className="main-title">회원가입</h1>
+        <div className="step-header">
+          {step > 0 && (
+            <Button type="button" className="backbtn" onClick={backbtn}>
+              ←
+            </Button>
+          )}
+          <h2 className="step-title">{STEP_TITLES[step - 1]}</h2>
+        </div>
 
-        {step > 1 && (
-          <Button
-            type="button"
-            className="backbtn"
-            onClick={() => setStep((s) => s - 1)}
-          >
-            ←
-          </Button>
-        )}
+        <div className="step-progress">
+          <div
+            className="step-progress-fill"
+            style={{ width: `${(step / STEP_TITLES.length) * 100}%` }}
+          />
+        </div>
 
         {/* 1. 사업자번호 */}
         {step === 1 && (
           <div className="form-group step-appear">
-            <div className="section-title">사업자번호</div>
             <Input
               text=""
               inputType="text"
-              placeholder="사업자번호 입력"
+              placeholder="사업자번호"
               value={username}
               onChange={setUsername}
             />
@@ -186,7 +222,6 @@ function RegisterPage() {
         {/* 2. 휴대폰 인증 */}
         {step === 2 && (
           <div className="form-group step-appear">
-            <div className="section-title">휴대폰 인증</div>
             <div className="phone-auth-group">
               <Input
                 text=""
@@ -207,16 +242,16 @@ function RegisterPage() {
               <Input
                 text=""
                 inputType="text"
-                placeholder="인증번호 입력"
+                placeholder="인증번호"
                 value={phoneCode}
                 onChange={setPhoneCode}
               />
               <Button
                 type="button"
                 className="auth-send-btn"
-                onClick={verifyPhoneCode}
+                onClick={verifyPhone ? verifyPhoneCodeNext : verifyPhoneCode}
               >
-                확인
+                {verifyPhone ? "다음" : "확인"}
               </Button>
             </div>
           </div>
@@ -225,30 +260,36 @@ function RegisterPage() {
         {/* 3. 기본정보 */}
         {step === 3 && (
           <div className="form-group step-appear">
-            <div className="section-title">상호명</div>
-            <Input
-              text=""
-              inputType="text"
-              placeholder="상호명 입력"
-              value={storeName}
-              onChange={setStoreName}
-            />
-            <div className="section-title">성명</div>
-            <Input
-              text=""
-              inputType="text"
-              placeholder="성명 입력"
-              value={name}
-              onChange={setName}
-            />
-            <div className="section-title">이메일</div>
-            <Input
-              text=""
-              inputType="email"
-              placeholder="이메일 입력"
-              value={email}
-              onChange={setEmail}
-            />
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="text"
+                placeholder="상호명"
+                value={storeName}
+                onChange={setStoreName}
+              />
+            </div>
+
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="text"
+                placeholder="성명"
+                value={name}
+                onChange={setName}
+              />
+            </div>
+
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="email"
+                placeholder="이메일"
+                value={email}
+                onChange={setEmail}
+              />
+            </div>
+
             <Button
               type="button"
               className="submitbutton"
@@ -262,26 +303,30 @@ function RegisterPage() {
         {/* 4. 비밀번호 */}
         {step === 4 && (
           <div className="form-group step-appear">
-            <div className="section-title">비밀번호</div>
-            <Input
-              text=""
-              inputType="password"
-              placeholder="비밀번호 입력"
-              value={password}
-              onChange={setPassword}
-            />
-            <div className="section-title">비밀번호 확인</div>
-            <Input
-              text=""
-              inputType="password"
-              placeholder="비밀번호 한 번 더 입력"
-              value={pwConfirm}
-              onChange={setPwConfirm}
-            />
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="password"
+                placeholder="비밀번호"
+                value={password}
+                onChange={setPassword}
+              />
+            </div>
+
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="password"
+                placeholder="비밀번호 확인"
+                value={pwConfirm}
+                onChange={setPwConfirm}
+              />
+            </div>
+
             <Button
               type="button"
               className="submitbutton"
-              onClick={submitPassword}
+              onClick={pwConfirmFlag ? pwConfirmCheck : submitPassword}
             >
               다음
             </Button>
@@ -291,7 +336,6 @@ function RegisterPage() {
         {/* 5. 사업자 유형 + 상점 종류 */}
         {step === 5 && (
           <div className="form-group step-appear">
-            <div className="section-title">사업자 유형</div>
             <div className="flex-row">
               <label className="click-label">
                 <input
@@ -315,7 +359,6 @@ function RegisterPage() {
               </label>
             </div>
 
-            <div className="section-title">상점 종류</div>
             <div className="flex-row">
               <select
                 className="store-select"
@@ -349,7 +392,6 @@ function RegisterPage() {
         {/* 6. 사업자 증명 서류 */}
         {step === 6 && (
           <div className="form-group step-appear">
-            <div className="section-title">사업자 증명 (jpg, png, pdf)</div>
             <input
               type="file"
               accept="image/png,image/jpeg,application/pdf"

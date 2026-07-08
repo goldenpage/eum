@@ -17,7 +17,7 @@ function LoginPage() {
   const fetchUser = useUserStore((state) => state.fetchUser);
   const clearUser = useUserStore((state) => state.clearUser);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // 폼 기본동작(새로고침) 막기(필수)
     if (loading) return; // 중복 제출 방지
     setError("");
@@ -47,23 +47,19 @@ function LoginPage() {
     <>
       <div className="login-wrap">
         <form className="login-box" onSubmit={handleSubmit}>
-          <img
-            src={image}
-            alt="logo"
-            style={{ width: "325px", height: "225px" }}
-          />
-
-          <div className="section-title">아이디</div>
-          <Input
-            text=""
-            inputType="text"
-            value={username}
-            onChange={setUsername}
-            placeholder="아이디를 입력하세요"
-          />
+          <img src={image} alt="logo" className="login-logo" />
 
           <div className="form-group">
-            <div className="section-title">비밀번호</div>
+            <Input
+              text=""
+              inputType="text"
+              value={username}
+              onChange={setUsername}
+              placeholder="사업자번호를 입력하세요"
+            />
+          </div>
+
+          <div className="form-group">
             <Input
               text=""
               inputType="password"
