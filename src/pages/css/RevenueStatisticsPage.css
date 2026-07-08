@@ -1,27 +1,14 @@
-ul {
-  list-style: none;
-}
+@import "../../components/css/Input.css";
 
-.revenue_page {
+.revenue-statistics-page {
   width: 100%;
-  box-sizing: border-box;
-}
-
-.revenue_page .main {
-  width: 100%;
-  max-width: 100%;
   min-width: 0;
   padding: 24px;
   box-sizing: border-box;
   overflow-x: hidden;
 }
 
-.profile {
-  display: flex;
-  justify-content: end;
-}
-
-.top_area {
+.revenue-statistics-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,72 +17,56 @@ ul {
   flex-wrap: wrap;
 }
 
-.top_area h1 {
+.revenue-statistics-top h1 {
+  margin: 0;
   font-size: 22px;
   font-weight: 700;
   color: #0f172a;
-  margin: 0;
 }
 
-.top_area form {
+.revenue-statistics-search-area {
   display: flex;
-  gap: 8px;
-  align-items: center;
+  align-items: flex-end;
+  gap: 10px;
 }
 
-.top_area form input {
-  padding: 10px 12px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  background: #f8fafc;
-  font-size: 14px;
+.revenue-statistics-message {
+  margin: 12px 0;
+  color: #64748b;
 }
 
-.top_area form input:focus {
-  outline: none;
-  border-color: #2563eb;
-  background: #ffffff;
+.revenue-statistics-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
 }
 
-.summary {
-  margin-bottom: 20px;
+.revenue-statistics-summary {
   padding: 16px 20px;
   font-size: 18px;
   font-weight: 700;
   color: #0f172a;
   background: #eff6ff;
   border: 1px solid #bfdbfe;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
-.summary span {
+.revenue-statistics-summary span {
   color: #2563eb;
 }
 
-.chart_area {
-  display: flex;
-  gap: 20px;
-  width: 100%;
-  margin-bottom: 24px;
-  padding: 0;
-  border: none;
-  background: none;
-  box-sizing: border-box;
-}
-
-.chart_box {
-  flex: 1;
+.revenue-statistics-chart-card {
   min-width: 0;
-  height: 340px;
+  height: 360px;
   padding: 16px 18px;
   box-sizing: border-box;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  border-radius: 8px;
 }
 
-.chart_box h3 {
+.revenue-statistics-chart-card h2 {
   margin: 0 0 12px;
   padding-bottom: 10px;
   border-bottom: 1px solid #f1f5f9;
@@ -104,85 +75,88 @@ ul {
   color: #0f172a;
 }
 
-.chart_box canvas {
-  width: 100% !important;
-  height: 260px !important;
+.revenue-statistics-chart-wrap {
+  position: relative;
+  height: 280px;
+  min-width: 0;
 }
 
-.revenue_page .main > table {
-  display: table;
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 8px;
+.revenue-statistics-chart-wrap canvas {
+  width: 100% !important;
+  height: 280px !important;
+}
+
+.revenue-statistics-page .empty_msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0;
+  color: #64748b;
+}
+
+.revenue-statistics-section {
+  overflow-x: auto;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  overflow: hidden;
+  border-radius: 8px;
+}
+
+.revenue-statistics-section h2 {
+  margin: 0;
+  padding: 16px 18px 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.revenue-statistics-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  margin-top: 12px;
   font-size: 14px;
 }
 
-.revenue_page .main th,
-.revenue_page .main td {
-  border: none;
-  border-bottom: 1px solid #f1f5f9;
+.revenue-statistics-table th,
+.revenue-statistics-table td {
   padding: 12px 14px;
+  border-top: 1px solid #f1f5f9;
   text-align: center;
   white-space: nowrap;
 }
 
-.revenue_page .main th {
+.revenue-statistics-table th {
   background: #f8fafc;
-  font-weight: 600;
   color: #475569;
-  font-size: 13px;
+  font-weight: 600;
 }
 
-.revenue_page .main tbody tr:hover {
-  background: #f8fafc;
-}
-
-.revenue_page .main td[colspan] {
-  padding: 32px;
+.revenue-statistics-table td[colspan] {
+  padding: 28px;
   color: #94a3b8;
-  white-space: normal;
-}
-
-button {
-  cursor: pointer;
 }
 
 @media (max-width: 480px) {
-  .revenue_page .main {
+  .revenue-statistics-page {
     padding: 16px;
   }
 
-  .top_area {
+  .revenue-statistics-top {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .top_area form {
+  .revenue-statistics-search-area {
     width: 100%;
   }
 
-  .top_area form input {
-    flex: 1;
+  .revenue-statistics-chart-card {
+    height: 320px;
+    padding: 14px;
   }
 
-  .chart_area {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .chart_box {
-    width: 100%;
-    height: 300px;
-  }
-
-  .revenue_page .main > table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+  .revenue-statistics-chart-wrap,
+  .revenue-statistics-chart-wrap canvas {
+    height: 250px !important;
   }
 }

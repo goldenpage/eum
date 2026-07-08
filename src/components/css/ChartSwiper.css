@@ -1,0 +1,39 @@
+.chart-swiper {
+  width: 100%;
+  min-width: 0;
+  padding-bottom: 32px;
+}
+
+.chart-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.chart-swiper__slide {
+  height: auto;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.chart-swiper__slide > * {
+  height: 100%;
+}
+
+.chart-swiper .swiper-pagination {
+  bottom: 0;
+}
+
+.chart-swiper .swiper-pagination-bullet {
+  background: #64748b;
+  opacity: 0.35;
+}
+
+.chart-swiper .swiper-pagination-bullet-active {
+  background: #2563eb;
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .chart-swiper {
+    padding-bottom: 28px;
+  }
+}

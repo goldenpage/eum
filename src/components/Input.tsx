@@ -17,6 +17,8 @@ function Input(props: InputType) {
       <div>{props.text}</div>
       <input
         type={props.inputType}
+        id={props.id}
+        name={props.name}
         value={props.value}
         onChange={(event) => props.onChange(event.target.value)}
         placeholder={props.placeholder}
