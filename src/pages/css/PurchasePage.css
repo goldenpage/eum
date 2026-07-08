@@ -18,7 +18,28 @@
   margin: 0 0 16px;
 }
 
+.purchase-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.purchase-date-range {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.purchase-date-range__inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .table_scroll {
+  max-height: 460px;
   overflow-x: auto;
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -66,17 +87,68 @@
   white-space: normal;
 }
 
+.purchase_page .main table .scroll_sentinel td {
+  padding: 0;
+  border-bottom: none;
+  height: 1px;
+}
+
 @media (max-width: 480px) {
   .purchase_page .main {
     padding: 16px;
   }
 
+  .purchase-toolbar {
+    gap: 8px;
+  }
+
+  .purchase-toolbar > div:first-child {
+    flex: 1 0 100%;
+    min-width: 0;
+  }
+
+  .purchase-toolbar > div:first-child input {
+    width: 100% !important;
+    height: 36px !important;
+  }
+
+  purchase-date-range {
+    flex: 1 0 100%;
+    min-width: 0;
+  }
+
+  .purchase-date-range__inputs input {
+    flex: 1;
+    min-width: 0;
+    height: 36px !important;
+  }
+
+  .purchase-toolbar > button {
+    flex: 1 1 calc(50% - 4px);
+    min-height: 36px;
+  }
+
   .table_scroll {
+    height: 420px;
     border-radius: 12px;
+  }
+
+  .purchase_page .main table {
+    table-layout: fixed;
+    width: 100%;
+    min-width: 0;
   }
 
   .purchase_page .main table th,
   .purchase_page .main table td {
-    padding: 10px 12px;
+    padding: 8px 6px;
+    font-size: 12.5px;
+    white-space: normal;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .purchase_page .main table .col-only-desktop {
+    display: none;
   }
 }

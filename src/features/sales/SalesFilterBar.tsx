@@ -43,7 +43,6 @@ export function SalesFilterBar({
           }
         />
       </label>
-      <span>~</span>
       <label className="sales-filter-date">
         <span>종료일</span>
         <Input
@@ -85,6 +84,7 @@ export function SalesFilterBar({
       </select>
 
       <select
+        className="sales-filter-menu"
         value={filters.menuName}
         onChange={(event) =>
           handleFilterChange({ ...filters, menuName: event.target.value })
@@ -97,7 +97,7 @@ export function SalesFilterBar({
           </option>
         ))}
       </select>
-      <Button type="button" onClick={onReset}>
+      <Button type="button" className="sales-reset-button" onClick={onReset}>
         초기화
       </Button>
     </form>
