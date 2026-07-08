@@ -35,7 +35,7 @@ export function DisposalTable({
             <th>식자재명</th>
             <th className="mobile-hidden">카테고리</th>
             <th>유형</th>
-            <th>총 폐기용량</th>
+            <th>총 폐기용량(g)</th>
             <th className="mobile-hidden">총 폐기가격</th>
             <th>폐기일</th>
             <th>사유</th>

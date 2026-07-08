@@ -14,18 +14,35 @@ function getNoticeKey(notice: NoticeItem) {
   return `expiration-${notice.foodMaterialId}`;
 }
 
+function getNoticeContent(notice: NoticeItem) {
+  if (notice.noticeType === "expiration") {
+    const days = Math.abs(notice.remainDays);
+    if (notice.remainDays > 0) {
+      return `${days}일 남음`;
+    }
+    if (notice.remainDays < 0) {
+      return `${days}일 지남`;
+    }
+
+    return "오늘까지";
+  }
+  if (notice.noticeType === "stock") {
+    return `${notice.remainStockAmount.toLocaleString()}개 부족`;
+  }
+}
+
 function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
   return (
     <div className="notice_page_content">
       <table className="notice_page_table">
         <thead>
           <tr>
-            <th>알림 유형</th>
+            <th>유형</th>
             <th>식자재명</th>
             <th>내용</th>
-            <th>수량 / 남은 일</th>
-            <th>알림 생성 날짜 / 유통기한</th>
-            <th>알림 확인 여부</th>
+            <th className="mobile-hidden">수량 / 남은 일</th>
+            <th className="mobile-hidden">알림 생성 날짜 / 유통기한</th>
+            <th className="mobile-hidden">알림 확인 여부</th>
           </tr>
         </thead>
         <tbody>
@@ -52,18 +69,18 @@ function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
                   {notice.noticeType === "stock" ? "재고 부족" : "유통 기한"}
                 </td>
                 <td>{notice.foodMaterialName}</td>
-                <td>{notice.noticeContent}</td>
-                <td>
+                <td>{getNoticeContent(notice)}</td>
+                <td className="mobile-hidden">
                   {notice.noticeType === "stock"
                     ? `${notice.remainStockAmount.toLocaleString()}개`
                     : `${notice.remainDays}일`}
                 </td>
-                <td>
+                <td className="mobile-hidden">
                   {notice.noticeType === "stock"
                     ? notice.noticeDate
                     : notice.expirationDate}
                 </td>
-                <td>
+                <td className="mobile-hidden">
                   {notice.noticeType === "stock"
                     ? notice.readYn === "Y"
                       ? "읽음"

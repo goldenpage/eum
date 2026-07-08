@@ -17,7 +17,7 @@ function NoticeSummaryBox({ summary }: NoticeSummaryBoxProps) {
         전체 알림 <b>{summary.totalCount}개</b>
       </span>
       <span>
-        현재 날짜 : <b>{summary.currentDate}</b>
+        오늘 날짜 : <b>{summary.currentDate}</b>
       </span>
     </div>
   );
