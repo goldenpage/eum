@@ -45,6 +45,10 @@
   grid-column: 1 / -1;
 }
 
+.disposal-stats-page .chart-swiper {
+  grid-column: 1 / -1;
+}
+
 .disposal-stats-page .disposal_price ul {
   display: flex;
   gap: 8px;

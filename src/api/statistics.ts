@@ -26,6 +26,31 @@ export interface DailyDisposal {
   disposalCount: number;
 }
 
+export interface ExpenseRank {
+  ranking: number;
+  foodMaterialName: string;
+  foodMaterialPrice: number;
+  foodMaterialCount: number;
+  totalExpense: number;
+}
+
+export interface MonthlyExpense {
+  expenseMonth: string;
+  totalExpense: number;
+}
+
+export interface MenuSalesRank {
+  ranking: number;
+  menuName: string;
+  menuPrice: number;
+  totalSaleCount: number;
+}
+
+export interface MonthlyRevenue {
+  revenueMonth: string;
+  totalRevenuePrice: number;
+}
+
 export const getDisposalRate = async (params: StatisticsDateRange) => {
   const response = await client.get<DisposalRateResponse | number>(
     "/api/statistics/disposals/rate",
@@ -65,6 +90,58 @@ export const getReasonRatio = async (params: StatisticsDateRange) => {
 export const getDailyChart = async (params: StatisticsDateRange) => {
   const response = await client.get<DailyDisposal[]>(
     "/api/statistics/disposals/daily-chart",
+    { params },
+  );
+
+  return response.data;
+};
+
+export const getTotalExpense = async (params: StatisticsDateRange) => {
+  const response = await client.get<number>("/api/statistics/expenses/total", {
+    params,
+  });
+
+  return response.data;
+};
+
+export const getExpenseMaterialRank = async (params: StatisticsDateRange) => {
+  const response = await client.get<ExpenseRank[]>(
+    "/api/statistics/expenses/material-rank",
+    { params },
+  );
+
+  return response.data;
+};
+
+export const getMonthlyExpense = async (params: StatisticsDateRange) => {
+  const response = await client.get<MonthlyExpense[]>(
+    "/api/statistics/expenses/monthly",
+    { params },
+  );
+
+  return response.data;
+};
+
+export const getTotalRevenue = async (params: StatisticsDateRange) => {
+  const response = await client.get<number>("/api/statistics/revenue/total", {
+    params,
+  });
+
+  return response.data;
+};
+
+export const getMenuSalesRank = async (params: StatisticsDateRange) => {
+  const response = await client.get<MenuSalesRank[]>(
+    "/api/statistics/revenue/menu-rank",
+    { params },
+  );
+
+  return response.data;
+};
+
+export const getMonthlyRevenue = async (params: StatisticsDateRange) => {
+  const response = await client.get<MonthlyRevenue[]>(
+    "/api/statistics/revenue/monthly",
     { params },
   );
 

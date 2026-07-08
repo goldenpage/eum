@@ -7,6 +7,8 @@ import DisposalSummary from "../features/disposalStatistics/DisposalSummary";
 import ReasonChart from "../features/disposalStatistics/ReasonChart";
 import DailyDisposalChart from "../features/disposalStatistics/DailyDisposalChart";
 import "../pages/css/DisposalStatisticsPage.css";
+import ChatrtSwiper from "../components/ChatrtSwiper";
+import Input from "../components/Input";
 
 function DisposalStatisticsPage() {
   const [month, setMonth] = useState(getCurrentMonth());
@@ -18,13 +20,14 @@ function DisposalStatisticsPage() {
         <h1>폐기통계</h1>
 
         <form onSubmit={(event) => event.preventDefault()}>
-          <input
-            type="month"
+          <Input
+            text="월 선택"
+            inputType="month"
             name="month"
             value={month}
-            onChange={(event) => setMonth(event.target.value)}
+            onChange={setMonth}
           />
-          <button type="submit">조회</button>
+          {/* <Button type="submit">조회</Button> */}
         </form>
       </div>
 
@@ -38,9 +41,10 @@ function DisposalStatisticsPage() {
           topMaterials={data.topMaterials}
         />
 
-        <ReasonChart list={data.reasonRatio} />
-
-        <DailyDisposalChart list={data.dailyChart} />
+        <ChatrtSwiper>
+          <ReasonChart list={data.reasonRatio} />
+          <DailyDisposalChart list={data.dailyChart} />
+        </ChatrtSwiper>
       </div>
     </section>
   );
