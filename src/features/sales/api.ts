@@ -18,6 +18,7 @@ export interface SalesPageResponse {
   totalPages: number;
   first: boolean;
   last: boolean;
+  totalRevenue: number;
 }
 
 export interface SalesSearchFilters {
