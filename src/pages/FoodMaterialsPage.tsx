@@ -8,6 +8,12 @@ import type {
 import "../pages/css/FoodMaterialsPage.css";
 import client from "../api/client";
 import Button from "../components/Button";
+import {
+  getExpNotice,
+  getStockNotice,
+  type ExpNoticeResponse,
+  type StockNoticeResponse,
+} from "../features/notice/api";
 
 // const foodMaterialData: FoodMaterialDto[] =[{
 //   foodMaterialId: "FM011",
@@ -146,6 +152,8 @@ import Button from "../components/Button";
 //   expirationDate: "2026-12-21",}
 // ]
 
+type AlertStatus = "danger" | "warning" | "";
+
 function formatDate(dateString: string) {
   if (!dateString) return "";
   return dateString.substring(0, 10);
@@ -157,6 +165,30 @@ function formatNumber(value: number) {
 
 function formatMoney(value: number) {
   return `${value.toLocaleString()}원`;
+}
+
+function getRemainingDays(dateString: string) {
+  const formattedDate = formatDate(dateString);
+
+  if (!formattedDate) return null;
+
+  const [year, month, day] = formattedDate.split("-").map(Number);
+
+  if (!year || !month || !day) return null;
+
+  const targetDate = new Date(year, month - 1, day);
+  const today = new Date();
+  const todayStart = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate(),
+  );
+
+  return Math.round((targetDate.getTime() - todayStart.getTime()) / 86400000);
+}
+
+function getColumnClassName(columnKey: string) {
+  return `food-materials-table__column--${columnKey}`;
 }
 
 interface FoodMaterialColumn {
@@ -234,6 +266,10 @@ function FoodMaterialsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [expSetting, setExpSetting] = useState<ExpNoticeResponse | null>(null);
+  const [stockSetting, setStockSetting] = useState<StockNoticeResponse | null>(
+    null,
+  );
 
   async function loadFoodMaterials(nextKeyword: string, nextSortType: string) {
     try {
@@ -263,8 +299,23 @@ function FoodMaterialsPage() {
     }
   }
 
+  async function loadNoticeSettings() {
+    try {
+      const [nextExpSetting, nextStockSetting] = await Promise.all([
+        getExpNotice(),
+        getStockNotice(),
+      ]);
+
+      setExpSetting(nextExpSetting);
+      setStockSetting(nextStockSetting);
+    } catch (e) {
+      console.error("알림 설정 불러오기 실패", e);
+    }
+  }
+
   useEffect(() => {
     void loadFoodMaterials("", "idDesc");
+    void loadNoticeSettings();
   }, []);
 
   // const sortFoodMaterials=(targetFoodMaterials:FoodMaterialDto[], targetSortType:string) =>{
@@ -296,6 +347,74 @@ function FoodMaterialsPage() {
   // }
   // return sortedFoodMaterials;
   // }
+
+  function getExpirationAlertStatus(
+    foodMaterial: FoodMaterialDto,
+  ): AlertStatus {
+    if (!expSetting?.expAlert || !foodMaterial.expirationDate) return "";
+
+    const remainingDays = getRemainingDays(foodMaterial.expirationDate);
+
+    if (remainingDays === null) return "";
+    if (remainingDays <= 0) return "danger";
+    if (remainingDays <= expSetting.expDays) return "warning";
+
+    return "";
+  }
+
+  function getStockAlertStatus(foodMaterial: FoodMaterialDto): AlertStatus {
+    if (!stockSetting?.foodmAlert) return "";
+
+    if (foodMaterial.totalWeight <= 0) return "danger";
+    if (foodMaterial.totalWeight <= stockSetting.foodmLimit) {
+      return "warning";
+    }
+
+    return "";
+  }
+
+  function getRowAlertStatus(foodMaterial: FoodMaterialDto): AlertStatus {
+    const expirationStatus = getExpirationAlertStatus(foodMaterial);
+    const stockStatus = getStockAlertStatus(foodMaterial);
+
+    if (expirationStatus === "danger" || stockStatus === "danger") {
+      return "danger";
+    }
+
+    if (expirationStatus === "warning" || stockStatus === "warning") {
+      return "warning";
+    }
+
+    return "";
+  }
+
+  function getRowClassName(foodMaterial: FoodMaterialDto) {
+    const rowAlertStatus = getRowAlertStatus(foodMaterial);
+
+    return rowAlertStatus
+      ? `food-materials-table__row food-materials-table__row--${rowAlertStatus}`
+      : "food-materials-table__row";
+  }
+
+  function getCellClassName(foodMaterial: FoodMaterialDto, columnKey: string) {
+    const classNames = [
+      "food-materials-table__cell",
+      getColumnClassName(columnKey),
+    ];
+
+    const alertStatus =
+      columnKey === "expirationDate"
+        ? getExpirationAlertStatus(foodMaterial)
+        : columnKey === "totalWeight"
+          ? getStockAlertStatus(foodMaterial)
+          : "";
+
+    if (alertStatus) {
+      classNames.push(`food-materials-table__cell--${alertStatus}`);
+    }
+
+    return classNames.join(" ");
+  }
 
   function onSortChange(nextSortType: string) {
     setSortType(nextSortType);
@@ -390,7 +509,6 @@ function FoodMaterialsPage() {
         <h1>식자재 조회</h1>
         <div className="food-materials-toolbar">
           <Input
-            text="식자재명"
             inputType="text"
             value={keyword}
             onChange={setKeyword}
@@ -400,7 +518,6 @@ function FoodMaterialsPage() {
           />
 
           <label className="food-materials-sort">
-            <div>정렬</div>
             <select
               className="food-materials-sort-select"
               value={sortType}
@@ -430,34 +547,54 @@ function FoodMaterialsPage() {
                 {foodMaterialColumnList.map((column) => (
                   <th
                     key={column.key}
-                    className="food-materials-table__header-cell"
+                    className={`food-materials-table__header-cell ${getColumnClassName(column.key)}`}
                   >
                     {column.label}
                   </th>
                 ))}
-                <th className="food-materials-table__header-cell">삭제</th>
+                <th
+                  className={`food-materials-table__header-cell ${getColumnClassName("delete")}`}
+                >
+                  삭제
+                </th>
               </tr>
             </thead>
             <tbody>
               {isLoading ? (
                 <tr>
-                  <td colSpan={foodMaterialColumnList.length + 1}>
+                  <td
+                    className="food-materials-table__message-cell"
+                    colSpan={foodMaterialColumnList.length + 1}
+                  >
                     식자재 목록을 불러오는 중입니다.
                   </td>
                 </tr>
               ) : foodMaterials.length === 0 ? (
                 <tr>
-                  <td colSpan={foodMaterialColumnList.length + 1}>
+                  <td
+                    className="food-materials-table__message-cell"
+                    colSpan={foodMaterialColumnList.length + 1}
+                  >
                     조회된 식자재가 없습니다.
                   </td>
                 </tr>
               ) : (
                 foodMaterials.map((foodMaterial) => (
-                  <tr key={foodMaterial.foodMaterialId}>
+                  <tr
+                    key={foodMaterial.foodMaterialId}
+                    className={getRowClassName(foodMaterial)}
+                  >
                     {foodMaterialColumnList.map((column) => (
-                      <td key={column.key}>{column.getValue(foodMaterial)}</td>
+                      <td
+                        key={column.key}
+                        className={getCellClassName(foodMaterial, column.key)}
+                      >
+                        {column.getValue(foodMaterial)}
+                      </td>
                     ))}
-                    <td>
+                    <td
+                      className={`food-materials-table__cell ${getColumnClassName("delete")}`}
+                    >
                       <Button
                         type="button"
                         onClick={() => {
@@ -472,7 +609,10 @@ function FoodMaterialsPage() {
               )}
               {isLoadingMore && (
                 <tr>
-                  <td colSpan={foodMaterialColumnList.length + 1}>
+                  <td
+                    className="food-materials-table__message-cell"
+                    colSpan={foodMaterialColumnList.length + 1}
+                  >
                     다음 식자재 목록을 불러오는 중입니다.
                   </td>
                 </tr>

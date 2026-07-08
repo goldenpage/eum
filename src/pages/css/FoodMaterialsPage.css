@@ -66,6 +66,28 @@
   background-color: white;
 }
 
+.food-materials-table__row--warning .food-materials-table__cell {
+  background-color: white;
+}
+
+.food-materials-table__row--danger .food-materials-table__cell {
+  background-color: white;
+}
+
+.food-materials-table__cell--warning {
+  box-shadow: 0 0 0 5px darkgoldenrod inset;
+  font-weight: 700;
+}
+
+.food-materials-table__cell--danger {
+  box-shadow: 0 0 0 5px darkred inset;
+  font-weight: 700;
+}
+
+.food-materials-table__message-cell {
+  text-align: center;
+}
+
 @media (max-width: 480px) {
   .food-materials-toolbar {
     gap: 8px;
@@ -97,10 +119,64 @@
 
   .food-materials-table-wrap {
     height: 380px;
+    overflow: auto;
   }
 
   .food-materials-table {
-    min-width: 900px;
-    font-size: 13px;
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    font-size: 12px;
+  }
+
+  .food-materials-table th,
+  .food-materials-table td {
+    display: none;
+    padding: 8px 4px;
+    white-space: normal;
+    word-break: keep-all;
+  }
+
+  .food-materials-table th.food-materials-table__column--foodMaterialName,
+  .food-materials-table td.food-materials-table__column--foodMaterialName,
+  .food-materials-table th.food-materials-table__column--totalWeight,
+  .food-materials-table td.food-materials-table__column--totalWeight,
+  .food-materials-table th.food-materials-table__column--expirationDate,
+  .food-materials-table td.food-materials-table__column--expirationDate,
+  .food-materials-table th.food-materials-table__column--delete,
+  .food-materials-table td.food-materials-table__column--delete {
+    display: table-cell;
+  }
+
+  .food-materials-table th.food-materials-table__column--foodMaterialName,
+  .food-materials-table td.food-materials-table__column--foodMaterialName {
+    width: 50%;
+  }
+
+  .food-materials-table th.food-materials-table__column--totalWeight,
+  .food-materials-table td.food-materials-table__column--totalWeight {
+    width: 50%;
+  }
+
+  .food-materials-table th.food-materials-table__column--expirationDate,
+  .food-materials-table td.food-materials-table__column--expirationDate {
+    width: 50%;
+  }
+
+  .food-materials-table th.food-materials-table__column--delete,
+  .food-materials-table td.food-materials-table__column--delete {
+    width: 50%;
+  }
+
+  .food-materials-table td.food-materials-table__message-cell {
+    display: table-cell;
+    width: 100%;
+    padding: 14px 8px;
+  }
+
+  .food-materials-table td.food-materials-table__column--delete button {
+    min-width: 44px;
+    padding: 6px 8px;
+    font-size: 12px;
   }
 }
