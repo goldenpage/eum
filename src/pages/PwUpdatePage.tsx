@@ -24,6 +24,12 @@ function PwUpdatePage() {
 
   const openNext = () => setStep((s) => s + 1);
 
+  const STEP_TITLES = [
+    "본인 확인", // step 1
+    "휴대폰 인증", // step 2
+    "새 비밀번호", // step 3
+  ];
+
   const submitIdentity = () => {
     if (!bId || !name) {
       setMessage("아이디와 이름을 입력해주세요");
@@ -91,33 +97,40 @@ function PwUpdatePage() {
   return (
     <div className="change-wrap">
       <div className="change-box">
-        <h1 className="main-title">비밀번호 변경</h1>
-        <Button type="button" className="backbtn" onClick={backbtn}>
-          ←
-        </Button>
+        <div className="step-header">
+          <Button type="button" className="backbtn" onClick={backbtn}>
+            ←
+          </Button>
+          <h2 className="step-title">{STEP_TITLES[step - 1]}</h2>
+        </div>
+        <div className="step-progress">
+          <div
+            className="step-progress-fill"
+            style={{ width: `${(step / STEP_TITLES.length) * 100}%` }}
+          />
+        </div>
+
         {step === 1 && (
           <div className="form-group step-appear">
-            <p className="description">
-              안전한 계정 사용을 위해
-              <br />
-              새로운 비밀번호를 설정해 주세요.
-            </p>
-            <div className="section-title">아이디</div>
-            <Input
-              text=""
-              inputType="text"
-              placeholder="아이디를 입력해주세요."
-              value={bId}
-              onChange={setBId}
-            />
-            <div className="section-title">이름</div>
-            <Input
-              text=""
-              inputType="text"
-              placeholder="이름을 입력해주세요."
-              value={name}
-              onChange={setName}
-            />
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="text"
+                placeholder="아이디"
+                value={bId}
+                onChange={setBId}
+              />
+            </div>
+
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="text"
+                placeholder="이름"
+                value={name}
+                onChange={setName}
+              />
+            </div>
             <Button
               type="button"
               className="submitbutton"
@@ -130,12 +143,11 @@ function PwUpdatePage() {
 
         {step === 2 && (
           <div className="form-group step-appear">
-            <div className="section-title">휴대폰 번호</div>
             <div className="phone-auth-group">
               <Input
                 text=""
                 inputType="text"
-                placeholder="휴대폰 번호를 입력해주세요."
+                placeholder="휴대폰 번호"
                 value={phone}
                 onChange={setPhone}
               />
@@ -151,7 +163,7 @@ function PwUpdatePage() {
               <Input
                 text=""
                 inputType="text"
-                placeholder="인증번호 입력"
+                placeholder="인증번호"
                 value={phoneCode}
                 onChange={setPhoneCode}
               />
@@ -168,25 +180,34 @@ function PwUpdatePage() {
 
         {step === 3 && (
           <div className="form-group step-appear">
-            <div className="section-title">새 비밀번호</div>
-            <Input
-              text=""
-              inputType="password"
-              placeholder="새 비밀번호를 입력하세요."
-              value={pw}
-              onChange={setPw}
-            />
-            <div className="password-hint">
-              ※ 영문, 숫자, 특수문자 혼합 4~8자
+            <p className="description">
+              안전한 계정 사용을 위해
+              <br />
+              새로운 비밀번호를 설정해 주세요.
+            </p>
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="password"
+                placeholder="새 비밀번호"
+                value={pw}
+                onChange={setPw}
+              />
+              <div className="password-hint">
+                ※ 영문, 숫자, 특수문자 혼합 4~8자
+              </div>
             </div>
-            <div className="section-title">새 비밀번호 확인</div>
-            <Input
-              text=""
-              inputType="password"
-              placeholder="새 비밀번호를 한 번 더 입력하세요."
-              value={pwConfirm}
-              onChange={setPwConfirm}
-            />
+
+            <div className="basic-info-section">
+              <Input
+                text=""
+                inputType="password"
+                placeholder="새 비밀번호 확인"
+                value={pwConfirm}
+                onChange={setPwConfirm}
+              />
+            </div>
+
             <Button
               type="button"
               className="submitbutton"
