@@ -98,8 +98,9 @@ export function useSalesRecords() {
     return () => window.clearTimeout(timer);
   }, [appliedFilters, isSearching, fetchRecords]);
 
-  const handleSearch = () => {
-    setAppliedFilters(filters);
+  const handleSearch = (nextFilters: SalesSearchFilters = filters) => {
+    setFilters(nextFilters);
+    setAppliedFilters(nextFilters);
     setIsSearching(true);
     setPage(0);
   };

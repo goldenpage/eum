@@ -32,7 +32,6 @@ export function DisposalTable({
       <table className="listTable">
         <thead>
           <tr>
-            <th>번호</th>
             <th>식자재명</th>
             <th>카테고리</th>
             <th>유형</th>
@@ -58,7 +57,6 @@ export function DisposalTable({
           ) : (
             items.map((item) => (
               <tr key={item.disposalId}>
-                <td>{item.disposalId}</td>
                 <td>{item.foodMaterialName ?? ""}</td>
                 <td>{item.foodCategory ?? ""}</td>
                 <td>{item.foodMaterialType ?? ""}</td>
