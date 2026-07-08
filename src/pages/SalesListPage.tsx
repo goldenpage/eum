@@ -29,7 +29,7 @@ function SalesListPage() {
   return (
     <div className="container">
       <div className="main">
-        <h1>판매 기록 조회</h1>
+        <h1>판매 기록</h1>
         {errorMessage && <div className="sales-error">{errorMessage}</div>}
         <SalesFilterBar
           filters={filters}

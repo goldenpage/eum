@@ -31,6 +31,7 @@ export function useSalesRecords() {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [editingRecord, setEditingRecord] = useState<SalesRecord | null>(null);
+  const [totalRevenue, setTotalRevenue] = useState(0);
   const categories = useMemo(
     () =>
       Array.from(
@@ -52,9 +53,37 @@ export function useSalesRecords() {
       ) as string[],
     [records],
   );
-  const totalRevenue = useMemo(
-    () => records.reduce((sum, record) => sum + record.qty * record.price, 0),
-    [records],
+
+  const fetchTotalRevenue = useCallback(
+    async (nextFilters = appliedFilters, searching = isSearching) => {
+      try {
+        let total = 0;
+        let nextPage = 0;
+        let totalPages = 1;
+
+        while (nextPage < totalPages) {
+          const data = searching
+            ? await searchSales({
+                ...nextFilters,
+                page: nextPage,
+                size: PAGE_SIZE,
+              })
+            : await getSalesList(nextPage, PAGE_SIZE);
+          total += (data.content ?? []).reduce(
+            (sum, record) =>
+              sum + (record.totalPrice ?? record.qty * record.price),
+            0,
+          );
+
+          totalPages = data.totalPages;
+          nextPage += 1;
+        }
+        setTotalRevenue(total);
+      } catch {
+        setTotalRevenue(0);
+      }
+    },
+    [appliedFilters, isSearching],
   );
 
   const fetchRecords = useCallback(
@@ -93,10 +122,11 @@ export function useSalesRecords() {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       void fetchRecords(0, appliedFilters, isSearching);
+      void fetchTotalRevenue(appliedFilters, isSearching);
     }, 0);
 
     return () => window.clearTimeout(timer);
-  }, [appliedFilters, isSearching, fetchRecords]);
+  }, [appliedFilters, isSearching, fetchRecords, fetchTotalRevenue]);
 
   const handleSearch = (nextFilters: SalesSearchFilters = filters) => {
     setFilters(nextFilters);
