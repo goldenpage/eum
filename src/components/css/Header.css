@@ -239,6 +239,10 @@
   display: none;
 }
 
+.mobile-stock-notice {
+  display: none;
+}
+
 .profile-trigger {
   display: inline-flex;
   align-items: center;
@@ -302,6 +306,10 @@
   }
 
   .mobile-profile-menu {
+    display: block;
+  }
+
+  .mobile-stock-notice {
     display: block;
   }
 
