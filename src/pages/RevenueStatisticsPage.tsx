@@ -29,8 +29,6 @@ function RevenueStatisticsPage() {
             value={month}
             onChange={setMonth}
           />
-
-          {/* <Button type="submit">조회</Button> */}
         </form>
       </div>
 
