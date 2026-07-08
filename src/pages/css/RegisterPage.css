@@ -19,10 +19,6 @@
   font-size: 16px;
 }
 
-.main-title {
-  text-align: center;
-  margin-bottom: 20px;
-}
 .form-group {
   margin-bottom: 20px;
 }
@@ -48,7 +44,7 @@
 .phone-auth-group {
   display: flex;
   gap: 8px;
-  margin-top: 5px;
+  margin-bottom: 10px;
   align-items: flex-start;
 }
 .phone-auth-group > div {
@@ -82,19 +78,6 @@
 }
 .submitbutton:hover {
   background-color: #000;
-}
-
-.backbtn {
-  position: absolute; /* ★변경: 카드 왼쪽 위 고정 */
-  top: 16px;
-  left: 16px;
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 22px; /* 화살표 크게 */
-  line-height: 1;
-  cursor: pointer;
-  padding: 4px 8px;
 }
 
 .login-link {
@@ -142,6 +125,53 @@
 /* 스텝 전환 애니메이션 */
 .step-appear {
   animation: slideDown 0.25s ease;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.step-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.backbtn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.backbtn:hover {
+  color: #000;
+}
+
+.step-progress {
+  height: 4px;
+  background-color: #e5e7eb; /* 회색 track */
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.step-progress-fill {
+  height: 100%;
+  background-color: #2563eb; /* 파란 진행 */
+  border-radius: 2px;
+  transition: width 0.25s ease; /* 부드럽게 늘어남 */
+}
+.basic-info-section {
+  margin-bottom: 10px;
+}
+
+.step-progress {
+  overflow: hidden;
 }
 @keyframes slideDown {
   from {
