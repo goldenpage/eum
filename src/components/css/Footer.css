@@ -107,12 +107,12 @@
 
 @media (max-width: 768px) {
   .footer__container {
-    padding: 24px 16px;
+    padding: 6px 8px;
   }
 
   .footer__main {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 3px;
   }
 
   .footer__utility {

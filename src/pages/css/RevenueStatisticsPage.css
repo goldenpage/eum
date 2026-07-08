@@ -111,7 +111,7 @@
 
 .revenue-statistics-table {
   width: 100%;
-  min-width: 560px;
+  min-width: 300px;
   border-collapse: collapse;
   margin-top: 12px;
   font-size: 14px;
@@ -139,6 +139,10 @@
 @media (max-width: 480px) {
   .revenue-statistics-page {
     padding: 16px;
+  }
+  .revenue-statistics-table th:nth-child(3),
+  .revenue-statistics-table td:nth-child(3) {
+    display: none;
   }
 
   .revenue-statistics-top {

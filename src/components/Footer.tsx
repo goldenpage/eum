@@ -34,12 +34,9 @@ function Footer() {
           </div>
 
           <address className="footer__contact">
-            <span id="footer-location">
-              주소: 서울특별시 금천구 가산디지털1로 70
-            </span>
             <span>팀명: 어울림</span>
-            <span>팀원: 종환, 영훈, 정락, 재혁, 동석</span>
-            <span>문의: 02-1111-1111</span>
+            <span>팀원: 진종환, 차영훈, 최정락, 김재혁, 최동석</span>
+            <span>jongtest845@gmail.com</span>
           </address>
 
           <nav className="footer__utility" aria-label="유틸리티 링크">
