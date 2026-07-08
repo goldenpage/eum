@@ -42,10 +42,10 @@ function Sidebar({ open, onClose }: SideBarProps) {
       />
       <nav className={`sideMenu ${open ? "open" : ""}`}>
         <button type="button" className="sideMenu-close" onClick={onClose}>
-          닫기
+          X
         </button>
         <Link to="/" onClick={onClose}>
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" style={{ width: "100px" }} />
         </Link>
 
         <ul>
