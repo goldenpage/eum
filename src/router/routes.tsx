@@ -82,10 +82,6 @@ export const router = createBrowserRouter([
         Component: PurchasePage,
       },
       {
-        path: "pwupdate",
-        Component: PwUpdatePage,
-      },
-      {
         path: "sales-list",
         Component: SaleListPage,
       },

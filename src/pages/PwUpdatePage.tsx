@@ -52,7 +52,7 @@ function PwUpdatePage() {
     setMessage("휴대폰 인증이 완료되었습니다 다음을 눌러주세요.");
   };
 
-  const verifyPhoneCodeNext = async () => {
+  const verifyPhoneCodeNext = () => {
     if (phoneVerified == true) {
       setMessage("");
       openNext();
@@ -78,7 +78,7 @@ function PwUpdatePage() {
     setMessage("비밀번호가 변경되었습니다.");
   };
 
-  const backbtn = async () => {
+  const backbtn = () => {
     setMessage("");
 
     if (step === 1) {
