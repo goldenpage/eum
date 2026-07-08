@@ -597,11 +597,12 @@ function FoodMaterialsPage() {
                     >
                       <Button
                         type="button"
+                        className="remove_btn"
                         onClick={() => {
                           onDelete(foodMaterial.foodMaterialId);
                         }}
                       >
-                        삭제
+                        X
                       </Button>
                     </td>
                   </tr>
