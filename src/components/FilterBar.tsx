@@ -6,7 +6,7 @@ interface FilterBarProps {
   categories: string[];
   reasons: string[];
   onChange: (filters: DisposalFilters) => void;
-  onSubmit: () => void;
+  onSubmit: (filters: DisposalFilters) => void;
   onReset: () => void;
 }
 
@@ -18,20 +18,27 @@ export function FilterBar({
   onSubmit,
   onReset,
 }: FilterBarProps) {
+  const handleFilterChange = (nextFilters: DisposalFilters) => {
+    onChange(nextFilters);
+    onSubmit(nextFilters);
+  };
   return (
     <form
       className="filterBar"
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit();
+        onSubmit(filters);
       }}
     >
-      <label htmlFor="category">카테고리</label>
+      <label htmlFor="category" className="mobile-filter-hidden">
+        카테고리
+      </label>
       <select
+        className="mobile-filter-hidden"
         id="category"
         value={filters.category}
         onChange={(event) =>
-          onChange({ ...filters, category: event.target.value })
+          handleFilterChange({ ...filters, category: event.target.value })
         }
       >
         <option value="">전체</option>
@@ -42,12 +49,15 @@ export function FilterBar({
         ))}
       </select>
 
-      <label htmlFor="reason">사유</label>
+      <label htmlFor="reason" className="mobile-filter-hidden">
+        사유
+      </label>
       <select
+        className="mobile-filter-hidden"
         id="reason"
         value={filters.reason}
         onChange={(event) =>
-          onChange({ ...filters, reason: event.target.value })
+          handleFilterChange({ ...filters, reason: event.target.value })
         }
       >
         <option value="">전체</option>
@@ -57,11 +67,6 @@ export function FilterBar({
           </option>
         ))}
       </select>
-
-      <Button type="submit" className="primaryButton">
-        조회
-      </Button>
-
       <Button type="button" className="secondaryButton" onClick={onReset}>
         초기화
       </Button>

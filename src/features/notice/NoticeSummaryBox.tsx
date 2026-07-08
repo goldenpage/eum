@@ -6,7 +6,7 @@ interface NoticeSummaryBoxProps {
 
 function NoticeSummaryBox({ summary }: NoticeSummaryBoxProps) {
   return (
-    <div className="notice-page__summary">
+    <div className="notice_page_summary">
       <span>
         유통기한 알림 <b>{summary.expirationCount}개</b>
       </span>

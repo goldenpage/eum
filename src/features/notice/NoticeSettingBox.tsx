@@ -21,18 +21,18 @@ function NoticeSettingBox({
 }: NoticeSettingBoxProps) {
   if (!expSetting || !stockSetting) {
     return (
-      <div className="notice-page__setting">
-        <div className="notice-page__setting-title">알림 설정</div>
+      <div className="notice_page_setting">
+        <div className="notice_page_setting_title">알림 설정</div>
         <div>설정을 불러오는 중입니다.</div>
       </div>
     );
   }
 
   return (
-    <div className="notice-page__setting">
-      <div className="notice-page__setting-title">알림 설정</div>
-      <div className="notice-page__setting-row">
-        <label className="notice-page__setting-label">
+    <div className="notice_page_setting">
+      <div className="notice_page_setting_title">알림 설정</div>
+      <div className="notice_page_setting_row">
+        <label className="notice_page_setting_label">
           <input
             type="checkbox"
             checked={expSetting.expAlert}
@@ -42,7 +42,7 @@ function NoticeSettingBox({
           />
           유통기한 알림
         </label>
-        <span className="notice-page__setting-text">기준</span>
+        <span className="notice_page_setting_text">기준</span>
         <Input
           text=""
           inputType="number"
@@ -52,10 +52,10 @@ function NoticeSettingBox({
             onExpChange({ ...expSetting, expDays: Number(value) })
           }
         />
-        <span className="notice-page__setting-text">일 전</span>
+        <span className="notice_page_setting_text">일 전</span>
       </div>
-      <div className="notice-page__setting-row">
-        <label className="notice-page__setting-label">
+      <div className="notice_page_setting_row">
+        <label className="notice_page_setting_label">
           <input
             type="checkbox"
             checked={stockSetting.foodmAlert}
@@ -68,7 +68,7 @@ function NoticeSettingBox({
           />
           재고 부족 알림
         </label>
-        <span className="notice-page__setting-text">기준</span>
+        <span className="notice_page_setting_text">기준</span>
         <Input
           text=""
           inputType="number"
@@ -78,17 +78,17 @@ function NoticeSettingBox({
             onStockChange({ ...stockSetting, foodmLimit: Number(value) })
           }
         />
-        <span className="notice-page__setting-text">개 이하</span>
+        <span className="notice_page_setting_text">개 이하</span>
       </div>
-      <div className="notice-page__setting-actions">
+      <div className="notice_page_setting_actions">
         <Button
           type="button"
-          className="notice-page__setting-save"
+          className="notice_page_setting_save"
           onClick={onSave}
         >
           저장
         </Button>
-        <span className="notice-page__setting-message">{message}</span>
+        <span className="notice_page_setting_message">{message}</span>
       </div>
     </div>
   );

@@ -16,8 +16,8 @@ function getNoticeKey(notice: NoticeItem) {
 
 function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
   return (
-    <div className="content_item">
-      <table className="list_container">
+    <div className="notice_page_content">
+      <table className="notice_page_table">
         <thead>
           <tr>
             <th>알림 유형</th>
@@ -43,7 +43,7 @@ function NoticeTable({ notices, isLoading, onRead }: NoticeTableProps) {
                 key={getNoticeKey(notice)}
                 className={
                   notice.noticeType === "stock" && notice.readYn === "Y"
-                    ? "notice-page__read-row"
+                    ? "notice_page_read_row"
                     : undefined
                 }
                 onClick={() => onRead(notice)}
