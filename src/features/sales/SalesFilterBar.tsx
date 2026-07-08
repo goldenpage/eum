@@ -1,4 +1,5 @@
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 import type { SalesSearchFilters } from "./api";
 
 interface SalesFilterBarProps {
@@ -34,22 +35,22 @@ export function SalesFilterBar({
     >
       <label className="sales-filter-date">
         <span>시작일</span>
-        <input
-          type="date"
+        <Input
+          inputType="date"
           value={filters.startDate}
-          onChange={(event) =>
-            handleFilterChange({ ...filters, startDate: event.target.value })
+          onChange={(value) =>
+            handleFilterChange({ ...filters, startDate: value })
           }
         />
       </label>
       <span>~</span>
       <label className="sales-filter-date">
         <span>종료일</span>
-        <input
-          type="date"
+        <Input
+          inputType="date"
           value={filters.endDate}
-          onChange={(event) =>
-            handleFilterChange({ ...filters, endDate: event.target.value })
+          onChange={(value) =>
+            handleFilterChange({ ...filters, endDate: value })
           }
         />
       </label>
