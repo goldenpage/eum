@@ -160,13 +160,23 @@
     margin-top: 8px;
   }
 
+  .sales-filter-menu {
+    margin-left: 5px;
+  }
+
+  .sales-reset-button {
+    margin-left: 5px;
+  }
+
   .sales-filter-date {
     width: 100%;
+    margin-left: 5px;
     margin-bottom: 4px;
   }
 
   .sales-filter-date input {
     flex: 1;
+    margin-left: 5px;
   }
 
   .sales-summary-box {

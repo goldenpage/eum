@@ -33,10 +33,10 @@ export function DisposalTable({
         <thead>
           <tr>
             <th>식자재명</th>
-            <th>카테고리</th>
+            <th className="mobile-hidden">카테고리</th>
             <th>유형</th>
             <th>총 폐기용량</th>
-            <th>총 폐기가격</th>
+            <th className="mobile-hidden">총 폐기가격</th>
             <th>폐기일</th>
             <th>사유</th>
           </tr>
@@ -44,13 +44,13 @@ export function DisposalTable({
         <tbody>
           {isLoading ? (
             <tr>
-              <td colSpan={8} className="emptyCell">
+              <td colSpan={7} className="emptyCell">
                 불러오는 중입니다.
               </td>
             </tr>
           ) : items.length === 0 ? (
             <tr>
-              <td colSpan={8} className="emptyCell">
+              <td colSpan={7} className="emptyCell">
                 조회된 폐기 품목이 없습니다.
               </td>
             </tr>
@@ -58,10 +58,12 @@ export function DisposalTable({
             items.map((item) => (
               <tr key={item.disposalId}>
                 <td>{item.foodMaterialName ?? ""}</td>
-                <td>{item.foodCategory ?? ""}</td>
+                <td className="mobile-hidden">{item.foodCategory ?? ""}</td>
                 <td>{item.foodMaterialType ?? ""}</td>
                 <td>{formatGram(item.disposalCountAll)}</td>
-                <td>{formatWon(item.disposalPrice)}</td>
+                <td className="mobile-hidden">
+                  {formatWon(item.disposalPrice)}
+                </td>
                 <td>
                   {item.disposalDate
                     ? new Date(item.disposalDate).toLocaleDateString("ko-KR")
