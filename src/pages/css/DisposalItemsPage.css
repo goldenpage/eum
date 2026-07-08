@@ -97,16 +97,23 @@
   .tableScroller {
     width: 100%;
     height: 260px;
-    overflow-x: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .listTable {
     min-width: 0;
+    width: 100%;
+    table-layout: fixed;
   }
 
   .listTable th,
   .listTable td {
+    padding: 8px 2px;
+    font-size: 12px;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   h1 {
@@ -128,5 +135,13 @@
   .mobile-hidden,
   .mobile-filter-hidden {
     display: none;
+  }
+
+  .reasonSelect {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
   }
 }
