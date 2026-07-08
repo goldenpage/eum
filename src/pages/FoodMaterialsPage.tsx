@@ -146,6 +146,11 @@ import Button from "../components/Button";
 //   expirationDate: "2026-12-21",}
 // ]
 
+function formatDate(dateString: string) {
+  if (!dateString) return "";
+  return dateString.substring(0, 10);
+}
+
 function formatNumber(value: number) {
   return value.toLocaleString();
 }
@@ -210,12 +215,12 @@ const foodMaterialColumnList: FoodMaterialColumn[] = [
   {
     key: "incomeDate",
     label: "매입일",
-    getValue: (foodMaterial) => foodMaterial.incomeDate,
+    getValue: (foodMaterial) => formatDate(foodMaterial.incomeDate),
   },
   {
     key: "expirationDate",
     label: "유통기한",
-    getValue: (foodMaterial) => foodMaterial.expirationDate,
+    getValue: (foodMaterial) => formatDate(foodMaterial.expirationDate),
   },
 ];
 
