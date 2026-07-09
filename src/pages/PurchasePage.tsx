@@ -160,7 +160,6 @@ function PuchasePage() {
     if (el.scrollHeight <= el.clientHeight) {
       loadNextPurchases();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [purchaseList, isLoading, isLoadingMore, currentPage, totalPage]);
 
   return (
