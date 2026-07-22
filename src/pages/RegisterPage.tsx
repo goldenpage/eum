@@ -156,7 +156,7 @@ function RegisterPage() {
       name,
       email,
       phone,
-      password,
+      pw: password,
       businessType,
       storeType,
       storeCategory,
