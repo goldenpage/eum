@@ -1,5 +1,4 @@
 import axios, { type InternalAxiosRequestConfig } from "axios";
-import { resolve } from "chart.js/helpers";
 
 export const AT = "accessToken";
 
@@ -17,8 +16,6 @@ client.interceptors.request.use((config) => {
   }
   return config;
 });
-
-type RetryConfig = InternalAxiosRequestConfig & { _retry?: boolean };
 
 type Waiter = {
   resolve: (token: string) => void;
