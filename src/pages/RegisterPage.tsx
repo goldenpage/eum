@@ -3,7 +3,15 @@ import client from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { useState } from "react";
+import axios from "axios";
 import "../pages/css/RegisterPage.css";
+
+type RegistrationStatus = "APPROVED" | "PENDING" | "REJECTED" | "RETRY";
+
+type RegistrationResponse = {
+  status: RegistrationStatus;
+  message: string;
+};
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -173,13 +181,52 @@ function RegisterPage() {
     formData.append("document", documentFile);
 
     try {
-      const res = await client.post("/api/auth/register", formData);
-      if (res.data.status === "PENDING") {
-        setMessage("가입 신청 완료. 관리자 승인 후 로그인할 수 있습니다.");
+      const { data } = await client.post<RegistrationResponse>(
+        "/api/auth/register",
+        formData,
+      );
+
+      switch (data.status) {
+        case "APPROVED":
+          window.alert(data.message || "회원가입이 완료되었습니다.");
+          navigate("/login", { replace: true });
+          return;
+
+        case "PENDING":
+          window.alert(
+            data.message ||
+              "가입 신청이 접수되었습니다. 관리자 승인 후 이용할 수 있습니다.",
+          );
+          navigate("/login", { replace: true });
+          return;
+
+        case "REJECTED":
+          setMessage(
+            data.message ||
+              "사업자 정보가 일치하지 않아 회원가입이 반려되었습니다.",
+          );
+          return;
+
+        case "RETRY":
+          setMessage(
+            data.message ||
+              "일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+          );
+          return;
+
+        default:
+          setMessage("알 수 없는 회원가입 처리 결과입니다.");
       }
-      navigate("/login");
-    } catch {
-      setMessage("회원가입에 실패했습니다.");
+    } catch (error: unknown) {
+      if (axios.isAxiosError<{ message?: string }>(error)) {
+        setMessage(
+          error.response?.data?.message ||
+            "회원가입 요청 중 오류가 발생했습니다.",
+        );
+        return;
+      }
+
+      setMessage("회원가입 요청 중 알 수 없는 오류가 발생했습니다.");
     }
   };
 
