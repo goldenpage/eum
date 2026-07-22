@@ -486,7 +486,7 @@ function FoodMaterialsPage() {
 
       setCurrentPage(res.data.currentPage);
     } catch (e) {
-      console.error("다음 식자재 목록 불러오기 실패");
+      console.error("다음 식자재 목록 불러오기 실패", e);
       setErrorMessage("다음 식자재 목록을 불러오지 못했습니다.");
     } finally {
       setIsLoadingMore(false);
