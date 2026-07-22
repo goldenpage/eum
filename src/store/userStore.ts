@@ -27,8 +27,16 @@ const ADMIN_VALUES = new Set([
   "ROLE_MANAGER",
 ]);
 
+let userRequest: Promise<UserInfo> | null = null;
+let userRequestId = 0;
+
+function normalizeRole(value?: string) {
+  return value?.trim().toUpperCase();
+}
+
 function hasAdminValue(value?: string) {
-  return value ? ADMIN_VALUES.has(value.toUpperCase()) : false;
+  const normalized = normalizeRole(value);
+  return normalized ? ADMIN_VALUES.has(normalized) : false;
 }
 
 export function isAdminUser(user: UserInfo | null) {
@@ -45,7 +53,7 @@ export function isAdminUser(user: UserInfo | null) {
 }
 
 export function getUserDisplayName(user: UserInfo | null) {
-  return user?.userName ?? user?.name ?? user?.username ?? "사용자";
+  return user?.userName ?? user?.name ?? user?.username ?? "관리자";
 }
 
 export const useUserStore = create<UserState>((set, get) => ({
@@ -53,21 +61,57 @@ export const useUserStore = create<UserState>((set, get) => ({
   loading: false,
 
   fetchUser: async () => {
-    if (get().user) return get().user;
-    if (get().loading) return null;
+    const cachedUser = get().user;
+
+    if (cachedUser) {
+      return cachedUser;
+    }
+
+    if (userRequest) {
+      return userRequest;
+    }
+
+    const requestId = ++userRequestId;
 
     set({ loading: true });
 
-    try {
-      const response = await client.get<UserInfo>("/api/auth/userinfo");
-      set({ user: response.data });
-      return response.data;
-    } finally {
-      set({ loading: false });
-    }
+    const currentRequest = client
+      .get<UserInfo>("/api/auth/userinfo")
+      .then((response) => {
+        const user = response.data;
+
+        if (requestId === userRequestId) {
+          set({ user });
+        }
+
+        return user;
+      })
+      .catch((error: unknown) => {
+        if (requestId === userRequestId) {
+          set({ user: null });
+        }
+
+        throw error;
+      })
+      .finally(() => {
+        if (requestId === userRequestId) {
+          userRequest = null;
+          set({ loading: false });
+        }
+      });
+
+    userRequest = currentRequest;
+
+    return currentRequest;
   },
 
   clearUser: () => {
-    set({ user: null, loading: false });
+    userRequestId += 1;
+    userRequest = null;
+
+    set({
+      user: null,
+      loading: false,
+    });
   },
 }));
