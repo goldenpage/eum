@@ -151,7 +151,7 @@ function RegisterPage() {
     }
 
     const requestJson = {
-      username,
+      bId: username,
       storeName,
       name,
       email,
