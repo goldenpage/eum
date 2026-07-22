@@ -1,17 +1,19 @@
-import client, { AT } from "../../api/client";
+import { useNavigate } from "react-router";
+import { logout } from "../../api/auth";
+import { useUserStore } from "../../store/userStore";
 
 interface Props {
   managerName: string;
 }
 
 function ManagerHeader({ managerName }: Props) {
+  const navigate = useNavigate();
+  const clearUser = useUserStore((state) => state.clearUser);
+
   const handleLogout = async () => {
-    try {
-      await client.post("/api/auth/logout");
-    } finally {
-      sessionStorage.removeItem(AT);
-      location.href = "/login";
-    }
+    await logout();
+    clearUser();
+    navigate("/login", { replace: true });
   };
 
   return (
