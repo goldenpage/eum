@@ -2,13 +2,12 @@ import { Link, useNavigate } from "react-router";
 import client from "../api/client";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { use, useState } from "react";
+import { useState } from "react";
 import "../pages/css/RegisterPage.css";
 
 function RegisterPage() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneCode, setPhoneCode] = useState("");
