@@ -10,6 +10,7 @@ import MenuListPage from "../pages/MenuListPage";
 import ManagerPage from "../pages/ManagerPage";
 import RegisterPage from "../pages/RegisterPage";
 import DisposalItemsPage from "../pages/DisposalItemsPage";
+import DisposalCreatePage from "../pages/DisposalCreatePage";
 import AddMenuPage from "../pages/AddMenuPage";
 import AddFoodMaterialsPage from "../pages/AddFoodMaterialsPage";
 import FoodMaterialsPage from "../pages/FoodMaterialsPage";
@@ -68,6 +69,10 @@ export const router = createBrowserRouter([
       {
         path: "disposal-items",
         Component: DisposalItemsPage,
+      },
+      {
+        path: "disposal-create",
+        Component: DisposalCreatePage,
       },
       {
         path: "menus",
